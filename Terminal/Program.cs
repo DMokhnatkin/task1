@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading;
+using NLog;
 
 namespace Terminal
 {
@@ -10,6 +11,8 @@ namespace Terminal
         /// Id of current terminal
         /// </summary>
         private static string _terminalId;
+
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         static void ReferToService(string serviceAddress)
         {
@@ -21,8 +24,7 @@ namespace Terminal
             }
             catch (Exception e)
             {
-                Console.WriteLine("Can't call method:");
-                Console.WriteLine(e.Message);
+                logger.Warn("Can't call method: {0}", e.Message);
             }
         }
 
@@ -31,7 +33,9 @@ namespace Terminal
             // Read and parse arguments
             if (args.Length != 3)
             {
-                throw new ArgumentException("3 arguments are required (Terminal id; service address; timeout)");
+                Exception e = new ArgumentException("3 arguments are required (Terminal id; service address; timeout)");
+                logger.Fatal(e);
+                throw e;
             }
 
             _terminalId = args[0];
@@ -43,7 +47,9 @@ namespace Terminal
             }
             catch (Exception)
             {
-                throw new ArgumentException("Timeout must be a double const");
+                Exception e = new ArgumentException("Timeout must be a double const");
+                logger.Fatal(e);
+                throw e;
             }
 
             Timer timer = new Timer((state) => { ReferToService(addr); }, null, 0, timeout);
