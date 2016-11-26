@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
-using WCFServer;
+using NLog;
 
 namespace WCFServer
 {
@@ -13,9 +9,11 @@ namespace WCFServer
         ConcurrencyMode = ConcurrencyMode.Single)]
     public class Service : IService
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public string SendData(string terminalId)
         {
-            Console.WriteLine(string.Format("info: {0}; terminalId = {1}", DateTime.Now, terminalId));
+            logger.Info("teminal(id={0}) called method SendData", terminalId);
             return "OK";
         }
     }
