@@ -58,8 +58,10 @@ namespace Terminal
                     },
                 };
 
-                DataServiceProxy proxy = new DataServiceProxy();
-                proxy.SendData(_terminalId, sample);
+                AuthorizationServiceProxy authorizationProxy = new AuthorizationServiceProxy();
+                authorizationProxy.Login(_terminalId);
+                DataServiceProxy dataProxy = new DataServiceProxy();
+                dataProxy.SendData(_terminalId, sample);
             }
             catch (Exception e)
             {
