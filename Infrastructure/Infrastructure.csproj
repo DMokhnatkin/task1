@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communication\Proxy\AuthorizationServiceProxy.cs" />
     <Compile Include="Communication\Service\IAuthorizationService.cs" />
     <Compile Include="Communication\Service\IDataService.cs" />
     <Compile Include="Model\MyData.cs" />
