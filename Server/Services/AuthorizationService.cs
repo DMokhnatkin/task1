@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Infrastructure.Communication.Service;
 
-namespace WCFServer.Services
+namespace Server.Services
 {
     class AuthorizationService : IAuthorizationService
     {

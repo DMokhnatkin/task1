@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using NLog;
+using System.Text;
+using System.Xml.Serialization;
+using Infrastructure.Communication.Proxy;
+using Infrastructure.Model;
 
 namespace Terminal
 {
@@ -11,6 +18,7 @@ namespace Terminal
         /// Id of current terminal
         /// </summary>
         private static string _terminalId;
+        private static int timeout;
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -18,9 +26,40 @@ namespace Terminal
         {
             try
             {
-                string requestAddress = string.Format("{0}/{1}/{2}/{3}", serviceAddress, "data", "SendData", _terminalId);
-                WebRequest req = WebRequest.Create(requestAddress);
-                WebResponse response = req.GetResponse();
+                const int points = 3;
+                List<MyData> sample = new List<MyData>()
+                {
+                    new MyData()
+                    {
+                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
+                        IsEngineEnable = false,
+                        Latitude = 0,
+                        Longitude = 0,
+                        Mileage = 100,
+                        Speed = 60
+                    },
+                    new MyData()
+                    {
+                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
+                        IsEngineEnable = false,
+                        Latitude = 0,
+                        Longitude = 0,
+                        Mileage = 100,
+                        Speed = 60
+                    },
+                    new MyData()
+                    {
+                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
+                        IsEngineEnable = false,
+                        Latitude = 0,
+                        Longitude = 0,
+                        Mileage = 100,
+                        Speed = 60
+                    },
+                };
+
+                DataServiceProxy proxy = new DataServiceProxy();
+                proxy.SendData(_terminalId, sample);
             }
             catch (Exception e)
             {
@@ -40,7 +79,6 @@ namespace Terminal
 
             _terminalId = args[0];
             string addr = args[1];
-            int timeout;
             try
             {
                 timeout = Convert.ToInt32(args[2]);

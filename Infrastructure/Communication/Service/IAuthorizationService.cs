@@ -6,13 +6,13 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFServer.Services
+namespace Infrastructure.Communication.Service
 {
     /// <summary>
     /// DataService for a authorization
     /// </summary>
     [ServiceContract]
-    interface IAuthorizationService
+    public interface IAuthorizationService
     {
         [OperationContract]
         [WebGet(UriTemplate = "/Login/{terminalId}")]

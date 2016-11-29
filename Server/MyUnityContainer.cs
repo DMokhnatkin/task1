@@ -1,8 +1,9 @@
-﻿
+﻿using Infrastructure.Communication.Service;
 using Microsoft.Practices.Unity;
-using WCFServer.Services;
+using NLog;
+using Server.Services;
 
-namespace WCFServer
+namespace Server
 {
     class MyUnityContainer
     {

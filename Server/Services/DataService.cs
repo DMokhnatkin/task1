@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
+using Infrastructure.Communication.Service;
 using Microsoft.Practices.Unity;
 using NLog;
-using Server.Model;
+using Infrastructure.Model;
 
-namespace WCFServer.Services
+namespace Server.Services
 {
     [ServiceBehavior(
         InstanceContextMode = InstanceContextMode.Single,
@@ -15,7 +17,7 @@ namespace WCFServer.Services
 
         private IAuthorizationService _authorization = MyUnityContainer.Instance.Resolve<IAuthorizationService>();
 
-        public string SendData(string terminalId)
+        public string SendData(string terminalId, List<MyData> data)
         {
             if (!_authorization.IsLogged(terminalId))
                 logger.Warn("SendData was forbidden. Terminal(id={0}) is not logged", terminalId);
