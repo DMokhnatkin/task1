@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.ServiceModel.Web;
-using System.Text;
-using System.Threading.Tasks;
 using Infrastructure.Communication.Service;
 using Microsoft.Practices.Unity;
 using NLog;
-using Server;
 using Server.Services;
+using Unity.Wcf;
 
 namespace Server
 {
     class Program
     {
-        static readonly Dictionary<Uri, Type> serviceDescriptions = new Dictionary<Uri, Type>()
+        static readonly List<ServiceDescription> serviceDescriptions = new List<ServiceDescription>()
         {
-            {new Uri("http://localhost:2224/auth"), typeof(AuthorizationService)},
-            {new Uri("http://localhost:2224/data"), typeof(DataService)}
+            new ServiceDescription()
+            {
+                Uri = new Uri("http://localhost:2224/auth"),
+                DataContractType = typeof(IAuthorizationService),
+                ServiceHost = null
+            },
+            new ServiceDescription()
+            {
+                Uri = new Uri("http://localhost:2224/data"),
+                DataContractType = typeof(IDataService),
+                ServiceHost = null
+            }
         };
 
         static void StartServices()
@@ -27,15 +32,18 @@ namespace Server
             ILogger logger = LogManager.GetCurrentClassLogger();
             foreach (var serviceDescription in serviceDescriptions)
             {
-                ServiceHost host = new ServiceHost(serviceDescription.Value, serviceDescription.Key);
+                serviceDescription.ServiceHost = new UnityServiceHost(
+                    MyUnityContainer.Instance, 
+                    MyUnityContainer.Instance.Resolve(serviceDescription.DataContractType).GetType(), // Get type of resolved object
+                    serviceDescription.Uri);
                 try
                 {
-                    host.Open();
-                    logger.Info("service {0} was started", serviceDescription.Value);
+                    serviceDescription.ServiceHost.Open();
+                    logger.Info("service {0} was started", serviceDescription.DataContractType);
                 }
                 catch (Exception)
                 {
-                    logger.Fatal("failed start {0}", serviceDescription.Value);
+                    logger.Fatal("failed start {0}", serviceDescription.DataContractType);
                     throw;
                 }
             }
@@ -46,15 +54,14 @@ namespace Server
             ILogger logger = LogManager.GetCurrentClassLogger();
             foreach (var serviceDescription in serviceDescriptions)
             {
-                ServiceHost host = new ServiceHost(serviceDescription.Value, serviceDescription.Key);
                 try
                 {
-                    host.Close();
-                    logger.Info("service {0} was stopped", serviceDescription.Value);
+                    serviceDescription.ServiceHost.Close();
+                    logger.Info("service {0} was stopped", serviceDescription.ServiceHost);
                 }
                 catch (Exception)
                 {
-                    logger.Fatal("failed stop {0}", serviceDescription.Value);
+                    logger.Fatal("failed stop {0}", serviceDescription.ServiceHost);
                     throw;
                 }
             }

@@ -5,7 +5,7 @@ using Server.Services;
 
 namespace Server
 {
-    class MyUnityContainer
+    public class MyUnityContainer
     {
         public static readonly UnityContainer Instance = new UnityContainer();
 
