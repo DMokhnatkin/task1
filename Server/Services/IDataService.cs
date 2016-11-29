@@ -2,10 +2,13 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
-namespace WCFServer
+namespace WCFServer.Services
 {
+    /// <summary>
+    /// DataService for work with data
+    /// </summary>
     [ServiceContract]
-    public interface IService
+    public interface IDataService
     {
         [OperationContract]
         [WebGet(UriTemplate = "/SendData/{terminalId}")]

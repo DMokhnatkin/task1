@@ -18,7 +18,7 @@ namespace Terminal
         {
             try
             {
-                string requestAddress = string.Format("{0}/{1}/{2}", serviceAddress, "SendData", _terminalId);
+                string requestAddress = string.Format("{0}/{1}/{2}/{3}", serviceAddress, "data", "SendData", _terminalId);
                 WebRequest req = WebRequest.Create(requestAddress);
                 WebResponse response = req.GetResponse();
             }
