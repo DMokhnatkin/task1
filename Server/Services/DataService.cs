@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 using Infrastructure.Communication.Service;
 using Microsoft.Practices.Unity;
@@ -20,10 +22,13 @@ namespace Server.Services
 
         private IAuthorizationService _authorization = MyUnityContainer.Instance.Resolve<IAuthorizationService>();
 
-        public string SendData(string terminalId, List<MyData> data)
+        public void SendData(string terminalId, List<MyData> data)
         {
             if (!_authorization.IsLogged(terminalId))
+            {
                 logger.Warn("SendData was forbidden. Terminal(id={0}) is not logged", terminalId);
+                //throw new WebFaultException<string>("Call Login before call SendData", HttpStatusCode.Unauthorized);
+            }
             else
             {
                 MemoryStream str = new MemoryStream();
@@ -32,7 +37,6 @@ namespace Server.Services
                 str.Position = 0;
                 logger.Info("teminal(id={0}) called method SendData. Data : {1}", terminalId, new StreamReader(str).ReadToEnd());
             }
-            return "OK";
         }
     }
 }

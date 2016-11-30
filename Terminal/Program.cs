@@ -62,6 +62,7 @@ namespace Terminal
                 authorizationProxy.Login(_terminalId);
                 DataServiceProxy dataProxy = new DataServiceProxy();
                 dataProxy.SendData(_terminalId, sample);
+                logger.Info("Data sent");
             }
             catch (Exception e)
             {

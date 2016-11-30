@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace Infrastructure.Communication.Proxy
         ClientBase<IDataService>, 
         IDataService
     {
-        public string SendData(string terminalId, List<MyData> data)
+        public void SendData(string terminalId, List<MyData> data)
         {
-            return base.Channel.SendData(terminalId, data);
+            base.Channel.SendData(terminalId, data);
         }
     }
 }

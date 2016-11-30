@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using Infrastructure.Model;
@@ -19,6 +20,6 @@ namespace Infrastructure.Communication.Service
             ResponseFormat = WebMessageFormat.Xml,
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        string SendData(string terminalId, List<MyData> data);
+        void SendData(string terminalId, List<MyData> data);
     }
 }
