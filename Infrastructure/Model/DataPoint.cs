@@ -8,21 +8,24 @@ using System.Threading.Tasks;
 namespace Infrastructure.Model
 {
     [DataContract]
-    public class MyData
+    public class DataPoint : IDataPoint
     {
         [DataMember]
-        public DateTime Time;
+        public DateTime Time { get; set; }
 
         [DataMember]
-        public float Latitude;
-        [DataMember]
-        public float Longitude;
+        public float Latitude { get; set; }
 
         [DataMember]
-        public float Speed;
+        public float Longitude { get; set; }
+
         [DataMember]
-        public bool IsEngineEnable;
+        public float Speed { get; set; }
+
         [DataMember]
-        public float Mileage;
+        public bool IsEngineEnable { get; set; }
+
+        [DataMember]
+        public float Mileage { get; set; }
     }
 }

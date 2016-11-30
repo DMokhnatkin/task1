@@ -14,12 +14,13 @@ namespace Infrastructure.Communication.Service
     public interface IDataService
     {
         [OperationContract]
+        [ServiceKnownType(typeof(DataPoint))]
         [WebInvoke(
             Method = "POST", 
             UriTemplate = "/SendData/{terminalId}",
             ResponseFormat = WebMessageFormat.Xml,
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        void SendData(string terminalId, List<MyData> data);
+        void SendData(string terminalId, List<IDataPoint> data);
     }
 }

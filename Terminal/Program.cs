@@ -27,9 +27,9 @@ namespace Terminal
             try
             {
                 const int points = 3;
-                List<MyData> sample = new List<MyData>()
+                List<IDataPoint> sample = new List<IDataPoint>()
                 {
-                    new MyData()
+                    new DataPoint()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         IsEngineEnable = false,
@@ -38,7 +38,7 @@ namespace Terminal
                         Mileage = 100,
                         Speed = 60
                     },
-                    new MyData()
+                    new DataPoint()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         IsEngineEnable = false,
@@ -47,7 +47,7 @@ namespace Terminal
                         Mileage = 100,
                         Speed = 60
                     },
-                    new MyData()
+                    new DataPoint()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         IsEngineEnable = false,

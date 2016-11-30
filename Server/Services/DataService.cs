@@ -10,6 +10,7 @@ using Infrastructure.Communication.Service;
 using Microsoft.Practices.Unity;
 using NLog;
 using Infrastructure.Model;
+using Server.Data;
 
 namespace Server.Services
 {
@@ -22,7 +23,9 @@ namespace Server.Services
 
         private IAuthorizationService _authorization = MyUnityContainer.Instance.Resolve<IAuthorizationService>();
 
-        public void SendData(string terminalId, List<MyData> data)
+        private ServerDbContext _dbcontext = new ServerDbContext();
+
+        public void SendData(string terminalId, List<IDataPoint> data)
         {
             if (!_authorization.IsLogged(terminalId))
             {
@@ -31,8 +34,18 @@ namespace Server.Services
             }
             else
             {
+                foreach (var dataPoint in data)
+                {
+                    //_dbcontext.DataPoints.Add(dataPoint);
+                }
+
                 MemoryStream str = new MemoryStream();
-                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<MyData>));
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(
+                    typeof(List<IDataPoint>), 
+                    new List<Type>()
+                    {
+                        typeof(DataPoint)
+                    });
                 ser.WriteObject(str, data);
                 str.Position = 0;
                 logger.Info("teminal(id={0}) called method SendData. Data : {1}", terminalId, new StreamReader(str).ReadToEnd());

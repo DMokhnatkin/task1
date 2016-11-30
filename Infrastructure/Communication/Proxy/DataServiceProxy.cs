@@ -14,7 +14,7 @@ namespace Infrastructure.Communication.Proxy
         ClientBase<IDataService>, 
         IDataService
     {
-        public void SendData(string terminalId, List<MyData> data)
+        public void SendData(string terminalId, List<IDataPoint> data)
         {
             base.Channel.SendData(terminalId, data);
         }

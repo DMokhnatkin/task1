@@ -46,7 +46,8 @@
     <Compile Include="Communication\Proxy\AuthorizationServiceProxy.cs" />
     <Compile Include="Communication\Service\IAuthorizationService.cs" />
     <Compile Include="Communication\Service\IDataService.cs" />
-    <Compile Include="Model\MyData.cs" />
+    <Compile Include="Model\DataPoint.cs" />
+    <Compile Include="Model\IDataPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Communication\Proxy\DataServiceProxy.cs" />
   </ItemGroup>
