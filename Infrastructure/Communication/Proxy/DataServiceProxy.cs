@@ -5,7 +5,8 @@ using System.Net;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure.Communication.Service;
+using Infrastructure.Contract.Model;
+using Infrastructure.Contract.Service;
 using Infrastructure.Model;
 
 namespace Infrastructure.Communication.Proxy

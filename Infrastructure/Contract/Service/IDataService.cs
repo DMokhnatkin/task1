@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using Infrastructure.Contract.Model;
 using Infrastructure.Model;
 
-namespace Infrastructure.Communication.Service
+namespace Infrastructure.Contract.Service
 {
     /// <summary>
     /// DataService for work with data

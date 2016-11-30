@@ -8,6 +8,7 @@ using NLog;
 using System.Text;
 using System.Xml.Serialization;
 using Infrastructure.Communication.Proxy;
+using Infrastructure.Contract.Model;
 using Infrastructure.Model;
 
 namespace Terminal

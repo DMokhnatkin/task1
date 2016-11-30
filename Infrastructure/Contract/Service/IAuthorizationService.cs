@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastructure.Communication.Service
+namespace Infrastructure.Contract.Service
 {
     /// <summary>
     /// DataService for a authorization

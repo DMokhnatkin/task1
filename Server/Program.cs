@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using Infrastructure.Communication.Service;
+using Infrastructure.Contract.Service;
 using Microsoft.Practices.Unity;
 using NLog;
 using Server.Services;

@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Model\DataPointDM.cs" />
     <Compile Include="Data\ServerDbContext.cs" />
     <Compile Include="MyUnityContainer.cs" />
     <Compile Include="Program.cs" />
