@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Contract.Model;
+using Infrastructure.Model.Sensors;
 
 namespace Infrastructure.Model
 {
@@ -21,12 +22,6 @@ namespace Infrastructure.Model
         public float Longitude { get; set; }
 
         [DataMember]
-        public float Speed { get; set; }
-
-        [DataMember]
-        public bool IsEngineEnable { get; set; }
-
-        [DataMember]
-        public float Mileage { get; set; }
+        public IDictionary<Guid, ISensorValue> SensorValues { get; set; } = new Dictionary<Guid, ISensorValue>();
     }
 }

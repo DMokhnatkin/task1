@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using Infrastructure.Contract.Service;
 
-namespace Infrastructure.Communication.Proxy
+namespace Terminal.Communication.Proxy
 {
     public class AuthorizationServiceProxy : 
         ClientBase<IAuthorizationService>,

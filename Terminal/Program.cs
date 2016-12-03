@@ -7,9 +7,10 @@ using System.Threading;
 using NLog;
 using System.Text;
 using System.Xml.Serialization;
-using Infrastructure.Communication.Proxy;
+using Terminal.Communication.Proxy;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
+using Infrastructure.Model.Sensors;
 
 namespace Terminal
 {
@@ -33,29 +34,26 @@ namespace Terminal
                     new DataPoint()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        IsEngineEnable = false,
                         Latitude = 0,
                         Longitude = 0,
-                        Mileage = 100,
-                        Speed = 60
+                        SensorValues =
+                        {
+                            { SensorsRep.GetGuid<EngineSensor>(), new EngineSensor() { CastedValue = true} },
+                            { SensorsRep.GetGuid<MileageSensor>(), new MileageSensor() { CastedValue = 100} },
+                            { SensorsRep.GetGuid<SpeedSensor>(), new SpeedSensor() { CastedValue = 100} },
+                        }
                     },
                     new DataPoint()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        IsEngineEnable = false,
                         Latitude = 0,
                         Longitude = 0,
-                        Mileage = 100,
-                        Speed = 60
                     },
                     new DataPoint()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        IsEngineEnable = false,
                         Latitude = 0,
                         Longitude = 0,
-                        Mileage = 100,
-                        Speed = 60
                     },
                 };
 

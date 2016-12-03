@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Infrastructure.Contract.Model
 {
@@ -9,10 +10,6 @@ namespace Infrastructure.Contract.Model
         float Latitude { get; set; }
         float Longitude { get; set; }
 
-        float Speed { get; set; }
-
-        bool IsEngineEnable { get; set; }
-
-        float Mileage { get; set; }
+        IDictionary<Guid, ISensorValue> SensorValues { get; }
     }
 }

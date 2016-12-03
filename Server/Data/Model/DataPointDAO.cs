@@ -5,7 +5,7 @@ using Infrastructure.Model;
 
 namespace Server.Data.Model
 {
-    class DataPointDM : IDataPoint
+    class DataPointDAO
     {
         [Key]
         public Guid Id;

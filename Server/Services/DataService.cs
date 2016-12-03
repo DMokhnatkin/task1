@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel;
@@ -46,7 +47,9 @@ namespace Server.Services
                     new List<Type>()
                     {
                         typeof(DataPoint)
-                    });
+                    }
+                    .Concat(SensorsRep.GetSensorTypes())
+                    );
                 ser.WriteObject(str, data);
                 str.Position = 0;
                 logger.Info("teminal(id={0}) called method SendData. Data : {1}", terminalId, new StreamReader(str).ReadToEnd());

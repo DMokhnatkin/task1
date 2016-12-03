@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
-using Infrastructure.Model;
 
-namespace Infrastructure.Communication.Proxy
+namespace Terminal.Communication.Proxy
 {
     public class DataServiceProxy :
         ClientBase<IDataService>, 
