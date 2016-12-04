@@ -6,7 +6,7 @@ using Infrastructure.Contract.Model;
 namespace Infrastructure.DTO
 {
     [DataContract]
-    public class DataPoint : IDataPoint
+    public class MeteringDTO : IMetering
     {
         [DataMember]
         public DateTime Time { get; set; }

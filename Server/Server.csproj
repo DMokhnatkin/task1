@@ -82,9 +82,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DAO\MeteringSensorValueRelationDAO.cs" />
     <Compile Include="Data\DAO\SensorValueDAO.cs" />
-    <Compile Include="Data\Model\DataPointDAO.cs" />
+    <Compile Include="Data\DAO\MeteringDAO.cs" />
     <Compile Include="Data\ServerDbContext.cs" />
+    <Compile Include="Migrations\201612041354100_init.cs" />
+    <Compile Include="Migrations\201612041354100_init.Designer.cs">
+      <DependentUpon>201612041354100_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyUnityContainer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,7 +111,11 @@
       <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612041354100_init.resx">
+      <DependentUpon>201612041354100_init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

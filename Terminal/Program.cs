@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Threading;
 using NLog;
-using System.Text;
-using System.Xml.Serialization;
 using Terminal.Communication.Proxy;
 using Infrastructure.Contract.Model;
 using Infrastructure.DTO;
@@ -29,9 +24,9 @@ namespace Terminal
             try
             {
                 const int points = 3;
-                List<IDataPoint> sample = new List<IDataPoint>()
+                List<IMetering> sample = new List<IMetering>()
                 {
-                    new DataPoint()
+                    new MeteringDTO()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         Latitude = 0,
@@ -43,13 +38,13 @@ namespace Terminal
                             { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 100} },
                         }
                     },
-                    new DataPoint()
+                    new MeteringDTO()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         Latitude = 0,
                         Longitude = 0,
                     },
-                    new DataPoint()
+                    new MeteringDTO()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         Latitude = 0,

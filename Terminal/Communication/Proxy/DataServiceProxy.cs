@@ -10,7 +10,7 @@ namespace Terminal.Communication.Proxy
         ClientBase<IDataService>, 
         IDataService
     {
-        public void SendData(string terminalId, List<IDataPoint> data)
+        public void SendData(string terminalId, List<IMetering> data)
         {
             base.Channel.SendData(terminalId, data);
         }

@@ -16,7 +16,7 @@ namespace Infrastructure.Contract.Service
     public interface IDataService
     {
         [OperationContract]
-        [ServiceKnownType(typeof(DataPoint))]
+        [ServiceKnownType(typeof(MeteringDTO))]
         // TODO: get known types from SensorsRep in runtime. I don't know why It dosn't work: ServiceKnownType("GetSensorValTypes", typeof(SensorsRep))
         [ServiceKnownType(typeof(EngineSensorValueDTO))]
         [ServiceKnownType(typeof(SpeedSensorValueDTO))]
@@ -28,6 +28,6 @@ namespace Infrastructure.Contract.Service
             ResponseFormat = WebMessageFormat.Xml,
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        void SendData(string terminalId, List<IDataPoint> data);
+        void SendData(string terminalId, List<IMetering> data);
     }
 }

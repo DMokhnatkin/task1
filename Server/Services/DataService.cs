@@ -27,7 +27,7 @@ namespace Server.Services
 
         private ServerDbContext _dbcontext = new ServerDbContext();
 
-        public void SendData(string terminalId, List<IDataPoint> data)
+        public void SendData(string terminalId, List<IMetering> data)
         {
             if (!_authorization.IsLogged(terminalId))
             {
@@ -38,15 +38,15 @@ namespace Server.Services
             {
                 foreach (var dataPoint in data)
                 {
-                    //_dbcontext.DataPoints.Add(dataPoint);
+                    //_dbcontext.Meterings.Add(dataPoint);
                 }
 
                 MemoryStream str = new MemoryStream();
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(
-                    typeof(List<IDataPoint>), 
+                    typeof(List<IMetering>), 
                     new List<Type>()
                     {
-                        typeof(DataPoint)
+                        typeof(MeteringDTO)
                     }
                     .Concat(SensorsRep.GetSensorValTypes())
                     );

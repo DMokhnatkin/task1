@@ -51,7 +51,7 @@
     <Compile Include="Contract\Service\IAuthorizationService.cs" />
     <Compile Include="Contract\Service\IDataService.cs" />
     <Compile Include="DTO\DataPointDTO.cs" />
-    <Compile Include="Contract\Model\IDataPoint.cs" />
+    <Compile Include="Contract\Model\IMetering.cs" />
     <Compile Include="DTO\SensorsRep.cs" />
     <Compile Include="DTO\SensorValue\EngineSensorValueDTO.cs" />
     <Compile Include="DTO\SensorValue\MileageSensorValueDTO.cs" />

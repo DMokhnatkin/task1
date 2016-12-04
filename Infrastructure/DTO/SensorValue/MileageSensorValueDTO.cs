@@ -5,7 +5,7 @@ namespace Infrastructure.DTO.SensorValue
 {
     public class MileageSensorValueDTO : ISensorValue
     {
-        public Guid SensorId { get; set; }
+        public Int64 MeteringId { get; set; }
 
         public float Mileage { get; set; }
     }

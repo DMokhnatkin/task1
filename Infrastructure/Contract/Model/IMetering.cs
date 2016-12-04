@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Contract.Model
 {
-    public interface IDataPoint
+    public interface IMetering
     {
         DateTime Time { get; set; }
 
