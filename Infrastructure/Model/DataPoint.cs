@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Contract.Model;
-using Infrastructure.Model.Sensors;
 
 namespace Infrastructure.Model
 {

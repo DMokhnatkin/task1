@@ -9,8 +9,9 @@ using System.Text;
 using System.Xml.Serialization;
 using Terminal.Communication.Proxy;
 using Infrastructure.Contract.Model;
+using Infrastructure.DTO;
+using Infrastructure.DTO.SensorValue;
 using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
 
 namespace Terminal
 {
@@ -38,9 +39,9 @@ namespace Terminal
                         Longitude = 0,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<EngineSensor>(), new EngineSensor() { CastedValue = true} },
-                            { SensorsRep.GetGuid<MileageSensor>(), new MileageSensor() { CastedValue = 100} },
-                            { SensorsRep.GetGuid<SpeedSensor>(), new SpeedSensor() { CastedValue = 100} },
+                            { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 100} },
+                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 100} },
                         }
                     },
                     new DataPoint()

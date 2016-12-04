@@ -52,10 +52,10 @@
     <Compile Include="Contract\Service\IDataService.cs" />
     <Compile Include="Model\DataPoint.cs" />
     <Compile Include="Contract\Model\IDataPoint.cs" />
-    <Compile Include="Model\SensorsRep.cs" />
-    <Compile Include="Model\Sensors\EngineSensor.cs" />
-    <Compile Include="Model\Sensors\MileageSensor.cs" />
-    <Compile Include="Model\Sensors\SpeedSensor.cs" />
+    <Compile Include="DTO\SensorsRep.cs" />
+    <Compile Include="DTO\SensorValue\EngineSensorValueDTO.cs" />
+    <Compile Include="DTO\SensorValue\MileageSensorValueDTO.cs" />
+    <Compile Include="DTO\SensorValue\SpeedSensorValueDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

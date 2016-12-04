@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DAO\SensorValueDAO.cs" />
     <Compile Include="Data\Model\DataPointDAO.cs" />
     <Compile Include="Data\ServerDbContext.cs" />
     <Compile Include="MyUnityContainer.cs" />

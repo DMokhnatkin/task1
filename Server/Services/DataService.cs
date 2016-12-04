@@ -9,6 +9,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
+using Infrastructure.DTO;
 using Microsoft.Practices.Unity;
 using NLog;
 using Infrastructure.Model;
@@ -48,7 +49,7 @@ namespace Server.Services
                     {
                         typeof(DataPoint)
                     }
-                    .Concat(SensorsRep.GetSensorTypes())
+                    .Concat(SensorsRep.GetSensorValTypes())
                     );
                 ser.WriteObject(str, data);
                 str.Position = 0;

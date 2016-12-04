@@ -9,6 +9,6 @@ namespace Infrastructure.Contract.Model
     public interface ISensorValue
     {
         Guid SensorId { get; set; }
-        object Value { get; set; }
+        //object Value { get; set; }
     }
 }
