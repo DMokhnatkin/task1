@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Infrastructure.Contract.Model;
-using Infrastructure.Model;
 
 namespace Server.Data.Model
 {

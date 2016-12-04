@@ -11,7 +11,6 @@ using Terminal.Communication.Proxy;
 using Infrastructure.Contract.Model;
 using Infrastructure.DTO;
 using Infrastructure.DTO.SensorValue;
-using Infrastructure.Model;
 
 namespace Terminal
 {

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using Infrastructure.Contract.Model;
+using Infrastructure.DTO;
 using Infrastructure.DTO.SensorValue;
-using Infrastructure.Model;
 
 namespace Infrastructure.Contract.Service
 {

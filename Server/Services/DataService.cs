@@ -12,7 +12,6 @@ using Infrastructure.Contract.Service;
 using Infrastructure.DTO;
 using Microsoft.Practices.Unity;
 using NLog;
-using Infrastructure.Model;
 using Server.Data;
 
 namespace Server.Services

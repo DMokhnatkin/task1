@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Infrastructure.Model;
+using Infrastructure.DTO;
 
 namespace Server.Data
 {
