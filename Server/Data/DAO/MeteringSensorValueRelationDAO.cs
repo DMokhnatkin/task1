@@ -9,6 +9,7 @@ namespace Server.Data.DAO
 {
     class MeteringSensorValueRelationDAO
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
 
         public Int64 MeteringId { get; set; }

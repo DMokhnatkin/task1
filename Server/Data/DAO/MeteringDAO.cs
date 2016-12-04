@@ -10,6 +10,7 @@ namespace Server.Data.DAO
     class MeteringDAO : IMetering
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
 
         public DateTime Time { get; set; }
@@ -18,7 +19,7 @@ namespace Server.Data.DAO
 
         public float Longitude { get; set; }
 
-        private List<MeteringSensorValueRelationDAO> SensorValueRelations { get; set; }
+        public virtual List<MeteringSensorValueRelationDAO> SensorValueRelations { get; set; }
 
         [NotMapped]
         public IDictionary<Guid, ISensorValue> SensorValues {

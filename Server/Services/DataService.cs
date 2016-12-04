@@ -7,12 +7,15 @@ using System.Runtime.Serialization.Json;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using AutoMapper;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.DTO;
 using Microsoft.Practices.Unity;
 using NLog;
 using Server.Data;
+using Server.Data.DAO;
+using Server.Data.Repository;
 
 namespace Server.Services
 {
@@ -25,7 +28,7 @@ namespace Server.Services
 
         private IAuthorizationService _authorization = MyUnityContainer.Instance.Resolve<IAuthorizationService>();
 
-        private ServerDbContext _dbcontext = new ServerDbContext();
+        private MeteringRepository _meteringRepository = new MeteringRepository();
 
         public void SendData(string terminalId, List<IMetering> data)
         {
@@ -36,9 +39,9 @@ namespace Server.Services
             }
             else
             {
-                foreach (var dataPoint in data)
+                foreach (var metering in data)
                 {
-                    //_dbcontext.Meterings.Add(dataPoint);
+                    _meteringRepository.SaveMetering(metering);
                 }
 
                 MemoryStream str = new MemoryStream();

@@ -13,9 +13,9 @@ namespace Infrastructure.DTO
 
         static SensorsRep()
         {
-            RegisterSensorType<EngineSensorValueDTO>(Guid.NewGuid());
-            RegisterSensorType<MileageSensorValueDTO>(Guid.NewGuid());
-            RegisterSensorType<SpeedSensorValueDTO>(Guid.NewGuid());
+            RegisterSensorType<EngineSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b223"));
+            RegisterSensorType<MileageSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b224"));
+            RegisterSensorType<SpeedSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b225"));
         }
 
         private static Dictionary<Guid, Type> _sensorValTypes = new Dictionary<Guid, Type>();

@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
+using AutoMapper;
 using Infrastructure.Contract.Service;
+using Infrastructure.DTO;
+using Infrastructure.DTO.SensorValue;
 using Microsoft.Practices.Unity;
 using NLog;
+using Server.Data.DAO;
 using Server.Services;
 using Unity.Wcf;
 
@@ -67,8 +73,36 @@ namespace Server
             }
         }
 
+        static byte[] ObjectToByteArray(object obj)
+        {
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }
+
+        static void InitializeDAOMapper()
+        {
+            Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<MeteringDTO, MeteringDAO>();
+                    cfg.CreateMap<EngineSensorValueDTO, SensorValueDAO>()
+                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.IsTurnedOn)));
+                    cfg.CreateMap<MileageSensorValueDTO, SensorValueDAO>()
+                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.Mileage)));
+                    cfg.CreateMap<SpeedSensorValueDTO, SensorValueDAO>()
+                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.Speed)));
+                }
+            );
+        }
+
         static void Main(string[] args)
         {
+            InitializeDAOMapper();
             StartServices();
             Console.WriteLine("All services were started. Press enter to stop server.");
             Console.ReadLine();
