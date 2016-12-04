@@ -29,26 +29,38 @@ namespace Terminal
                     new MeteringDTO()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        Latitude = 0,
-                        Longitude = 0,
+                        Latitude = 56.2f,
+                        Longitude = 36.2f,
                         SensorValues =
                         {
                             { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 100} },
-                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 100} },
+                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 0.100f} },
+                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 80} },
                         }
                     },
                     new MeteringDTO()
                     {
-                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        Latitude = 0,
-                        Longitude = 0,
+                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, (points - 1) * timeout / points),
+                        Latitude = 56.20015f,
+                        Longitude = 36.2f,
+                        SensorValues =
+                        {
+                            { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 0.122f} },
+                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 80} },
+                        }
                     },
                     new MeteringDTO()
                     {
-                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        Latitude = 0,
-                        Longitude = 0,
+                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, (points - 2) * timeout / points),
+                        Latitude = 56.2003f,
+                        Longitude = 36.2f,
+                        SensorValues =
+                        {
+                            { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 0.144f} },
+                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 80} },
+                        }
                     },
                 };
 

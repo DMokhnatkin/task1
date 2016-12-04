@@ -13,6 +13,7 @@ namespace Infrastructure.DTO
 
         static SensorsRep()
         {
+            // TODO: create new layer for sensor values (DTO must be used only for transfer)
             RegisterSensorType<EngineSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b223"));
             RegisterSensorType<MileageSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b224"));
             RegisterSensorType<SpeedSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b225"));

@@ -13,6 +13,7 @@ namespace Server.Data.DAO
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
 
+        // TODO: make clustered
         public DateTime Time { get; set; }
 
         public float Latitude { get; set; }

@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
@@ -47,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\ValidateMetering\IMeteringValidator.cs" />
+    <Compile Include="BL\ValidateMetering\MeteringValidateManager.cs" />
+    <Compile Include="BL\ValidateMetering\Validators\MileageDistanceValidator.cs" />
+    <Compile Include="BL\ValidateMetering\Validators\SpeedMileageTimeValidator.cs" />
     <Compile Include="Contract\Model\ISensorValue.cs" />
     <Compile Include="Contract\Service\IAuthorizationService.cs" />
     <Compile Include="Contract\Service\IDataService.cs" />

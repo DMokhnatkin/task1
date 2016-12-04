@@ -8,6 +8,5 @@ namespace Infrastructure.Contract.Model
 {
     public interface ISensorValue
     {
-        //Int64 MeteringId { get; set; }
     }
 }

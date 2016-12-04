@@ -8,6 +8,8 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using AutoMapper;
+using Infrastructure.BL.ValidateMetering;
+using Infrastructure.BL.ValidateMetering.Validators;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.DTO;
@@ -20,8 +22,8 @@ using Server.Data.Repository;
 namespace Server.Services
 {
     [ServiceBehavior(
-        InstanceContextMode = InstanceContextMode.Single,
-        ConcurrencyMode = ConcurrencyMode.Single)]
+         InstanceContextMode = InstanceContextMode.Single,
+         ConcurrencyMode = ConcurrencyMode.Single)]
     public class DataService : IDataService
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -39,6 +41,25 @@ namespace Server.Services
             }
             else
             {
+                // Validate
+                // TODO: validate in db (first get data from db, concat with cur, and validate)
+                MeteringValidateManager _validateManager = new MeteringValidateManager(
+                    new List<IMeteringValidator>()
+                    {
+                        new MileageDistanceValidator(10),
+                        new SpeedMileageTimeValidator(20)
+                    });
+                try
+                {
+                    _validateManager.Validate(data);
+                }
+                catch (Exception e)
+                {
+                    logger.Warn(e);
+                    return;
+                }
+
+                // Save in db
                 foreach (var metering in data)
                 {
                     _meteringRepository.SaveMetering(metering);
