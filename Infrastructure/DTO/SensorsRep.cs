@@ -14,9 +14,9 @@ namespace Infrastructure.DTO
 
         static SensorsRep()
         {
-            RegisterSensorType<IEngineSensorValue, EngineSensorValueDTO>();
-            RegisterSensorType<IMileageSensorValue, MileageSensorValueDTO>();
-            RegisterSensorType<ISpeedSensorValue, SpeedSensorValueDTO>();
+            RegisterSensorType<IEngineSensorValue, EngineIdto>();
+            RegisterSensorType<IMileageSensorValue, MileageIdto>();
+            RegisterSensorType<ISpeedSensorValue, SpeedIdto>();
         }
 
         private static Dictionary<Type, Type> _iSensorValDictionary = new Dictionary<Type, Type>();
@@ -30,7 +30,7 @@ namespace Infrastructure.DTO
         /// <typeparam name="TDTO">Type of data transform object</typeparam>
         public static void RegisterSensorType<TSensorValueContract, TDTO>(Guid? guid = null)
             where TSensorValueContract : ISensorValue
-            where TDTO : TSensorValueContract
+            where TDTO : IDTO<TSensorValueContract>
         {
             Guid fGuid = guid ?? Guid.NewGuid();
             _iSensorValDictionary.Add(typeof(TSensorValueContract), typeof(TDTO));
@@ -52,6 +52,23 @@ namespace Infrastructure.DTO
                 throw e;
             }
             return _guids[typeof(TSensorValueContract)];
+        }
+
+        /// <summary>
+        /// Map ISensorValue to DTO
+        /// </summary>
+        public static IDTO<TSensorValueContract> MapToDTO<TSensorValueContract>(TSensorValueContract model)
+            where TSensorValueContract : ISensorValue
+        {
+            if (!_dtoDictionary.ContainsKey(typeof(TSensorValueContract)))
+            {
+                KeyNotFoundException e = new KeyNotFoundException(String.Format("Sensor value contract type ({0}) wasn't registered", typeof(TSensorValueContract)));
+                logger.Error(e);
+                throw e;
+            }
+            var dto = (IDTO<TSensorValueContract>)Activator.CreateInstance(_dtoDictionary[typeof(TSensorValueContract)]);
+            dto.MapFromModel(model);
+            return dto;
         }
     }
 }

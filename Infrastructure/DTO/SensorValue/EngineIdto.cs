@@ -7,19 +7,15 @@ namespace Infrastructure.DTO.SensorValue
     /// Wraps IEngineSensorValue for transfer 
     /// </summary>
     [DataContract]
-    public class EngineSensorValueDTO : IEngineSensorValue
+    public class EngineIdto : IDTO<IEngineSensorValue>
     {
-        public EngineSensorValueDTO()
-        {
-            
-        }
+        [DataMember]
+        public bool IsTurnedOn { get; set; }
 
-        public EngineSensorValueDTO(IEngineSensorValue model)
+        /// <inheritdoc />
+        public void MapFromModel(IEngineSensorValue model)
         {
             this.IsTurnedOn = model.IsTurnedOn;
         }
-
-        [DataMember]
-        public bool IsTurnedOn { get; set; }
     }
 }

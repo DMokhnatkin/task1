@@ -52,6 +52,9 @@
     <Compile Include="Communication\Proxy\AuthorizationServiceProxy.cs" />
     <Compile Include="Communication\Proxy\DataServiceProxy.cs" />
     <Compile Include="Emulator.cs" />
+    <Compile Include="Model\SensorValue\EngineSensorValue.cs" />
+    <Compile Include="Model\SensorValue\MileageSensorValue.cs" />
+    <Compile Include="Model\SensorValue\SpeedSensorValue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

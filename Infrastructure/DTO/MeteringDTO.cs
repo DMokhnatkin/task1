@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using Infrastructure.Contract.Model;
 
 namespace Infrastructure.DTO
 {
     [DataContract]
-    public class MeteringDTO : IMetering
+    public class MeteringDTO : IDTO<IMetering>
     {
         [DataMember]
         public DateTime Time { get; set; }
@@ -18,6 +19,14 @@ namespace Infrastructure.DTO
         public float Longitude { get; set; }
 
         [DataMember]
-        public IDictionary<Guid, ISensorValue> SensorValues { get; set; } = new Dictionary<Guid, ISensorValue>();
+        public IDictionary<Guid, IDTO<ISensorValue>> SensorValues { get; set; } = new Dictionary<Guid, IDTO<ISensorValue>>();
+
+        public void MapFromModel(IMetering model)
+        {
+            Time = model.Time;
+            Latitude = model.Latitude;
+            Longitude = model.Longitude;
+            SensorValues = model.SensorValues.ToDictionary(k => k.Key, v => SensorsRep.MapToDTO(v.Value));
+        }
     }
 }

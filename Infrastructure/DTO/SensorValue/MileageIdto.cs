@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Model.SensorValue;
 
 namespace Infrastructure.DTO.SensorValue
@@ -7,19 +8,15 @@ namespace Infrastructure.DTO.SensorValue
     /// Wraps IMileageSensorValue for transfer 
     /// </summary>
     [DataContract]
-    public class MileageSensorValueDTO : IMileageSensorValue
+    public class MileageIdto : IDTO<IMileageSensorValue>
     {
-        public MileageSensorValueDTO()
-        {
-            
-        }
+        [DataMember]
+        public float MileageKm { get; set; }
 
-        public MileageSensorValueDTO(IMileageSensorValue model)
+        /// <inheritdoc />
+        public void MapFromModel(IMileageSensorValue model)
         {
             this.MileageKm = model.MileageKm;
         }
-
-        [DataMember]
-        public float MileageKm { get; set; }
     }
 }

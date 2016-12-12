@@ -7,6 +7,7 @@ using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Model.SensorValue;
 using Infrastructure.DTO;
 using Infrastructure.DTO.SensorValue;
+using Terminal.Model.SensorValue;
 
 namespace Terminal
 {
@@ -25,6 +26,7 @@ namespace Terminal
             try
             {
                 const int points = 3;
+                /*
                 List<IMetering> sample = new List<IMetering>()
                 {
                     new MeteringDTO()
@@ -34,9 +36,9 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageSensorValueDTO() { MileageKm = 0.100f} },
-                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedSensorValueDTO() { SpeedKmh = 80} },
+                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineIdto(new EngineSensorValue() { IsTurnedOn = true}) },
+                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageIdto() { MileageKm = 0.100f} },
+                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedIdto() { SpeedKmh = 80} },
                         }
                     },
                     new MeteringDTO()
@@ -46,9 +48,9 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageSensorValueDTO() { MileageKm = 0.122f} },
-                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedSensorValueDTO() { SpeedKmh = 80} },
+                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineIdto() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageIdto() { MileageKm = 0.122f} },
+                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedIdto() { SpeedKmh = 80} },
                         }
                     },
                     new MeteringDTO()
@@ -58,17 +60,17 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageSensorValueDTO() { MileageKm = 0.144f} },
-                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedSensorValueDTO() { SpeedKmh = 80} },
+                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineIdto() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageIdto() { MileageKm = 0.144f} },
+                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedIdto() { SpeedKmh = 80} },
                         }
                     },
-                };
+                };*/
 
                 AuthorizationServiceProxy authorizationProxy = new AuthorizationServiceProxy();
                 authorizationProxy.Login(_terminalId);
                 DataServiceProxy dataProxy = new DataServiceProxy();
-                dataProxy.SendData(_terminalId, sample);
+                //dataProxy.SendData(_terminalId, sample);
                 logger.Info("Data sent");
             }
             catch (Exception e)

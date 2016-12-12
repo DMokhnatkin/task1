@@ -7,19 +7,15 @@ namespace Infrastructure.DTO.SensorValue
     /// Wraps ISpeedSensorValue for transfer 
     /// </summary>
     [DataContract]
-    public class SpeedSensorValueDTO : ISpeedSensorValue
+    public class SpeedIdto : IDTO<ISpeedSensorValue>
     {
-        public SpeedSensorValueDTO()
-        {
-            
-        }
+        [DataMember]
+        public float SpeedKmh { get; set; }
 
-        public SpeedSensorValueDTO(ISpeedSensorValue model)
+        /// <inheritdoc />
+        public void MapFromModel(ISpeedSensorValue model)
         {
             this.SpeedKmh = model.SpeedKmh;
         }
-
-        [DataMember]
-        public float SpeedKmh { get; set; }
     }
 }
