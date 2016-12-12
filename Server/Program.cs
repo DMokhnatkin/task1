@@ -93,9 +93,9 @@ namespace Server
                     cfg.CreateMap<EngineSensorValueDTO, SensorValueDAO>()
                         .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.IsTurnedOn)));
                     cfg.CreateMap<MileageSensorValueDTO, SensorValueDAO>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.Mileage)));
+                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.MileageKm)));
                     cfg.CreateMap<SpeedSensorValueDTO, SensorValueDAO>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.Speed)));
+                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.SpeedKmh)));
                 }
             );
         }

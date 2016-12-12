@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using Infrastructure.Contract.Model;
+using Infrastructure.Contract.Model.SensorValue;
 using Infrastructure.DTO;
 using Infrastructure.DTO.SensorValue;
 
@@ -33,9 +34,9 @@ namespace Infrastructure.BL.ValidateMetering.Validators
                 try
                 {
                     curMileageVal =
-                        ((MileageSensorValueDTO)cur.Current.SensorValues[SensorsRep.GetGuid<MileageSensorValueDTO>()]).Mileage;
+                        ((IMileageSensorValue)cur.Current.SensorValues[SensorsRep.GetGuid<IMileageSensorValue>()]).MileageKm;
                     prevMileageVal =
-                        ((MileageSensorValueDTO)prev.Current.SensorValues[SensorsRep.GetGuid<MileageSensorValueDTO>()]).Mileage;
+                        ((IMileageSensorValue)prev.Current.SensorValues[SensorsRep.GetGuid<IMileageSensorValue>()]).MileageKm;
                 }
                 catch (KeyNotFoundException e)
                 {
@@ -47,9 +48,9 @@ namespace Infrastructure.BL.ValidateMetering.Validators
                 try
                 {
                     curSpeedVal =
-                        ((SpeedSensorValueDTO)cur.Current.SensorValues[SensorsRep.GetGuid<SpeedSensorValueDTO>()]).Speed;
+                        ((ISpeedSensorValue)cur.Current.SensorValues[SensorsRep.GetGuid<ISpeedSensorValue>()]).SpeedKmh;
                     prevSpeedVal =
-                        ((SpeedSensorValueDTO)prev.Current.SensorValues[SensorsRep.GetGuid<SpeedSensorValueDTO>()]).Speed;
+                        ((ISpeedSensorValue)prev.Current.SensorValues[SensorsRep.GetGuid<ISpeedSensorValue>()]).SpeedKmh;
                 }
                 catch (KeyNotFoundException e)
                 {

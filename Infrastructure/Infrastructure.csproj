@@ -53,6 +53,9 @@
     <Compile Include="BL\ValidateMetering\Validators\MileageDistanceValidator.cs" />
     <Compile Include="BL\ValidateMetering\Validators\SpeedMileageTimeValidator.cs" />
     <Compile Include="Contract\Model\ISensorValue.cs" />
+    <Compile Include="Contract\Model\SensorValue\IEngineSensorValue.cs" />
+    <Compile Include="Contract\Model\SensorValue\IMileageSensorValue.cs" />
+    <Compile Include="Contract\Model\SensorValue\ISpeedSensorValue.cs" />
     <Compile Include="Contract\Service\IAuthorizationService.cs" />
     <Compile Include="Contract\Service\IDataService.cs" />
     <Compile Include="DTO\MeteringDTO.cs" />

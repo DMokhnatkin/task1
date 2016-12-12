@@ -7,6 +7,7 @@ using Infrastructure.Contract.Model;
 using Infrastructure.DTO;
 using Infrastructure.DTO.SensorValue;
 using System.Device.Location;
+using Infrastructure.Contract.Model.SensorValue;
 
 namespace Infrastructure.BL.ValidateMetering.Validators
 {
@@ -40,9 +41,9 @@ namespace Infrastructure.BL.ValidateMetering.Validators
                 try
                 {
                     curMileageVal =
-                        ((MileageSensorValueDTO)cur.Current.SensorValues[SensorsRep.GetGuid<MileageSensorValueDTO>()]).Mileage;
+                        ((IMileageSensorValue)cur.Current.SensorValues[SensorsRep.GetGuid<IMileageSensorValue>()]).MileageKm;
                     prevMileageVal =
-                        ((MileageSensorValueDTO)prev.Current.SensorValues[SensorsRep.GetGuid<MileageSensorValueDTO>()]).Mileage;
+                        ((IMileageSensorValue)prev.Current.SensorValues[SensorsRep.GetGuid<IMileageSensorValue>()]).MileageKm;
                 }
                 catch (KeyNotFoundException e)
                 {

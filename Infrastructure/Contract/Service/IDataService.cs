@@ -17,7 +17,7 @@ namespace Infrastructure.Contract.Service
     {
         [OperationContract]
         [ServiceKnownType(typeof(MeteringDTO))]
-        // TODO: get known types from SensorsRep in runtime. I don't know why It dosn't work: ServiceKnownType("GetSensorValTypes", typeof(SensorsRep))
+        // TODO: get known types from SensorsRep in runtime. I don't know why It dosn't work: ServiceKnownType("GetSensorValContractTypes", typeof(SensorsRep))
         [ServiceKnownType(typeof(EngineSensorValueDTO))]
         [ServiceKnownType(typeof(SpeedSensorValueDTO))]
         [ServiceKnownType(typeof(MileageSensorValueDTO))]

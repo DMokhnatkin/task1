@@ -4,6 +4,7 @@ using System.Threading;
 using NLog;
 using Terminal.Communication.Proxy;
 using Infrastructure.Contract.Model;
+using Infrastructure.Contract.Model.SensorValue;
 using Infrastructure.DTO;
 using Infrastructure.DTO.SensorValue;
 
@@ -33,9 +34,9 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 0.100f} },
-                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 80} },
+                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageSensorValueDTO() { MileageKm = 0.100f} },
+                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedSensorValueDTO() { SpeedKmh = 80} },
                         }
                     },
                     new MeteringDTO()
@@ -45,9 +46,9 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 0.122f} },
-                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 80} },
+                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageSensorValueDTO() { MileageKm = 0.122f} },
+                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedSensorValueDTO() { SpeedKmh = 80} },
                         }
                     },
                     new MeteringDTO()
@@ -57,9 +58,9 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 0.144f} },
-                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 80} },
+                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageSensorValueDTO() { MileageKm = 0.144f} },
+                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedSensorValueDTO() { SpeedKmh = 80} },
                         }
                     },
                 };

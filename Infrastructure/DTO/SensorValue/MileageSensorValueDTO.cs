@@ -1,10 +1,25 @@
-﻿using System;
-using Infrastructure.Contract.Model;
+﻿using System.Runtime.Serialization;
+using Infrastructure.Contract.Model.SensorValue;
 
 namespace Infrastructure.DTO.SensorValue
 {
-    public class MileageSensorValueDTO : ISensorValue
+    /// <summary>
+    /// Wraps IMileageSensorValue for transfer 
+    /// </summary>
+    [DataContract]
+    public class MileageSensorValueDTO : IMileageSensorValue
     {
-        public float Mileage { get; set; }
+        public MileageSensorValueDTO()
+        {
+            
+        }
+
+        public MileageSensorValueDTO(IMileageSensorValue model)
+        {
+            this.MileageKm = model.MileageKm;
+        }
+
+        [DataMember]
+        public float MileageKm { get; set; }
     }
 }

@@ -41,8 +41,7 @@ namespace Server.Services
             }
             else
             {
-                // Validate
-                // TODO: validate in db (first get data from db, concat with cur, and validate)
+                /*
                 MeteringValidateManager _validateManager = new MeteringValidateManager(
                     new List<IMeteringValidator>()
                     {
@@ -57,7 +56,7 @@ namespace Server.Services
                 {
                     logger.Warn(e);
                     return;
-                }
+                }*/
 
                 // Save in db
                 foreach (var metering in data)
@@ -72,7 +71,7 @@ namespace Server.Services
                     {
                         typeof(MeteringDTO)
                     }
-                    .Concat(SensorsRep.GetSensorValTypes())
+                    .Concat(SensorsRep.GetSensorValContractTypes())
                     );
                 ser.WriteObject(str, data);
                 str.Position = 0;
