@@ -48,10 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\ValidateMetering\IMeteringValidator.cs" />
-    <Compile Include="BL\ValidateMetering\MeteringValidateManager.cs" />
-    <Compile Include="BL\ValidateMetering\Validators\MileageDistanceValidator.cs" />
-    <Compile Include="BL\ValidateMetering\Validators\SpeedMileageTimeValidator.cs" />
     <Compile Include="Contract\Model\ISensorValue.cs" />
     <Compile Include="Contract\Model\SensorValue\IEngineSensorValue.cs" />
     <Compile Include="Contract\Model\SensorValue\IMileageSensorValue.cs" />

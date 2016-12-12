@@ -8,8 +8,6 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using AutoMapper;
-using Infrastructure.BL.ValidateMetering;
-using Infrastructure.BL.ValidateMetering.Validators;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.DTO;
@@ -41,23 +39,6 @@ namespace Server.Services
             }
             else
             {
-                /*
-                MeteringValidateManager _validateManager = new MeteringValidateManager(
-                    new List<IMeteringValidator>()
-                    {
-                        new MileageDistanceValidator(10),
-                        new SpeedMileageTimeValidator(20)
-                    });
-                try
-                {
-                    _validateManager.Validate(data);
-                }
-                catch (Exception e)
-                {
-                    logger.Warn(e);
-                    return;
-                }*/
-
                 // Save in db
                 foreach (var metering in data)
                 {
