@@ -1,7 +1,6 @@
 ﻿using System;
 using AutoMapper;
 using Infrastructure.Contract.Model;
-using Infrastructure.DTO;
 using Server.Data.DAO;
 
 namespace Server.Data.Repository

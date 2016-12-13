@@ -4,8 +4,8 @@ using System.Threading;
 using NLog;
 using Terminal.Communication.Proxy;
 using Infrastructure.Contract.Model;
-using Infrastructure.DTO;
-using Infrastructure.DTO.SensorValue;
+using Infrastructure.Model;
+using Infrastructure.Model.SensorValue;
 
 namespace Terminal
 {
@@ -26,25 +26,25 @@ namespace Terminal
                 const int points = 3;
                 List<IMetering> sample = new List<IMetering>()
                 {
-                    new MeteringDTO()
+                    new Metering()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         Latitude = 0,
                         Longitude = 0,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<EngineSensorValueDTO>(), new EngineSensorValueDTO() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<MileageSensorValueDTO>(), new MileageSensorValueDTO() { Mileage = 100} },
-                            { SensorsRep.GetGuid<SpeedSensorValueDTO>(), new SpeedSensorValueDTO() { Speed = 100} },
+                            { SensorsRep.GetGuid<EngineSensorValue>(), new EngineSensorValue() { IsTurnedOn = true} },
+                            { SensorsRep.GetGuid<MileageSensorValue>(), new MileageSensorValue() { Mileage = 100} },
+                            { SensorsRep.GetGuid<SpeedSensorValue>(), new SpeedSensorValue() { Speed = 100} },
                         }
                     },
-                    new MeteringDTO()
+                    new Metering()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         Latitude = 0,
                         Longitude = 0,
                     },
-                    new MeteringDTO()
+                    new Metering()
                     {
                         Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
                         Latitude = 0,

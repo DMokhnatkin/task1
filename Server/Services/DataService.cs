@@ -10,7 +10,7 @@ using System.Text;
 using AutoMapper;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
-using Infrastructure.DTO;
+using Infrastructure.Model;
 using Microsoft.Practices.Unity;
 using NLog;
 using Server.Data;
@@ -49,7 +49,7 @@ namespace Server.Services
                     typeof(List<IMetering>), 
                     new List<Type>()
                     {
-                        typeof(MeteringDTO)
+                        typeof(Metering)
                     }
                     .Concat(SensorsRep.GetSensorValTypes())
                     );

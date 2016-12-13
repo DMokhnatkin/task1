@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using Infrastructure.DTO;
 using Server.Data.DAO;
 
 namespace Server.Data

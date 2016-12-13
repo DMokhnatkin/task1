@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Infrastructure.Contract.Model;
-using Infrastructure.DTO.SensorValue;
+using Infrastructure.Model.SensorValue;
 using NLog;
 
-namespace Infrastructure.DTO
+namespace Infrastructure.Model
 {
     public static class SensorsRep
     {
@@ -13,9 +13,9 @@ namespace Infrastructure.DTO
 
         static SensorsRep()
         {
-            RegisterSensorType<EngineSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b223"));
-            RegisterSensorType<MileageSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b224"));
-            RegisterSensorType<SpeedSensorValueDTO>(new Guid("ca761232ed4211cebacd00aa0057b225"));
+            RegisterSensorType<EngineSensorValue>(new Guid("ca761232ed4211cebacd00aa0057b223"));
+            RegisterSensorType<MileageSensorValue>(new Guid("ca761232ed4211cebacd00aa0057b224"));
+            RegisterSensorType<SpeedSensorValue>(new Guid("ca761232ed4211cebacd00aa0057b225"));
         }
 
         private static Dictionary<Guid, Type> _sensorValTypes = new Dictionary<Guid, Type>();

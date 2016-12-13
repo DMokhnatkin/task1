@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Infrastructure.Contract.Model;
 
-namespace Infrastructure.DTO
+namespace Infrastructure.Model
 {
     [DataContract]
-    public class MeteringDTO : IMetering
+    public class Metering : IMetering
     {
         [DataMember]
         public DateTime Time { get; set; }
