@@ -19,43 +19,26 @@ namespace Terminal
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private static Metering prev;
+        const int points = 3;
+
         static void ReferToService(string serviceAddress)
         {
             try
             {
-                const int points = 3;
-                List<IMetering> sample = new List<IMetering>()
+                if (prev == null)
+                    prev = Emulator.GetRandom();
+                List<IMetering> data = new List<IMetering>();
+                for (int i = 0; i < points; i++)
                 {
-                    new Metering()
-                    {
-                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        Latitude = 0,
-                        Longitude = 0,
-                        SensorValues =
-                        {
-                            { SensorsRep.GetGuid<EngineSensorValue>(), new EngineSensorValue() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<MileageSensorValue>(), new MileageSensorValue() { Mileage = 100} },
-                            { SensorsRep.GetGuid<SpeedSensorValue>(), new SpeedSensorValue() { Speed = 100} },
-                        }
-                    },
-                    new Metering()
-                    {
-                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        Latitude = 0,
-                        Longitude = 0,
-                    },
-                    new Metering()
-                    {
-                        Time = DateTime.Now - new TimeSpan(0, 0, 0, 0, points * timeout / points),
-                        Latitude = 0,
-                        Longitude = 0,
-                    },
-                };
+                    prev = Emulator.GetNext(prev, new TimeSpan(0, 0, 0, 0, timeout/points), (float)new Random().NextDouble() * 60);
+                    data.Add(prev);
+                }
 
                 AuthorizationServiceProxy authorizationProxy = new AuthorizationServiceProxy();
                 authorizationProxy.Login(_terminalId);
                 DataServiceProxy dataProxy = new DataServiceProxy();
-                dataProxy.SendData(_terminalId, sample);
+                dataProxy.SendData(_terminalId, data);
                 logger.Info("Data sent");
             }
             catch (Exception e)

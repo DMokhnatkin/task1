@@ -4,6 +4,6 @@ namespace Infrastructure.Model.SensorValue
 {
     public class MileageSensorValue : ISensorValue
     {
-        public float Mileage { get; set; }
+        public float MileageKm { get; set; }
     }
 }
