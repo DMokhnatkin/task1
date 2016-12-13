@@ -57,10 +57,14 @@
     <Compile Include="DTO\IDTO.cs" />
     <Compile Include="DTO\MeteringDTO.cs" />
     <Compile Include="Contract\Model\IMetering.cs" />
-    <Compile Include="DTO\SensorsRep.cs" />
-    <Compile Include="DTO\SensorValue\EngineIdto.cs" />
-    <Compile Include="DTO\SensorValue\MileageIdto.cs" />
-    <Compile Include="DTO\SensorValue\SpeedIdto.cs" />
+    <Compile Include="Model\Mettering.cs" />
+    <Compile Include="Model\SensorValue\EngineSensorValue.cs" />
+    <Compile Include="Model\SensorValue\MileageSensorValue.cs" />
+    <Compile Include="Model\SensorValue\SpeedSensorValue.cs" />
+    <Compile Include="SensorsContainer.cs" />
+    <Compile Include="DTO\SensorValue\EngineDTO.cs" />
+    <Compile Include="DTO\SensorValue\MileageDTO.cs" />
+    <Compile Include="DTO\SensorValue\SpeedDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

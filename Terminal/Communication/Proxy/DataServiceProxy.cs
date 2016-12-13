@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
+using Infrastructure.DTO;
 
 namespace Terminal.Communication.Proxy
 {
@@ -10,7 +11,7 @@ namespace Terminal.Communication.Proxy
         ClientBase<IDataService>, 
         IDataService
     {
-        public void SendData(string terminalId, List<IMetering> data)
+        public void SendData(string terminalId, List<MeteringDTO> data)
         {
             base.Channel.SendData(terminalId, data);
         }

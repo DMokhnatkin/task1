@@ -4,18 +4,18 @@ using Infrastructure.Contract.Model.SensorValue;
 namespace Infrastructure.DTO.SensorValue
 {
     /// <summary>
-    /// Wraps ISpeedSensorValue for transfer 
+    /// Wraps IEngineSensorValue for transfer 
     /// </summary>
     [DataContract]
-    public class SpeedIdto : IDTO<ISpeedSensorValue>
+    public class EngineDTO : IDTO<IEngineSensorValue>
     {
         [DataMember]
-        public float SpeedKmh { get; set; }
+        public bool IsTurnedOn { get; set; }
 
         /// <inheritdoc />
-        public void MapFromModel(ISpeedSensorValue model)
+        public void MapFromModel(IEngineSensorValue model)
         {
-            this.SpeedKmh = model.SpeedKmh;
+            this.IsTurnedOn = model.IsTurnedOn;
         }
     }
 }

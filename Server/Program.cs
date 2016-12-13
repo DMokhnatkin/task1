@@ -90,11 +90,11 @@ namespace Server
             Mapper.Initialize(cfg =>
                 {
                     cfg.CreateMap<MeteringDTO, MeteringDAO>();
-                    cfg.CreateMap<EngineIdto, SensorValueDAO>()
+                    cfg.CreateMap<EngineDTO, SensorValueDAO>()
                         .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.IsTurnedOn)));
-                    cfg.CreateMap<MileageIdto, SensorValueDAO>()
+                    cfg.CreateMap<MileageDTO, SensorValueDAO>()
                         .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.MileageKm)));
-                    cfg.CreateMap<SpeedIdto, SensorValueDAO>()
+                    cfg.CreateMap<SpeedDTO, SensorValueDAO>()
                         .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.SpeedKmh)));
                 }
             );

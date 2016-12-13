@@ -8,6 +8,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using AutoMapper;
+using Infrastructure;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.DTO;
@@ -30,7 +31,7 @@ namespace Server.Services
 
         private MeteringRepository _meteringRepository = new MeteringRepository();
 
-        public void SendData(string terminalId, List<IMetering> data)
+        public void SendData(string terminalId, List<MeteringDTO> data)
         {
             if (!_authorization.IsLogged(terminalId))
             {
@@ -42,7 +43,8 @@ namespace Server.Services
                 // Save in db
                 foreach (var metering in data)
                 {
-                    _meteringRepository.SaveMetering(metering);
+                    // TODO: save if db
+                    //_meteringRepository.SaveMetering(metering);
                 }
 
                 MemoryStream str = new MemoryStream();
@@ -52,7 +54,7 @@ namespace Server.Services
                     {
                         typeof(MeteringDTO)
                     }
-                    .Concat(SensorsRep.GetSensorValContractTypes())
+                    .Concat(SensorsContainer.GetSensorValContractTypes())
                     );
                 ser.WriteObject(str, data);
                 str.Position = 0;

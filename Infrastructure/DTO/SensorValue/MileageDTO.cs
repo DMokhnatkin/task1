@@ -8,7 +8,7 @@ namespace Infrastructure.DTO.SensorValue
     /// Wraps IMileageSensorValue for transfer 
     /// </summary>
     [DataContract]
-    public class MileageIdto : IDTO<IMileageSensorValue>
+    public class MileageDTO : IDTO<IMileageSensorValue>
     {
         [DataMember]
         public float MileageKm { get; set; }

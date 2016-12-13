@@ -1,20 +1,30 @@
 ﻿using System;
 using Infrastructure.Contract.Model;
+using Infrastructure.Contract.Model.SensorValue;
+using Terminal.Model;
+using Terminal.Model.SensorValue;
 
 namespace Terminal
 {
-    public class Emulator
+    class Emulator
     {
-        private IMetering _cur;
+        private Mettering _cur;
 
-        public Emulator(IMetering start)
+        public Emulator(Mettering start)
         {
             _cur = start;
         }
 
-        public IMetering GetNext()
+        public Mettering GetNext(TimeSpan time)
         {
-            return null;
+            var z = new Mettering();
+            z.Time = new DateTime();
+            z.Latitude = 56.2f;
+            z.Longitude = 36.2f;
+            z.AddSensorValue<IEngineSensorValue>(new EngineSensorValue() { IsTurnedOn = true });
+            z.AddSensorValue<IMileageSensorValue>(new MileageSensorValue() { MileageKm = 80 });
+            z.AddSensorValue<ISpeedSensorValue>(new SpeedSensorValue() { SpeedKmh = 60 });
+            return z;
         }
     }
 }

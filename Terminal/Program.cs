@@ -7,6 +7,7 @@ using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Model.SensorValue;
 using Infrastructure.DTO;
 using Infrastructure.DTO.SensorValue;
+using Terminal.Model;
 using Terminal.Model.SensorValue;
 
 namespace Terminal
@@ -20,6 +21,7 @@ namespace Terminal
         private static int timeout;
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Emulator _emulator;
 
         static void ReferToService(string serviceAddress)
         {
@@ -36,9 +38,9 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineIdto(new EngineSensorValue() { IsTurnedOn = true}) },
-                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageIdto() { MileageKm = 0.100f} },
-                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedIdto() { SpeedKmh = 80} },
+                            { SensorsContainer.GetGuid<IEngineSensorValue>(), new EngineDTO(new EngineSensorValue() { IsTurnedOn = true}) },
+                            { SensorsContainer.GetGuid<IMileageSensorValue>(), new MileageDTO() { MileageKm = 0.100f} },
+                            { SensorsContainer.GetGuid<ISpeedSensorValue>(), new SpeedDTO() { SpeedKmh = 80} },
                         }
                     },
                     new MeteringDTO()
@@ -48,9 +50,9 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineIdto() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageIdto() { MileageKm = 0.122f} },
-                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedIdto() { SpeedKmh = 80} },
+                            { SensorsContainer.GetGuid<IEngineSensorValue>(), new EngineDTO() { IsTurnedOn = true} },
+                            { SensorsContainer.GetGuid<IMileageSensorValue>(), new MileageDTO() { MileageKm = 0.122f} },
+                            { SensorsContainer.GetGuid<ISpeedSensorValue>(), new SpeedDTO() { SpeedKmh = 80} },
                         }
                     },
                     new MeteringDTO()
@@ -60,17 +62,22 @@ namespace Terminal
                         Longitude = 36.2f,
                         SensorValues =
                         {
-                            { SensorsRep.GetGuid<IEngineSensorValue>(), new EngineIdto() { IsTurnedOn = true} },
-                            { SensorsRep.GetGuid<IMileageSensorValue>(), new MileageIdto() { MileageKm = 0.144f} },
-                            { SensorsRep.GetGuid<ISpeedSensorValue>(), new SpeedIdto() { SpeedKmh = 80} },
+                            { SensorsContainer.GetGuid<IEngineSensorValue>(), new EngineDTO() { IsTurnedOn = true} },
+                            { SensorsContainer.GetGuid<IMileageSensorValue>(), new MileageDTO() { MileageKm = 0.144f} },
+                            { SensorsContainer.GetGuid<ISpeedSensorValue>(), new SpeedDTO() { SpeedKmh = 80} },
                         }
                     },
                 };*/
 
+                var data = new List<MeteringDTO>()
+                {
+                    new MeteringDTO(_emulator.GetNext(new TimeSpan()))
+                };
+
                 AuthorizationServiceProxy authorizationProxy = new AuthorizationServiceProxy();
                 authorizationProxy.Login(_terminalId);
                 DataServiceProxy dataProxy = new DataServiceProxy();
-                //dataProxy.SendData(_terminalId, sample);
+                dataProxy.SendData(_terminalId, data);
                 logger.Info("Data sent");
             }
             catch (Exception e)
@@ -102,6 +109,7 @@ namespace Terminal
                 throw e;
             }
 
+            _emulator = new Emulator(new Mettering());
             Timer timer = new Timer((state) => { ReferToService(addr); }, null, 0, timeout);
 
             Console.WriteLine("Terminal is run. Press any key to stop");

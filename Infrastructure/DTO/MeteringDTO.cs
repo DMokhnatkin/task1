@@ -21,12 +21,22 @@ namespace Infrastructure.DTO
         [DataMember]
         public IDictionary<Guid, IDTO<ISensorValue>> SensorValues { get; set; } = new Dictionary<Guid, IDTO<ISensorValue>>();
 
+        public MeteringDTO()
+        {
+            
+        }
+
+        public MeteringDTO(IMetering model)
+        {
+            MapFromModel(model);
+        }
+
         public void MapFromModel(IMetering model)
         {
             Time = model.Time;
             Latitude = model.Latitude;
             Longitude = model.Longitude;
-            SensorValues = model.SensorValues.ToDictionary(k => k.Key, v => SensorsRep.MapToDTO(v.Value));
+            SensorValues = model.SensorValues.ToDictionary(k => k.Key, v => SensorsContainer.MapToDTORuntime(v.Value));
         }
     }
 }

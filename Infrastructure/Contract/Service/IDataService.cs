@@ -17,17 +17,17 @@ namespace Infrastructure.Contract.Service
     {
         [OperationContract]
         [ServiceKnownType(typeof(MeteringDTO))]
-        // TODO: get known types from SensorsRep in runtime. I don't know why It dosn't work: ServiceKnownType("GetSensorValContractTypes", typeof(SensorsRep))
-        [ServiceKnownType(typeof(EngineIdto))]
-        [ServiceKnownType(typeof(SpeedIdto))]
-        [ServiceKnownType(typeof(MileageIdto))]
-        [ServiceKnownType(typeof(SpeedIdto))]
+        // TODO: get known types from SensorsContainer in runtime. I don't know why It dosn't work: ServiceKnownType("GetSensorValContractTypes", typeof(SensorsContainer))
+        [ServiceKnownType(typeof(EngineDTO))]
+        [ServiceKnownType(typeof(SpeedDTO))]
+        [ServiceKnownType(typeof(MileageDTO))]
+        [ServiceKnownType(typeof(SpeedDTO))]
         [WebInvoke(
             Method = "POST", 
             UriTemplate = "/SendData/{terminalId}",
             ResponseFormat = WebMessageFormat.Xml,
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        void SendData(string terminalId, List<IMetering> data);
+        void SendData(string terminalId, List<MeteringDTO> data);
     }
 }
