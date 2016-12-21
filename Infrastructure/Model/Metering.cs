@@ -10,6 +10,9 @@ namespace Infrastructure.Model
     public class Metering : IMetering
     {
         [DataMember]
+        public string TerminalId { get; set; }
+
+        [DataMember]
         public DateTime Time { get; set; }
 
         [DataMember]

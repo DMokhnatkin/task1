@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201612041455519_auto_inc.Designer.cs">
       <DependentUpon>201612041455519_auto_inc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612211905269_terminal_id.cs" />
+    <Compile Include="Migrations\201612211905269_terminal_id.Designer.cs">
+      <DependentUpon>201612211905269_terminal_id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyUnityContainer.cs" />
     <Compile Include="Program.cs" />
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612041455519_auto_inc.resx">
       <DependentUpon>201612041455519_auto_inc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211905269_terminal_id.resx">
+      <DependentUpon>201612211905269_terminal_id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

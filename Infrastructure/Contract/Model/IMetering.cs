@@ -5,6 +5,8 @@ namespace Infrastructure.Contract.Model
 {
     public interface IMetering
     {
+        string TerminalId { get; set; }
+
         DateTime Time { get; set; }
 
         float Latitude { get; set; }

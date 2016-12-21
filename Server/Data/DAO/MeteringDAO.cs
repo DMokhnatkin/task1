@@ -13,6 +13,8 @@ namespace Server.Data.DAO
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
 
+        public string TerminalId { get; set; }
+
         public DateTime Time { get; set; }
 
         public float Latitude { get; set; }
