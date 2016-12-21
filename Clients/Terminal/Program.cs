@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using NLog;
-using Terminal.Communication.Proxy;
+using Common.Communication.Proxy;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
 using Infrastructure.Model.SensorValue;

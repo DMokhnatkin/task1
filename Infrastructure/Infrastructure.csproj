@@ -50,12 +50,14 @@
     <Compile Include="Contract\Model\ISensorValue.cs" />
     <Compile Include="Contract\Service\IAuthorizationService.cs" />
     <Compile Include="Contract\Service\IDataService.cs" />
+    <Compile Include="Contract\Service\ITerminalsService.cs" />
     <Compile Include="Model\Metering.cs" />
     <Compile Include="Contract\Model\IMetering.cs" />
     <Compile Include="Model\SensorsRep.cs" />
     <Compile Include="Model\SensorValue\EngineSensorValue.cs" />
     <Compile Include="Model\SensorValue\MileageSensorValue.cs" />
     <Compile Include="Model\SensorValue\SpeedSensorValue.cs" />
+    <Compile Include="Model\TerminalStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

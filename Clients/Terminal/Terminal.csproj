@@ -49,8 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communication\Proxy\AuthorizationServiceProxy.cs" />
-    <Compile Include="Communication\Proxy\DataServiceProxy.cs" />
     <Compile Include="Emulator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +68,10 @@
     <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj">
       <Project>{61C6B1BF-9B9C-424A-A581-A5513B00835C}</Project>
       <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{67ed0532-5d6c-495b-a375-f09ad92d2f06}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

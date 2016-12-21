@@ -1,0 +1,80 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        xmlns:properties="clr-namespace:Client.Properties"
+        mc:Ignorable="d"
+        DataContext="{StaticResource MainViewModel}"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="180">
+            <GroupBox x:Name="groupBox" Header="{x:Static properties:Eng.TerminalList_Header}">
+                <DataGrid x:Name="terminalsView" Height="118" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="{x:Static properties:Eng.TerminalId_Caption}"/>
+                        <DataGridTextColumn Binding="{Binding LastActiveDateTime, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="{x:Static properties:Eng.LastActiveTime_Caption}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <GroupBox x:Name="TerminalProps" Header="{x:Static properties:Eng.TerminalProps_Header}">
+                <StackPanel>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Static properties:Eng.TerminalId_Caption}"/>
+                        <TextBox Text="{Binding SelectedTerminal.Id, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                            <TextBox.Background>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                            </TextBox.Background>
+                        </TextBox>
+                    </Grid>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Static properties:Eng.LastActiveTime_Caption}"/>
+                        <TextBox Text="{Binding SelectedTerminal.LastActiveDateTime, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                            <TextBox.Background>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                            </TextBox.Background>
+                        </TextBox>
+                    </Grid>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Static properties:Eng.Longitude_Caption}"/>
+                        <TextBox Text="{Binding SelectedTerminal.Longitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                            <TextBox.Background>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                            </TextBox.Background>
+                        </TextBox>
+                    </Grid>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Static properties:Eng.Latitude_Caption}"/>
+                        <TextBox Text="{Binding SelectedTerminal.Latitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                            <TextBox.Background>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                            </TextBox.Background>
+                        </TextBox>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+    </Grid>
+</Window>
