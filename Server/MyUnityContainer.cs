@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Contract.Service;
 using Microsoft.Practices.Unity;
 using NLog;
+using Server.Data;
 using Server.Services;
 
 namespace Server
@@ -14,6 +15,7 @@ namespace Server
             Instance.RegisterType<IAuthorizationService, AuthorizationService>(new ContainerControlledLifetimeManager());
             Instance.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
             Instance.RegisterType<ITerminalsService, TerminalsService>(new ContainerControlledLifetimeManager());
+            Instance.RegisterType<ServerDbContext>("db", new ContainerControlledLifetimeManager());
         }
     }
 }

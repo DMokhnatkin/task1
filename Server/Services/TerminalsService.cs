@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
+using Server.Data;
 
 namespace Server.Services
 {
@@ -11,9 +13,10 @@ namespace Server.Services
         ConcurrencyMode = ConcurrencyMode.Single)]
     public class TerminalsService : ITerminalsService
     {
+        private ServerDbContext _db = (ServerDbContext)MyUnityContainer.Instance.Resolve(typeof(ServerDbContext), "db");
+
         public List<TerminalStatus> GetCurStatus()
         {
-
             return new List<TerminalStatus>()
             {
                 new TerminalStatus()
@@ -21,8 +24,8 @@ namespace Server.Services
                     TerminalId = "test1",
                     LastMetering = new Metering()
                     {
-                        Latitude = 5,
-                        Longitude = 6,
+                        Latitude = 59.918116f,
+                        Longitude = 30.346666f,
                         Time = DateTime.Now
                     }
                 },
@@ -31,8 +34,18 @@ namespace Server.Services
                     TerminalId = "test2",
                     LastMetering = new Metering()
                     {
-                        Latitude = 9,
-                        Longitude = 7,
+                        Latitude = 59.918116f,
+                        Longitude = 30.348666f,
+                        Time = DateTime.Now
+                    }
+                },
+                new TerminalStatus()
+                {
+                    TerminalId = "test3",
+                    LastMetering = new Metering()
+                    {
+                        Latitude = 60.918116f,
+                        Longitude = 27.348666f,
                         Time = DateTime.Now
                     }
                 }

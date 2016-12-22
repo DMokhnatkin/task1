@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         xmlns:properties="clr-namespace:Client.Properties"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="500" Width="525">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="180">
+        <StackPanel HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="180">
             <GroupBox x:Name="groupBox" Header="{x:Static properties:Eng.TerminalList_Header}">
-                <DataGrid x:Name="terminalsView" Height="118" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
+                <DataGrid x:Name="terminalsView" Height="300" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="{x:Static properties:Eng.TerminalId_Caption}"/>
                         <DataGridTextColumn Binding="{Binding LastActiveDateTime, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="{x:Static properties:Eng.LastActiveTime_Caption}"/>
@@ -53,8 +54,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Static properties:Eng.Longitude_Caption}"/>
-                        <TextBox Text="{Binding SelectedTerminal.Longitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                        <TextBlock Text="{x:Static properties:Eng.Latitude_Caption}"/>
+                        <TextBox Text="{Binding SelectedTerminal.Latitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
                             <TextBox.Background>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
                             </TextBox.Background>
@@ -65,8 +66,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Static properties:Eng.Latitude_Caption}"/>
-                        <TextBox Text="{Binding SelectedTerminal.Latitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                        <TextBlock Text="{x:Static properties:Eng.Longitude_Caption}"/>
+                        <TextBox Text="{Binding SelectedTerminal.Longitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
                             <TextBox.Background>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
                             </TextBox.Background>
@@ -75,6 +76,12 @@
                 </StackPanel>
             </GroupBox>
         </StackPanel>
-
+        <m:Map 
+            x:Name="Map"
+            Grid.Column="1" 
+            CredentialsProvider="AglUDYfQDZ8hI6mMq9obyR994bGaNEA5PthdhJdkVj_UDDJ_IxcVj3ccldL_papd"
+            ZoomLevel="12.000"
+            Center="59.918116, 30.346666">
+        </m:Map>
     </Grid>
 </Window>

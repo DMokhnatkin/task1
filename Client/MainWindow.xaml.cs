@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Client.Map;
 using Client.ViewModels;
 
 namespace Client
@@ -21,6 +22,8 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MapManager _mapManager;
+
         internal AppViewModel ViewModel
         {
             get { return DataContext as AppViewModel; }
@@ -30,6 +33,12 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
+            InitializeMap();
+        }
+
+        private void InitializeMap()
+        {
+            _mapManager = new MapManager(ViewModel, Map);
         }
     }
 }
