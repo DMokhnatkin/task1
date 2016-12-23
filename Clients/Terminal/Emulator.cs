@@ -15,9 +15,9 @@ namespace Terminal
                 Longitude = (float) rand.NextDouble()*360 - 180,
                 Time = DateTime.Now.AddMilliseconds(rand.NextDouble()*maxTimeOffsetMs)
             };
-            res.AddSensorValue(new SpeedSensorValue() { SpeedKmh = (float)rand.NextDouble() * maxSpeedKmh});
-            res.AddSensorValue(new MileageSensorValue() { MileageKm = (float)rand.NextDouble() * maxMileageKm});
-            res.AddSensorValue(new EngineSensorValue() { IsTurnedOn = rand.Next() % 2 == 0 });
+            SensorValuesHelper.AddSensorValue(res, new SpeedSensorValue() { SpeedKmh = (float)rand.NextDouble() * maxSpeedKmh});
+            SensorValuesHelper.AddSensorValue(res, new MileageSensorValue() { MileageKm = (float)rand.NextDouble() * maxMileageKm});
+            SensorValuesHelper.AddSensorValue(res, new EngineSensorValue() { IsTurnedOn = rand.Next() % 2 == 0 });
 
             return res;
         }
@@ -49,12 +49,12 @@ namespace Terminal
             next.Longitude = lonO;
             next.Time = prev.Time + dTime;
 
-            next.AddSensorValue(new SpeedSensorValue() { SpeedKmh = speed });
-            next.AddSensorValue(new MileageSensorValue()
+            SensorValuesHelper.AddSensorValue(next, new SpeedSensorValue() { SpeedKmh = speed });
+            SensorValuesHelper.AddSensorValue(next, new MileageSensorValue()
             {
-                MileageKm = prev.GetSensorValue<MileageSensorValue>().MileageKm + dMil
+                MileageKm = SensorValuesHelper.GetSensorValue<MileageSensorValue>(prev).MileageKm + dMil
             });
-            next.AddSensorValue(new EngineSensorValue() { IsTurnedOn = speed > 0 });
+            SensorValuesHelper.AddSensorValue(next, new EngineSensorValue() { IsTurnedOn = speed > 0 });
             return next;
         }
     }
