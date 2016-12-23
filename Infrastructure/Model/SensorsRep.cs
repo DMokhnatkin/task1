@@ -51,5 +51,19 @@ namespace Infrastructure.Model
                 throw ex;
             }
         }
+
+        public static Type GetSensorType(Guid guid)
+        {
+            try
+            {
+                return _sensorValTypes[guid];
+            }
+            catch (KeyNotFoundException e)
+            {
+                var ex = new ArgumentException(String.Format("Sensor type with {0} guid wasn't registered.", guid));
+                logger.Error(ex);
+                throw ex;
+            }
+        }
     }
 }

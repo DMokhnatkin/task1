@@ -78,6 +78,7 @@
     </ApplicationDefinition>
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
+    <Compile Include="ViewModels\SensorValueViewModel.cs" />
     <Compile Include="ViewModels\TerminalViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">

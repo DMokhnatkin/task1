@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:Client"
         xmlns:properties="clr-namespace:Client.Properties"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="MainWindow" Height="500" Width="525">
+        Title="MainWindow" Height="700" Width="700">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -73,6 +75,15 @@
                             </TextBox.Background>
                         </TextBox>
                     </Grid>
+                    <GroupBox Header="{x:Static properties:Eng.SensorsHeader}" 
+                              VerticalAlignment="Top" Margin="2">
+                        <DataGrid ItemsSource="{Binding SelectedTerminal.SensorValues}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding SensorName, Mode=OneWay}"/>
+                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Value, Mode=OneWay}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

@@ -127,6 +127,9 @@
   <data name="Longitude_Caption" xml:space="preserve">
     <value>Longitude</value>
   </data>
+  <data name="SensorsHeader" xml:space="preserve">
+    <value>Sensors list</value>
+  </data>
   <data name="TerminalId_Caption" xml:space="preserve">
     <value>Terminal id</value>
   </data>

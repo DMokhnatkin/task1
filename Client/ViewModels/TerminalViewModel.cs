@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Infrastructure.Contract.Model;
 using Infrastructure.Model;
 
 namespace Client.ViewModels
@@ -26,5 +30,8 @@ namespace Client.ViewModels
         public float Longitude => _terminalStatus.LastMetering.Longitude;
 
         public float Latitude => _terminalStatus.LastMetering.Latitude;
+
+        public List<SensorValueViewModel> SensorValues => 
+            _terminalStatus.LastMetering.SensorValues.Values.Select(x => new SensorValueViewModel(x)).ToList();
     }
 }

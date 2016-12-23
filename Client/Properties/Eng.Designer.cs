@@ -88,6 +88,15 @@ namespace Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sensors list.
+        /// </summary>
+        public static string SensorsHeader {
+            get {
+                return ResourceManager.GetString("SensorsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Terminal id.
         /// </summary>
         public static string TerminalId_Caption {

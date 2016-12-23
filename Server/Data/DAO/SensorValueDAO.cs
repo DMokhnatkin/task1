@@ -13,5 +13,8 @@ namespace Server.Data.DAO
 
         // TODO: now sensor values will be serialized in db. We can create ef class for each sensor value type. It will increase permomance.
         public byte[] Value { get; set; }
+
+        [NotMapped]
+        public object GetValue => Value;
     }
 }

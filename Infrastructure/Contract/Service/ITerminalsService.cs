@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using Infrastructure.Model;
+using Infrastructure.Model.SensorValue;
 
 namespace Infrastructure.Contract.Service
 {
@@ -14,6 +15,11 @@ namespace Infrastructure.Contract.Service
         [OperationContract]
         [ServiceKnownType(typeof(TerminalStatus))]
         [ServiceKnownType(typeof(Metering))]
+        // TODO: get known types from SensorsRep in runtime. I don't know why It dosn't work: ServiceKnownType("GetSensorValTypes", typeof(SensorsRep))
+        [ServiceKnownType(typeof(EngineSensorValue))]
+        [ServiceKnownType(typeof(SpeedSensorValue))]
+        [ServiceKnownType(typeof(MileageSensorValue))]
+        [ServiceKnownType(typeof(SpeedSensorValue))]
         [WebInvoke(
             Method = "GET",
             UriTemplate = "/status",
