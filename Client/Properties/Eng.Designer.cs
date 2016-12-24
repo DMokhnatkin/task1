@@ -88,11 +88,38 @@ namespace Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sensor name.
+        /// </summary>
+        public static string SensorName {
+            get {
+                return ResourceManager.GetString("SensorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sensors list.
         /// </summary>
         public static string SensorsHeader {
             get {
                 return ResourceManager.GetString("SensorsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string SensorValue {
+            get {
+                return ResourceManager.GetString("SensorValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units.
+        /// </summary>
+        public static string SensorValueUnits {
+            get {
+                return ResourceManager.GetString("SensorValueUnits", resourceCulture);
             }
         }
         

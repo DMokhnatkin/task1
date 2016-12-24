@@ -54,6 +54,7 @@
     <Compile Include="Model\Metering.cs" />
     <Compile Include="Contract\Model\IMetering.cs" />
     <Compile Include="Model\SensorsRep.cs" />
+    <Compile Include="Model\SensorTypeInfo.cs" />
     <Compile Include="Model\SensorValuesHelper.cs" />
     <Compile Include="Model\SensorValue\EngineSensorValue.cs" />
     <Compile Include="Model\SensorValue\MileageSensorValue.cs" />

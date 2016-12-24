@@ -79,8 +79,9 @@
                               VerticalAlignment="Top" Margin="2">
                         <DataGrid ItemsSource="{Binding SelectedTerminal.SensorValues}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding SensorName, Mode=OneWay}"/>
-                                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Value, Mode=OneWay}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="{x:Static properties:Eng.SensorName}" IsReadOnly="True" Binding="{Binding SensorName, Mode=OneWay}"/>
+                                <DataGridTextColumn Header="{x:Static properties:Eng.SensorValue}" IsReadOnly="True" Binding="{Binding Value, Mode=OneWay}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="{x:Static properties:Eng.SensorValueUnits}" IsReadOnly="True" Binding="{Binding Units, Mode=OneWay}"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>

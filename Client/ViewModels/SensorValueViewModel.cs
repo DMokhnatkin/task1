@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Contract.Model;
+using Infrastructure.Model;
 
 namespace Client.ViewModels
 {
@@ -13,7 +14,9 @@ namespace Client.ViewModels
 
         public object Value => _sensorValue.GetValue;
 
-        public string SensorName => _sensorValue.GetType().Name;
+        public string SensorName => SensorsRep.GetSensorTypeInfo(SensorsRep.GetGuid(_sensorValue.GetType())).SensorName;
+
+        public string Units => SensorsRep.GetSensorTypeInfo(SensorsRep.GetGuid(_sensorValue.GetType())).Units;
 
         public SensorValueViewModel(ISensorValue sensorValue)
         {
