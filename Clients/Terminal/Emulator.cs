@@ -1,6 +1,6 @@
 ﻿using System;
 using Infrastructure.Model;
-using Infrastructure.Model.SensorValue;
+using Infrastructure.Model.Sensors.Types;
 
 namespace Terminal
 {

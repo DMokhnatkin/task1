@@ -11,6 +11,7 @@ using AutoMapper;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
+using Infrastructure.Model.Sensors;
 using Microsoft.Practices.Unity;
 using NLog;
 using Server.Data;
@@ -51,7 +52,7 @@ namespace Server.Services
                     {
                         typeof(Metering)
                     }
-                    .Concat(SensorsRep.GetSensorValTypes())
+                    .Concat(SensorsRep.GetKnownTypes())
                     );
                 ser.WriteObject(str, data);
                 str.Position = 0;

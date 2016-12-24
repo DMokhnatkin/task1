@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
+using Infrastructure.Model.Sensors;
 
 namespace Client.ViewModels
 {
@@ -14,9 +15,9 @@ namespace Client.ViewModels
 
         public object Value => _sensorValue.GetValue;
 
-        public string SensorName => SensorsRep.GetSensorTypeInfo(SensorsRep.GetGuid(_sensorValue.GetType())).SensorName;
+        public string SensorName => SensorsRep.GetSensorTypeAttribute(_sensorValue.GetType()).SensorName;
 
-        public string Units => SensorsRep.GetSensorTypeInfo(SensorsRep.GetGuid(_sensorValue.GetType())).Units;
+        public string Units => SensorsRep.GetSensorTypeAttribute(_sensorValue.GetType()).Units;
 
         public SensorValueViewModel(ISensorValue sensorValue)
         {

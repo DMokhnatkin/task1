@@ -5,7 +5,6 @@ using NLog;
 using Common.Communication.Proxy;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
-using Infrastructure.Model.SensorValue;
 
 namespace Terminal
 {

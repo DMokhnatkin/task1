@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Contract.Model;
+using Infrastructure.Model.Sensors;
 
 namespace Infrastructure.Model
 {
@@ -7,13 +8,13 @@ namespace Infrastructure.Model
         public static void AddSensorValue<TSensorValue>(IMetering metering, TSensorValue value)
             where TSensorValue : ISensorValue
         {
-            metering.SensorValues[SensorsRep.GetGuid<TSensorValue>()] = value;
+            metering.SensorValues[SensorsRep.GetSensorTypeAttribute(typeof(TSensorValue)).Guid] = value;
         }
 
         public static TSensorValue GetSensorValue<TSensorValue>(IMetering metering)
             where TSensorValue : ISensorValue
         {
-            return (TSensorValue)metering.SensorValues[SensorsRep.GetGuid<TSensorValue>()];
+            return (TSensorValue)metering.SensorValues[SensorsRep.GetSensorTypeAttribute(typeof(TSensorValue)).Guid];
         }
     }
 }

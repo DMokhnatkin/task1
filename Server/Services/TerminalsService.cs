@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
-using Infrastructure.Model.SensorValue;
+using Infrastructure.Model.Sensors.Types;
 using Server.Data;
 
 namespace Server.Services
