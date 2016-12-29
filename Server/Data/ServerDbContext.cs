@@ -7,7 +7,10 @@ namespace Server.Data
     {
         public ServerDbContext()
             : base("name=ServerDbConnectionString")
-        { }
+        {
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
+        }
 
         public DbSet<MeteringDAO> Meterings { get; set; }
         public DbSet<MeteringSensorValueRelationDAO> MeteringSensorRelations { get; set; }

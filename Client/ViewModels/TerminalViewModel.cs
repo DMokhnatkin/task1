@@ -32,6 +32,6 @@ namespace Client.ViewModels
         public float Latitude => _terminalStatus.LastMetering.Latitude;
 
         public List<SensorValueViewModel> SensorValues => 
-            _terminalStatus.LastMetering.SensorValues.Values.Select(x => new SensorValueViewModel(x)).ToList();
+            _terminalStatus.LastMetering.SensorValues?.Values.Select(x => new SensorValueViewModel(x)).ToList();
     }
 }

@@ -97,6 +97,21 @@ namespace Infrastructure.Model.Sensors
             }
         }
 
+        public static Type GetSensorType(Guid guid)
+        {
+            try
+            {
+                return _guidToType[guid];
+            }
+            catch (Exception)
+            {
+                ArgumentException e = new ArgumentException(
+                    $"Sensor type with {guid} guid wasn't registered");
+                logger.Error(e);
+                throw e;
+            }
+        }
+
         public static IEnumerable<Type> GetKnownTypes(ICustomAttributeProvider provider = null)
         {
             return _guidToType.Values.AsEnumerable();

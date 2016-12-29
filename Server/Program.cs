@@ -4,12 +4,14 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
 using AutoMapper;
+using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
 using Infrastructure.Model.Sensors;
 using Infrastructure.Model.Sensors.Types;
 using Microsoft.Practices.Unity;
 using NLog;
+using Server.Data;
 using Server.Data.DAO;
 using Server.Services;
 using Unity.Wcf;
@@ -80,29 +82,13 @@ namespace Server
             }
         }
 
-        static byte[] ObjectToByteArray(object obj)
-        {
-            if (obj == null)
-                return null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
-
         static void InitializeDAOMapper()
         {
             Mapper.Initialize(cfg =>
                 {
-                    cfg.CreateMap<Metering, MeteringDAO>();
-                    cfg.CreateMap<EngineSensorValue, SensorValueDAO>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.IsTurnedOn)));
-                    cfg.CreateMap<MileageSensorValue, SensorValueDAO>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.MileageKm)));
-                    cfg.CreateMap<SpeedSensorValue, SensorValueDAO>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => ObjectToByteArray(src.SpeedKmh)));
+                    cfg.CreateMap<Metering, MeteringDAO>().ReverseMap();
+                    cfg.CreateMap<ISensorValue, SensorValueDAO>()
+                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => DAOHelper.ObjectToByteArray(src)));
                 }
             );
         }

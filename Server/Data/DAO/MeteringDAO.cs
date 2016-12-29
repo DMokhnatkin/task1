@@ -7,25 +7,24 @@ using Infrastructure.Contract.Model;
 
 namespace Server.Data.DAO
 {
-    class MeteringDAO : IMetering
+    class MeteringDAO
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
 
+        [Required]
         public string TerminalId { get; set; }
 
+        [Required]
         public DateTime Time { get; set; }
 
+        [Required]
         public float Latitude { get; set; }
 
+        [Required]
         public float Longitude { get; set; }
 
-        public virtual List<MeteringSensorValueRelationDAO> SensorValueRelations { get; set; }
-
-        [NotMapped]
-        public IDictionary<Guid, ISensorValue> SensorValues {
-            get { return SensorValueRelations.ToDictionary(x => x.SensorGuid, y => (ISensorValue)y.SensorValue); }
-        }
+        public virtual ICollection<MeteringSensorValueRelationDAO> SensorValueRelations { get; set; }
     }
 }

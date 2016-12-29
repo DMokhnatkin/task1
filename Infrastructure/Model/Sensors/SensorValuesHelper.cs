@@ -1,7 +1,6 @@
 ﻿using Infrastructure.Contract.Model;
-using Infrastructure.Model.Sensors;
 
-namespace Infrastructure.Model
+namespace Infrastructure.Model.Sensors
 {
     public static class SensorValuesHelper
     {

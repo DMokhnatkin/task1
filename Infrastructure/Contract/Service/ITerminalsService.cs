@@ -23,5 +23,12 @@ namespace Infrastructure.Contract.Service
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<TerminalStatus> GetCurStatus();
+
+        /// <summary>
+        /// Check if service is alive
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        bool IsAlive();
     }
 }

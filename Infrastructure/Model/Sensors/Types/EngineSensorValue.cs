@@ -7,6 +7,10 @@ namespace Infrastructure.Model.Sensors.Types
     {
         public bool IsTurnedOn { get; set; }
 
-        public object GetValue => IsTurnedOn;
+        public object ObjValue
+        {
+            get { return IsTurnedOn; }
+            set { IsTurnedOn = (bool)value; }
+        }
     }
 }

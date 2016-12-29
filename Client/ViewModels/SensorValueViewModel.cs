@@ -13,7 +13,7 @@ namespace Client.ViewModels
     {
         private ISensorValue _sensorValue;
 
-        public object Value => _sensorValue.GetValue;
+        public object Value => _sensorValue.ObjValue;
 
         public string SensorName => SensorsRep.GetSensorTypeAttribute(_sensorValue.GetType()).SensorName;
 

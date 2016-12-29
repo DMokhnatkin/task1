@@ -4,8 +4,11 @@ using System.Linq;
 using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
+using Infrastructure.Model.Sensors;
 using Infrastructure.Model.Sensors.Types;
+using Microsoft.Practices.Unity;
 using Server.Data;
+using Server.Data.Repository;
 
 namespace Server.Services
 {
@@ -14,52 +17,26 @@ namespace Server.Services
         ConcurrencyMode = ConcurrencyMode.Single)]
     public class TerminalsService : ITerminalsService
     {
-        private ServerDbContext _db = (ServerDbContext)MyUnityContainer.Instance.Resolve(typeof(ServerDbContext), "db");
+        private ServerDbContext _db = MyUnityContainer.Instance.Resolve<ServerDbContext>("db");
+        private readonly ITerminalsRepository _terminalsRepository = MyUnityContainer.Instance.Resolve<ITerminalsRepository>();
+        private readonly IMeteringRepository _meteringsRepository = MyUnityContainer.Instance.Resolve<IMeteringRepository>();
+
+        public bool IsAlive()
+        {
+            return true;
+        }
 
         public List<TerminalStatus> GetCurStatus()
         {
-            var m1 = new Metering()
-            {
-                Latitude = 59.918116f,
-                Longitude = 30.346666f,
-                Time = DateTime.Now
-            };
-            SensorValuesHelper.AddSensorValue(m1, new SpeedSensorValue() { SpeedKmh = 34});
-
-            var m2 = new Metering()
-            {
-                Latitude = 59.918116f,
-                Longitude = 30.348666f,
-                Time = DateTime.Now
-            };
-
-            var m3 = new Metering()
-            {
-                Latitude = 60.918116f,
-                Longitude = 27.348666f,
-                Time = DateTime.Now
-            };
-            SensorValuesHelper.AddSensorValue(m3, new MileageSensorValue() { MileageKm = 32});
-            SensorValuesHelper.AddSensorValue(m3, new SpeedSensorValue() { SpeedKmh = 14});
-
-            return new List<TerminalStatus>()
-            {
-                new TerminalStatus()
+            var z = _terminalsRepository
+                .GetTerminalIds()
+                .Select(x => new TerminalStatus
                 {
-                    TerminalId = "test1",
-                    LastMetering = m1
-                },
-                new TerminalStatus()
-                {
-                    TerminalId = "test2",
-                    LastMetering = m2
-                },
-                new TerminalStatus()
-                {
-                    TerminalId = "test3",
-                    LastMetering = m3
-                }
-            };
+                    TerminalId = x,
+                    LastMetering = _meteringsRepository.GetLastMetering(x)
+                })
+                .ToList();
+            return z;
         }
     }
 }

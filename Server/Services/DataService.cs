@@ -21,8 +21,8 @@ using Server.Data.Repository;
 namespace Server.Services
 {
     [ServiceBehavior(
-        InstanceContextMode = InstanceContextMode.Single,
-        ConcurrencyMode = ConcurrencyMode.Single)]
+         InstanceContextMode = InstanceContextMode.Single,
+         ConcurrencyMode = ConcurrencyMode.Single)]
     public class DataService : IDataService
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -42,7 +42,15 @@ namespace Server.Services
             {
                 foreach (var metering in data)
                 {
-                    _meteringRepository.SaveMetering(metering);
+                    try
+                    {
+                        _meteringRepository.SaveMetering(metering);
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Warn(e);
+                        return;
+                    }
                 }
 
                 MemoryStream str = new MemoryStream();

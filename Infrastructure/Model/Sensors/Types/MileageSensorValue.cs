@@ -7,6 +7,10 @@ namespace Infrastructure.Model.Sensors.Types
     {
         public float MileageKm { get; set; }
 
-        public object GetValue => MileageKm;
+        public object ObjValue
+        {
+            get { return MileageKm; }
+            set { MileageKm = (float)value; }
+        }
     }
 }

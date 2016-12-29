@@ -117,41 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LastActiveTime_Caption" xml:space="preserve">
-    <value>Last active time</value>
-    <comment>Last time when terminal send value.</comment>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="Latitude_Caption" xml:space="preserve">
-    <value>Latitude</value>
-  </data>
-  <data name="Longitude_Caption" xml:space="preserve">
-    <value>Longitude</value>
-  </data>
-  <data name="SensorName" xml:space="preserve">
-    <value>Sensor name</value>
-  </data>
-  <data name="SensorsHeader" xml:space="preserve">
-    <value>Sensors list</value>
-  </data>
-  <data name="SensorValue" xml:space="preserve">
-    <value>Value</value>
-  </data>
-  <data name="SensorValueUnits" xml:space="preserve">
-    <value>Units</value>
-  </data>
-  <data name="TerminalId_Caption" xml:space="preserve">
-    <value>Terminal id</value>
-  </data>
-  <data name="TerminalList_Header" xml:space="preserve">
-    <value>List of terminals</value>
-  </data>
-  <data name="TerminalProps_Header" xml:space="preserve">
-    <value>Properties</value>
-  </data>
-  <data name="ServerCaption" xml:space="preserve">
-    <value>Server status</value>
-  </data>
-  <data name="ServerText" xml:space="preserve">
-    <value>Connected to server</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

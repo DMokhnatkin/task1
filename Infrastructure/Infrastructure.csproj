@@ -55,11 +55,11 @@
     <Compile Include="Contract\Model\IMetering.cs" />
     <Compile Include="Model\Sensors\SensorsRep.cs" />
     <Compile Include="Model\Sensors\SensorTypeAttribute.cs" />
+    <Compile Include="Model\Sensors\SensorValuesHelper.cs" />
     <Compile Include="Model\Sensors\Types\EngineSensorValue.cs" />
     <Compile Include="Model\Sensors\Types\MileageSensorValue.cs" />
     <Compile Include="Model\Sensors\Types\SpeedSensorValue.cs" />
     <Compile Include="Model\SensorTypeInfo.cs" />
-    <Compile Include="Model\SensorValuesHelper.cs" />
     <Compile Include="Model\TerminalStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

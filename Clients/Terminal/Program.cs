@@ -26,7 +26,7 @@ namespace Terminal
             try
             {
                 if (prev == null)
-                    prev = Emulator.GetRandom();
+                    prev = Emulator.GetRandom(_terminalId);
                 List<IMetering> data = new List<IMetering>();
                 for (int i = 0; i < points; i++)
                 {

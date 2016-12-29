@@ -1,16 +1,18 @@
 ﻿using System;
 using Infrastructure.Model;
+using Infrastructure.Model.Sensors;
 using Infrastructure.Model.Sensors.Types;
 
 namespace Terminal
 {
     static class Emulator
     {
-        public static Metering GetRandom(float maxTimeOffsetMs = 10E4f, float maxSpeedKmh = 90f, float maxMileageKm = 500f)
+        public static Metering GetRandom(string terminalId, float maxTimeOffsetMs = 10E4f, float maxSpeedKmh = 90f, float maxMileageKm = 500f)
         {
             Random rand= new Random();
             var res = new Metering()
             {
+                TerminalId = terminalId,
                 Latitude = (float) rand.NextDouble()*180 - 90,
                 Longitude = (float) rand.NextDouble()*360 - 180,
                 Time = DateTime.Now.AddMilliseconds(rand.NextDouble()*maxTimeOffsetMs)
@@ -25,6 +27,7 @@ namespace Terminal
         public static Metering GetNext(Metering prev, TimeSpan dTime, float speed)
         {
             Metering next = new Metering();
+            next.TerminalId = prev.TerminalId;
 
             // Mileage
             float dMil = speed * (float) dTime.TotalHours;

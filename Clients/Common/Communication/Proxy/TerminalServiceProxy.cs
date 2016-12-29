@@ -14,5 +14,11 @@ namespace Common.Communication.Proxy
         {
             return Channel.GetCurStatus();
         }
+
+        /// <inheritdoc />
+        public bool IsAlive()
+        {
+            return Channel.IsAlive();
+        }
     }
 }

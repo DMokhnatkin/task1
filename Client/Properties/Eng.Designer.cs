@@ -124,6 +124,24 @@ namespace Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server status.
+        /// </summary>
+        public static string ServerCaption {
+            get {
+                return ResourceManager.GetString("ServerCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected to server.
+        /// </summary>
+        public static string ServerText {
+            get {
+                return ResourceManager.GetString("ServerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Terminal id.
         /// </summary>
         public static string TerminalId_Caption {

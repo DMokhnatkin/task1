@@ -102,10 +102,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DAOHelper.cs" />
     <Compile Include="Data\DAO\MeteringSensorValueRelationDAO.cs" />
     <Compile Include="Data\DAO\SensorValueDAO.cs" />
     <Compile Include="Data\DAO\MeteringDAO.cs" />
+    <Compile Include="Data\Repository\IMeteringRepository.cs" />
+    <Compile Include="Data\Repository\ITerminalsRepository.cs" />
     <Compile Include="Data\Repository\MeteringRepository.cs" />
+    <Compile Include="Data\Repository\TerminalsRepository.cs" />
     <Compile Include="Data\ServerDbContext.cs" />
     <Compile Include="Migrations\201612041354100_init.cs" />
     <Compile Include="Migrations\201612041354100_init.Designer.cs">
@@ -118,6 +122,10 @@
     <Compile Include="Migrations\201612211905269_terminal_id.cs" />
     <Compile Include="Migrations\201612211905269_terminal_id.Designer.cs">
       <DependentUpon>201612211905269_terminal_id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612241907389_not_null.cs" />
+    <Compile Include="Migrations\201612241907389_not_null.Designer.cs">
+      <DependentUpon>201612241907389_not_null.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyUnityContainer.cs" />
@@ -150,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612211905269_terminal_id.resx">
       <DependentUpon>201612211905269_terminal_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612241907389_not_null.resx">
+      <DependentUpon>201612241907389_not_null.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

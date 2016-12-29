@@ -17,6 +17,26 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="180">
+            <GroupBox Header="{x:Static properties:Eng.ServerCaption}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{x:Static properties:Eng.ServerText}"></TextBlock>
+                    <ContentPresenter Content="{Binding IsServerReady}">
+                        <ContentPresenter.ContentTemplate>
+                            <DataTemplate DataType="{x:Type system:Boolean}">
+                                <Ellipse Name="Ellipse" Width="15" Height="15" Margin="2" Fill="Red"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding}" Value="True">
+                                        <Setter TargetName="Ellipse" Property="Fill" Value="Green"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding}" Value="False">
+                                        <Setter TargetName="Ellipse" Property="Fill" Value="Red"></Setter>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ContentPresenter.ContentTemplate>
+                    </ContentPresenter>
+                </StackPanel>
+            </GroupBox>
             <GroupBox x:Name="groupBox" Header="{x:Static properties:Eng.TerminalList_Header}">
                 <DataGrid x:Name="terminalsView" Height="300" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
                     <DataGrid.Columns>
