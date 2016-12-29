@@ -48,15 +48,18 @@ namespace Server.Data.Repository
         public IMetering GetLastMetering(string terminalId)
         {
             // TODO: combine in one query
-            MeteringDAO z = _context.Meterings
+
+            // Get last metering
+            MeteringDAO lastMetering = _context.Meterings
                 .Include(x => x.SensorValueRelations)
                 .OrderByDescending(x => x.Time)
                 .FirstOrDefault(x => x.TerminalId == terminalId);
 
+            // Get sensor vals for last metering
             var sensorVals = _context.MeteringSensorRelations
                 .Include(x => x.Metering)
                 .Include(x => x.SensorValue)
-                .Where(x => x.Metering.TerminalId == terminalId)
+                .Where(x => x.Metering.Id == lastMetering.Id)
                 .ToDictionary(
                     k => k.SensorGuid,
                     v => (ISensorValue)DAOHelper.ByteArrayToObject(
@@ -66,10 +69,10 @@ namespace Server.Data.Repository
             // Map to Metering model
             Metering res = new Metering()
             {
-                TerminalId = z.TerminalId,
-                Latitude = z.Latitude,
-                Longitude = z.Longitude,
-                Time = z.Time,
+                TerminalId = lastMetering.TerminalId,
+                Latitude = lastMetering.Latitude,
+                Longitude = lastMetering.Longitude,
+                Time = lastMetering.Time,
                 SensorValues = sensorVals
             };
             return res;

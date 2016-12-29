@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.Model.Sensors;
 
 namespace Server.Data
 {
@@ -14,7 +15,7 @@ namespace Server.Data
     {
         internal static byte[] ObjectToByteArray(object obj)
         {
-            DataContractSerializer serializer = new DataContractSerializer(typeof(object));
+            DataContractSerializer serializer = new DataContractSerializer(typeof(object), SensorsRep.GetKnownTypes());
 
             using (var ms = new MemoryStream())
             {

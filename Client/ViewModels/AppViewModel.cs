@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using Common.Communication.Proxy;
 using Infrastructure.Contract.Service;
@@ -75,7 +76,7 @@ namespace Client.ViewModels
                         if (z)
                         {
                             // Invoke callback in main thread (we need to change ui)
-                            Dispatcher.CurrentDispatcher.Invoke(callback);
+                            Application.Current.Dispatcher.Invoke(callback);
                             return;
                         }
                     }
@@ -97,7 +98,6 @@ namespace Client.ViewModels
         private async void LoadStatsFromServer()
         {
             var newCol = new ObservableCollection<TerminalViewModel>();
-            // TODO: make proxy async
             await Task.Run(() =>
             {
                 var stats = _proxy.GetCurStatus();
@@ -105,8 +105,8 @@ namespace Client.ViewModels
                 {
                     newCol.Add(new TerminalViewModel(z));
                 }
-            });
-            TerminalViewModels = newCol;
+            }).ConfigureAwait(false);
+            Application.Current.Dispatcher.Invoke(() => TerminalViewModels = newCol);
         }
     }
 }
