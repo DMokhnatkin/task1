@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\IPingAvailable.cs" />
     <Compile Include="Contract\Model\ISensorValue.cs" />
     <Compile Include="Contract\Service\IAuthorizationService.cs" />
     <Compile Include="Contract\Service\IDataService.cs" />

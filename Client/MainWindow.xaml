@@ -20,7 +20,7 @@
             <GroupBox Header="{x:Static properties:Eng.ServerCaption}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{x:Static properties:Eng.ServerText}"></TextBlock>
-                    <ContentPresenter Content="{Binding IsServerReady}">
+                    <ContentPresenter Content="{Binding IsServerConnected}">
                         <ContentPresenter.ContentTemplate>
                             <DataTemplate DataType="{x:Type system:Boolean}">
                                 <Ellipse Name="Ellipse" Width="15" Height="15" Margin="2" Fill="Red"/>

@@ -18,15 +18,13 @@ namespace Client.ViewModels
 {
     internal class AppViewModel : ViewModelBase
     {
-        private const int sleepTime = 1000;
-
         TerminalServiceProxy _proxy = (TerminalServiceProxy) MyUnityContainer.Instance.Resolve<ITerminalsService>();
 
         private ObservableCollection<TerminalViewModel> _terminalViewModels =
             new ObservableCollection<TerminalViewModel>();
 
         private TerminalViewModel _selectedTerminal;
-        private bool _isServerReady = false;
+        private bool _isServerConnected = false;
 
         public ObservableCollection<TerminalViewModel> TerminalViewModels
         {
@@ -48,51 +46,31 @@ namespace Client.ViewModels
             }
         }
 
-        public bool IsServerReady
+        public bool IsServerConnected
         {
-            get { return _isServerReady; }
+            get { return _isServerConnected; }
             set
             {
-                _isServerReady = value;
-                RaisePropertyChanged(nameof(IsServerReady));
+                _isServerConnected = value;
+                RaisePropertyChanged(nameof(IsServerConnected));
             }
         }
 
         public AppViewModel()
         {
-            WaitServer(OnServerReady);
-        }
-
-        // Call callbackAction when proxy is ready
-        private async void WaitServer(Action callback)
-        {
-            await Task.Run(() =>
+            _proxy.Connected += () =>
             {
-                while (true)
-                {
-                    try
-                    {
-                        var z = _proxy.IsAlive();
-                        if (z)
-                        {
-                            // Invoke callback in main thread (we need to change ui)
-                            Application.Current.Dispatcher.Invoke(callback);
-                            return;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
-                    Thread.Sleep(sleepTime);
-                 }
-             });
-        }
-
-        private void OnServerReady()
-        {
-            IsServerReady = true;
-            LoadStatsFromServer();
+                IsServerConnected = true;
+                // Invoke LoadStatsFromServer in main thread (we need to change ui)
+                Application.Current.Dispatcher.Invoke(LoadStatsFromServer);
+            };
+            _proxy.Fault += () =>
+            {
+                IsServerConnected = false;
+                // Try repair connection
+                _proxy.StartPing();
+            };
+            _proxy.StartPing();
         }
 
         private async void LoadStatsFromServer()

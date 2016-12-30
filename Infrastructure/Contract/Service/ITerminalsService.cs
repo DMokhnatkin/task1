@@ -11,7 +11,7 @@ namespace Infrastructure.Contract.Service
     /// </summary>
     [ServiceContract]
     [ServiceKnownType(nameof(SensorsRep.GetKnownTypes), typeof(SensorsRep))]
-    public interface ITerminalsService
+    public interface ITerminalsService : IPingAvailable
     {
         [OperationContract]
         [ServiceKnownType(typeof(TerminalStatus))]
@@ -23,12 +23,5 @@ namespace Infrastructure.Contract.Service
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<TerminalStatus> GetCurStatus();
-
-        /// <summary>
-        /// Check if service is alive
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        bool IsAlive();
     }
 }

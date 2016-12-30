@@ -1,24 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
 
 namespace Common.Communication.Proxy
 {
-    public class TerminalServiceProxy : 
-        ClientBase<ITerminalsService>,
+    public class TerminalServiceProxy :
+        BaseProxy<ITerminalsService>,
         ITerminalsService
     {
         /// <inheritdoc />
         public List<TerminalStatus> GetCurStatus()
         {
-            return Channel.GetCurStatus();
+            try
+            {
+                return Channel.GetCurStatus();
+            }
+            catch (Exception)
+            {
+                OnFault();
+                throw;
+            }
         }
 
         /// <inheritdoc />
-        public bool IsAlive()
+        public bool Ping()
         {
-            return Channel.IsAlive();
+            try
+            {
+                return Channel.Ping();
+            }
+            catch (Exception)
+            {
+                OnFault();
+                throw;
+            }
         }
     }
 }

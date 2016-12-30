@@ -21,7 +21,7 @@ namespace Server.Services
         private readonly ITerminalsRepository _terminalsRepository = MyUnityContainer.Instance.Resolve<ITerminalsRepository>();
         private readonly IMeteringRepository _meteringsRepository = MyUnityContainer.Instance.Resolve<IMeteringRepository>();
 
-        public bool IsAlive()
+        public bool Ping()
         {
             return true;
         }
