@@ -10,13 +10,13 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="MainWindow" Height="700" Width="700">
+        Title="MainWindow" Height="700" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="180">
+        <StackPanel Margin="10" VerticalAlignment="Top">
             <GroupBox Header="{x:Static properties:Eng.ServerCaption}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{x:Static properties:Eng.ServerText}"></TextBlock>
