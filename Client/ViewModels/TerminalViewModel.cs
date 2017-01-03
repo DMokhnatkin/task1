@@ -13,7 +13,12 @@ namespace Client.ViewModels
 
         public void UpdateTerminalStatus(TerminalStatus newTerminalStatus)
         {
-            _terminalStatus = newTerminalStatus;
+            ChangeModel(newTerminalStatus);
+        }
+
+        public void ChangeModel(TerminalStatus newModel)
+        {
+            _terminalStatus = newModel;
             // Raise all properties changed
             RaisePropertyChanged(null);
         }

@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.ServiceModel;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Common.Communication.Proxy;
+using Common.Communication.ProxyWrappers;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
 using Microsoft.Practices.Unity;
@@ -18,10 +14,13 @@ namespace Client.ViewModels
 {
     internal class AppViewModel : ViewModelBase
     {
-        TerminalServiceProxy _proxy = (TerminalServiceProxy) MyUnityContainer.Instance.Resolve<ITerminalsService>();
+        private readonly DispatcherTimer _loadAllTerminalsStatus;
+        readonly TerminalServiceProxyWrapper _proxy = (TerminalServiceProxyWrapper) MyUnityContainer.Instance.Resolve<ITerminalsService>();
 
         private ObservableCollection<TerminalViewModel> _terminalViewModels =
             new ObservableCollection<TerminalViewModel>();
+
+        private object _terminalViewModelsLock = new object();
 
         private TerminalViewModel _selectedTerminal;
         private bool _isServerConnected = false;
@@ -67,24 +66,54 @@ namespace Client.ViewModels
             _proxy.Fault += () =>
             {
                 IsServerConnected = false;
-                // Try repair connection
+                // Start ping and wait
                 _proxy.StartPing();
             };
             _proxy.StartPing();
+
+            _loadAllTerminalsStatus = new DispatcherTimer();
+            _loadAllTerminalsStatus.Interval = new TimeSpan(0 ,0, 0, 2);
+            _loadAllTerminalsStatus.Tick += (sender, args) =>
+            {
+                try
+                {
+                    LoadStatsFromServer();
+                }
+                catch (Exception)
+                {
+                    // ignored
+                };
+            };
+            _loadAllTerminalsStatus.Start();
         }
 
         private async void LoadStatsFromServer()
         {
-            var newCol = new ObservableCollection<TerminalViewModel>();
+            // Get from server new collection
+            var statsColl = new List<TerminalStatus>();
             await Task.Run(() =>
             {
-                var stats = _proxy.GetCurStatus();
-                foreach (var z in stats)
-                {
-                    newCol.Add(new TerminalViewModel(z));
-                }
+                statsColl = _proxy.GetCurStatus();
             }).ConfigureAwait(false);
-            Application.Current.Dispatcher.Invoke(() => TerminalViewModels = newCol);
+
+            lock (_terminalViewModelsLock)
+            {
+                Dictionary<string, int> prevCol;
+                prevCol = TerminalViewModels
+                    .Select((val, index) => new {val, index})
+                    .ToDictionary(t => t.val.Id, z => z.index);
+                // Apply new values
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    foreach (var z in statsColl)
+                    {
+                        if (prevCol.ContainsKey(z.TerminalId))
+                            TerminalViewModels[prevCol[z.TerminalId]].ChangeModel(z);
+                        else
+                            TerminalViewModels.Add(new TerminalViewModel(z));
+                    }
+                });
+            }
         }
     }
 }

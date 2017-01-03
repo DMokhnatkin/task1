@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communication\BaseProxy.cs" />
+    <Compile Include="Communication\ProxyWrappers\BaseProxyWrapper.cs" />
+    <Compile Include="Communication\ProxyWrappers\TerminalServiceProxyWrapper.cs" />
     <Compile Include="Communication\Proxy\AuthorizationServiceProxy.cs" />
     <Compile Include="Communication\Proxy\DataServiceProxy.cs" />
     <Compile Include="Communication\Proxy\TerminalServiceProxy.cs" />

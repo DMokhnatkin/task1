@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Net.Mime;
-using System.ServiceModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Infrastructure.Contract;
 
-namespace Common.Communication
+namespace Common.Communication.ProxyWrappers
 {
-    /// <summary>
-    /// Use this base class if you need Connected and Fault events for proxy.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class BaseProxy<T> : ClientBase<T> 
-        where T : class, IPingAvailable
+    public class BaseProxyWrapper
     {
+        protected readonly IPingAvailable _proxy;
+
         public int SleepTime { get; set; } = 1000;
+
+        public bool IsActive { get; private set; } = false;
 
         /// <summary>
         /// Raised when proxy can't call some method on server
@@ -28,12 +28,19 @@ namespace Common.Communication
 
         protected virtual void OnFault()
         {
+            IsActive = false;
             Fault?.Invoke();
         }
 
         protected virtual void OnConnected()
         {
+            IsActive = true;
             Connected?.Invoke();
+        }
+
+        public BaseProxyWrapper(IPingAvailable proxy)
+        {
+            _proxy = proxy;
         }
 
         /// <summary>
@@ -47,7 +54,7 @@ namespace Common.Communication
                 {
                     try
                     {
-                        var z = Channel.Ping();
+                        var z = _proxy.Ping();
                         if (z)
                         {
                             OnConnected();

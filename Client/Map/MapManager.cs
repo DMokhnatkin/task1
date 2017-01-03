@@ -35,7 +35,8 @@ namespace Client.Map
             if (e.PropertyName == nameof(_appViewModel.SelectedTerminal))
             {
                 UnSelect();
-                Select(_appViewModel.SelectedTerminal);
+                if (_appViewModel.SelectedTerminal != null)
+                    Select(_appViewModel.SelectedTerminal);
             }
         }
 

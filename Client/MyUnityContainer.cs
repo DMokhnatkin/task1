@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Communication.Proxy;
+using Common.Communication.ProxyWrappers;
 using Infrastructure.Contract.Service;
 using Microsoft.Practices.Unity;
 
@@ -16,7 +17,7 @@ namespace Client
         static MyUnityContainer()
         {
             // Proxies
-            Instance.RegisterType<ITerminalsService, TerminalServiceProxy>(new ContainerControlledLifetimeManager());
+            Instance.RegisterType<ITerminalsService, TerminalServiceProxyWrapper>(new ContainerControlledLifetimeManager());
         }
     }
 }

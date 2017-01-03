@@ -7,35 +7,19 @@ using Infrastructure.Model;
 namespace Common.Communication.Proxy
 {
     public class TerminalServiceProxy :
-        BaseProxy<ITerminalsService>,
+        ClientBase<ITerminalsService>,
         ITerminalsService
     {
         /// <inheritdoc />
         public List<TerminalStatus> GetCurStatus()
         {
-            try
-            {
-                return Channel.GetCurStatus();
-            }
-            catch (Exception)
-            {
-                OnFault();
-                throw;
-            }
+            return Channel.GetCurStatus();
         }
 
         /// <inheritdoc />
         public bool Ping()
         {
-            try
-            {
-                return Channel.Ping();
-            }
-            catch (Exception)
-            {
-                OnFault();
-                throw;
-            }
+            return Channel.Ping();
         }
     }
 }
