@@ -5,6 +5,6 @@
              xmlns:viewModels="clr-namespace:Client.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <viewModels:AppViewModel x:Key="MainViewModel" />
+        <viewModels:MainViewModel x:Key="MainViewModel" />
     </Application.Resources>
 </Application>

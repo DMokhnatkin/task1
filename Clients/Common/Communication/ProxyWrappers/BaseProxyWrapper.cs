@@ -60,6 +60,11 @@ namespace Common.Communication.ProxyWrappers
                             OnConnected();
                             return;
                         }
+                        else
+                        {
+                            OnFault();
+                            return;
+                        }
                     }
                     catch (Exception)
                     {

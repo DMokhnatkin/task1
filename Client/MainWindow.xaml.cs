@@ -24,9 +24,9 @@ namespace Client
     {
         private MapManager _mapManager;
 
-        internal AppViewModel ViewModel
+        internal MainViewModel ViewModel
         {
-            get { return DataContext as AppViewModel; }
+            get { return DataContext as MainViewModel; }
             set { DataContext = value; }
         }
 

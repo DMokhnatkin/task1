@@ -78,7 +78,7 @@
     </ApplicationDefinition>
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="MyUnityContainer.cs" />
-    <Compile Include="ViewModels\AppViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SensorValueViewModel.cs" />
     <Compile Include="ViewModels\TerminalViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

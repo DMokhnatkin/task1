@@ -12,7 +12,7 @@ using Microsoft.Practices.Unity;
 
 namespace Client.ViewModels
 {
-    internal class AppViewModel : ViewModelBase
+    internal class MainViewModel : ViewModelBase
     {
         private readonly DispatcherTimer _loadAllTerminalsStatus;
         readonly TerminalServiceProxyWrapper _proxy = (TerminalServiceProxyWrapper) MyUnityContainer.Instance.Resolve<ITerminalsService>();
@@ -55,7 +55,7 @@ namespace Client.ViewModels
             }
         }
 
-        public AppViewModel()
+        public MainViewModel()
         {
             _proxy.Connected += () =>
             {
