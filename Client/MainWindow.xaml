@@ -9,6 +9,7 @@
         xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:views="clr-namespace:Client.Views"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
         Title="MainWindow" Height="700" Width="900">
@@ -38,15 +39,7 @@
                     </ContentPresenter>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="{x:Static properties:Eng.Report_Header}" DataContext="{Binding ReportViewModel}">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{x:Static properties:Eng.Report_From}"></TextBlock>
-                    <xctk:DateTimePicker Value="{Binding From}" AutoCloseCalendar="True"></xctk:DateTimePicker>
-                    <TextBlock Text="{x:Static properties:Eng.Report_To}"></TextBlock>
-                    <xctk:DateTimePicker Value="{Binding To}" AutoCloseCalendar="True"></xctk:DateTimePicker>
-                    <Button Margin="0, 5, 0, 5" Command="{Binding MakeAReportCommand}" Content="{x:Static properties:Eng.Report_Make}"></Button>
-                </StackPanel>
-            </GroupBox>
+            <views:ReportView DataContext="{Binding ReportViewModel}"></views:ReportView>
             <GroupBox x:Name="groupBox" Header="{x:Static properties:Eng.TerminalList_Header}">
                 <DataGrid x:Name="terminalsView" Height="200" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
                     <DataGrid.Columns>
@@ -55,68 +48,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
-            <GroupBox x:Name="TerminalProps" Header="{x:Static properties:Eng.TerminalProps_Header}">
-                <StackPanel>
-                    <Grid Margin="0,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Static properties:Eng.TerminalId_Caption}"/>
-                        <TextBox Text="{Binding SelectedTerminal.Id, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
-                            <TextBox.Background>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                            </TextBox.Background>
-                        </TextBox>
-                    </Grid>
-                    <Grid Margin="0,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Static properties:Eng.LastActiveTime_Caption}"/>
-                        <TextBox Text="{Binding SelectedTerminal.LastActiveDateTime, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
-                            <TextBox.Background>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                            </TextBox.Background>
-                        </TextBox>
-                    </Grid>
-                    <Grid Margin="0,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Static properties:Eng.Latitude_Caption}"/>
-                        <TextBox Text="{Binding SelectedTerminal.Latitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
-                            <TextBox.Background>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                            </TextBox.Background>
-                        </TextBox>
-                    </Grid>
-                    <Grid Margin="0,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Static properties:Eng.Longitude_Caption}"/>
-                        <TextBox Text="{Binding SelectedTerminal.Longitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
-                            <TextBox.Background>
-                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                            </TextBox.Background>
-                        </TextBox>
-                    </Grid>
-                    <GroupBox Header="{x:Static properties:Eng.SensorsHeader}" 
-                              VerticalAlignment="Top" Margin="2">
-                        <DataGrid ItemsSource="{Binding SelectedTerminal.SensorValues}" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="{x:Static properties:Eng.SensorName}" IsReadOnly="True" Binding="{Binding SensorName, Mode=OneWay}"/>
-                                <DataGridTextColumn Header="{x:Static properties:Eng.SensorValue}" IsReadOnly="True" Binding="{Binding Value, Mode=OneWay}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="{x:Static properties:Eng.SensorValueUnits}" IsReadOnly="True" Binding="{Binding Units, Mode=OneWay}"></DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </GroupBox>
-                </StackPanel>
-            </GroupBox>
+            <views:PropertiesView DataContext="{Binding SelectedTerminal}"></views:PropertiesView>
         </StackPanel>
         <m:Map 
             x:Name="Map"

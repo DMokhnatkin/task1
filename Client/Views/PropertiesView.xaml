@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Client.Views.PropertiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Client.Views"
+             xmlns:viewModels="clr-namespace:Client.ViewModels"
+             xmlns:properties="clr-namespace:Client.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance viewModels:TerminalViewModel, IsDesignTimeCreatable=True}">
+    <GroupBox x:Name="TerminalProps" Header="{x:Static properties:Eng.TerminalProps_Header}">
+        <StackPanel>
+            <Grid Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Static properties:Eng.TerminalId_Caption}"/>
+                <TextBox Text="{Binding Id, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                    <TextBox.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                    </TextBox.Background>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Static properties:Eng.LastActiveTime_Caption}"/>
+                <TextBox Text="{Binding LastActiveDateTime, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                    <TextBox.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                    </TextBox.Background>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Static properties:Eng.Latitude_Caption}"/>
+                <TextBox Text="{Binding Latitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                    <TextBox.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                    </TextBox.Background>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Static properties:Eng.Longitude_Caption}"/>
+                <TextBox Text="{Binding Longitude, Mode=OneWay}" Grid.Column="1" IsReadOnly="True">
+                    <TextBox.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                    </TextBox.Background>
+                </TextBox>
+            </Grid>
+            <GroupBox Header="{x:Static properties:Eng.SensorsHeader}" 
+                              VerticalAlignment="Top" Margin="2">
+                <DataGrid ItemsSource="{Binding SensorValues}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{x:Static properties:Eng.SensorName}" IsReadOnly="True" Binding="{Binding SensorName, Mode=OneWay}"/>
+                        <DataGridTextColumn Header="{x:Static properties:Eng.SensorValue}" IsReadOnly="True" Binding="{Binding Value, Mode=OneWay}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="{x:Static properties:Eng.SensorValueUnits}" IsReadOnly="True" Binding="{Binding Units, Mode=OneWay}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </StackPanel>
+    </GroupBox>
+</UserControl>
