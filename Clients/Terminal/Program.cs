@@ -71,7 +71,7 @@ namespace Terminal
 
             Timer timer = new Timer((state) => { ReferToService(addr); }, null, 0, timeout);
 
-            Console.WriteLine("Terminal is run. Press any key to stop");
+            Console.WriteLine($"Terminal id={_terminalId} is started. Press any key to stop");
             Console.ReadKey();
             timer.Dispose();
         }

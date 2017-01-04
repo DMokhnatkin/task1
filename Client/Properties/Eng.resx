@@ -154,4 +154,16 @@
   <data name="ServerText" xml:space="preserve">
     <value>Connected to server</value>
   </data>
+  <data name="Report_Header" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Report_Make" xml:space="preserve">
+    <value>Make a report</value>
+  </data>
+  <data name="Report_From" xml:space="preserve">
+    <value>Start period</value>
+  </data>
+  <data name="Report_To" xml:space="preserve">
+    <value>End period</value>
+  </data>
 </root>

@@ -8,6 +8,7 @@
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
         Title="MainWindow" Height="700" Width="900">
@@ -37,8 +38,17 @@
                     </ContentPresenter>
                 </StackPanel>
             </GroupBox>
+            <GroupBox Header="{x:Static properties:Eng.Report_Header}" DataContext="{Binding ReportViewModel}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{x:Static properties:Eng.Report_From}"></TextBlock>
+                    <xctk:DateTimePicker Value="{Binding From}" AutoCloseCalendar="True"></xctk:DateTimePicker>
+                    <TextBlock Text="{x:Static properties:Eng.Report_To}"></TextBlock>
+                    <xctk:DateTimePicker Value="{Binding To}" AutoCloseCalendar="True"></xctk:DateTimePicker>
+                    <Button Margin="0, 5, 0, 5" Command="{Binding MakeAReportCommand}" Content="{x:Static properties:Eng.Report_Make}"></Button>
+                </StackPanel>
+            </GroupBox>
             <GroupBox x:Name="groupBox" Header="{x:Static properties:Eng.TerminalList_Header}">
-                <DataGrid x:Name="terminalsView" Height="300" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
+                <DataGrid x:Name="terminalsView" Height="200" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="{x:Static properties:Eng.TerminalId_Caption}"/>
                         <DataGridTextColumn Binding="{Binding LastActiveDateTime, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="{x:Static properties:Eng.LastActiveTime_Caption}"/>

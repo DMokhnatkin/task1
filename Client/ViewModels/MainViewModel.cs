@@ -14,6 +14,8 @@ namespace Client.ViewModels
 {
     internal class MainViewModel : ViewModelBase
     {
+        private ReportViewModel _reportViewModel = new ReportViewModel();
+
         private const int UpdatePeriod = 2000;
 
         private readonly DispatcherTimer _loadAllTerminalsStatus;
@@ -54,6 +56,16 @@ namespace Client.ViewModels
             {
                 _isServerConnected = value;
                 RaisePropertyChanged(nameof(IsServerConnected));
+            }
+        }
+
+        public ReportViewModel ReportViewModel
+        {
+            get { return _reportViewModel; }
+            set
+            {
+                _reportViewModel = value;
+                RaisePropertyChanged(nameof(ReportViewModel));
             }
         }
 

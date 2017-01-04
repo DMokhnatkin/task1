@@ -88,6 +88,42 @@ namespace Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start period.
+        /// </summary>
+        public static string Report_From {
+            get {
+                return ResourceManager.GetString("Report_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report.
+        /// </summary>
+        public static string Report_Header {
+            get {
+                return ResourceManager.GetString("Report_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make a report.
+        /// </summary>
+        public static string Report_Make {
+            get {
+                return ResourceManager.GetString("Report_Make", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End period.
+        /// </summary>
+        public static string Report_To {
+            get {
+                return ResourceManager.GetString("Report_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sensor name.
         /// </summary>
         public static string SensorName {
