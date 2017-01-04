@@ -14,6 +14,8 @@ namespace Client.ViewModels
 {
     internal class MainViewModel : ViewModelBase
     {
+        private const int UpdatePeriod = 2000;
+
         private readonly DispatcherTimer _loadAllTerminalsStatus;
         readonly TerminalServiceProxyWrapper _proxy = (TerminalServiceProxyWrapper) MyUnityContainer.Instance.Resolve<ITerminalsService>();
 
@@ -72,7 +74,7 @@ namespace Client.ViewModels
             _proxy.StartPing();
 
             _loadAllTerminalsStatus = new DispatcherTimer();
-            _loadAllTerminalsStatus.Interval = new TimeSpan(0 ,0, 0, 2);
+            _loadAllTerminalsStatus.Interval = new TimeSpan(0 ,0, 0, 0, UpdatePeriod);
             _loadAllTerminalsStatus.Tick += (sender, args) =>
             {
                 try
