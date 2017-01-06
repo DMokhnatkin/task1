@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model.DynamicProperties.Specialized;
 
-namespace Infrastructure.Model.Dto
+namespace Infrastructure.Model.Dto.Meterings
 {
     [DataContract]
     public class MeteringDto

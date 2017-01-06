@@ -5,6 +5,7 @@ using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
 using Infrastructure.Model.Dto;
+using Infrastructure.Model.Dto.Meterings;
 using Microsoft.Practices.Unity;
 using Server.Data;
 using Server.Data.Repository;

@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using Infrastructure.Model.Dto;
+using Infrastructure.Model.Dto.Meterings;
 
 namespace Infrastructure.Contract.Service
 {

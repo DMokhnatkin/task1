@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Model.Dto
+﻿using Infrastructure.Model.Dto.Meterings;
+
+namespace Infrastructure.Model.Dto
 {
     public class TerminalStatusDto
     {

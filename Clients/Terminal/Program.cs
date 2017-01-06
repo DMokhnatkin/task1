@@ -7,6 +7,7 @@ using Common.Communication.Proxy;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
 using Infrastructure.Model.Dto;
+using Infrastructure.Model.Dto.Meterings;
 
 namespace Terminal
 {

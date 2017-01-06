@@ -3,6 +3,7 @@ using System.ServiceModel;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model.Dto;
+using Infrastructure.Model.Dto.Meterings;
 
 namespace Common.Communication.Proxy
 {

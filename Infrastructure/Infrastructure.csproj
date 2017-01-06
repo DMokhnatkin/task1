@@ -50,8 +50,11 @@
     <Compile Include="Contract\IPingAvailable.cs" />
     <Compile Include="Contract\Service\IAuthorizationService.cs" />
     <Compile Include="Contract\Service\IDataService.cs" />
+    <Compile Include="Contract\Service\IReportService.cs" />
     <Compile Include="Contract\Service\ITerminalsService.cs" />
-    <Compile Include="Model\Dto\MeteringDto.cs" />
+    <Compile Include="Model\Dto\Meterings\MeteringDto.cs" />
+    <Compile Include="Model\Dto\Reports\ReportDto.cs" />
+    <Compile Include="Model\Dto\Reports\ReportSettingsDto.cs" />
     <Compile Include="Model\Dto\TerminalStatusDto.cs" />
     <Compile Include="Model\DynamicProperties\PropertiesCollection.cs" />
     <Compile Include="Model\DynamicProperties\Property.cs" />
@@ -60,14 +63,17 @@
     <Compile Include="Model\DynamicProperties\Specialized\DynamicPropertyManagers.cs" />
     <Compile Include="Model\DynamicProperties\Specialized\Managers\ReportsPropertyManager.cs" />
     <Compile Include="Model\DynamicProperties\Specialized\Managers\SensorsPropertyManager.cs" />
+    <Compile Include="Model\DynamicProperties\Specialized\Properties\ReportProperty.cs" />
     <Compile Include="Model\DynamicProperties\Specialized\Properties\SensorProperty.cs" />
     <Compile Include="Model\Metering.cs" />
     <Compile Include="Contract\Model\IMetering.cs" />
+    <Compile Include="Model\Reports\Report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

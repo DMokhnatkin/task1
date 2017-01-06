@@ -16,6 +16,7 @@ namespace Server
             Instance.RegisterType<IAuthorizationService, AuthorizationService>(new ContainerControlledLifetimeManager());
             Instance.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
             Instance.RegisterType<ITerminalsService, TerminalsService>(new ContainerControlledLifetimeManager());
+            Instance.RegisterType<IReportService, ReportsService>(new ContainerControlledLifetimeManager());
 
             // Repositories
             Instance.RegisterType<IMeteringRepository, MeteringRepository>(new ContainerControlledLifetimeManager());

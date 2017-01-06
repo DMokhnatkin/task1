@@ -32,6 +32,12 @@ namespace Server
                 Uri = new Uri("http://localhost:2224/terminals"),
                 DataContractType = typeof(ITerminalsService),
                 ServiceHost = null
+            },
+            new ServiceDescription()
+            {
+                Uri = new Uri("http://localhost:2224/reports"),
+                DataContractType = typeof(IReportService),
+                ServiceHost = null
             }
         };
 

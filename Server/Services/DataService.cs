@@ -8,6 +8,7 @@ using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
 using Infrastructure.Model.Dto;
+using Infrastructure.Model.Dto.Meterings;
 using Microsoft.Practices.Unity;
 using NLog;
 using Server.Data.Repository;
