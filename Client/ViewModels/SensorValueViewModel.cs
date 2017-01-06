@@ -6,18 +6,18 @@ namespace Client.ViewModels
     internal class SensorValueViewModel : ViewModelBase
     {
         private SensorProperty _property;
-        private PropertiesCollection _collection;
+        private object _val;
 
-        public object Value => _collection.GetValue(_property);
+        public object Value => _val;
 
         public string SensorName => _property.Name;
 
         public string Units => _property.Unit;
 
-        public SensorValueViewModel(SensorProperty prop, PropertiesCollection coll)
+        public SensorValueViewModel(SensorProperty prop, object val)
         {
             _property = prop;
-            _collection = coll;
+            _val = val;
         }
     }
 }
