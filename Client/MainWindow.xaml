@@ -15,7 +15,7 @@
         Title="MainWindow" Height="700" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="10" VerticalAlignment="Top">
@@ -39,7 +39,7 @@
                     </ContentPresenter>
                 </StackPanel>
             </GroupBox>
-            <views:ReportView DataContext="{Binding ReportViewModel}"></views:ReportView>
+            <views:MakeReportView DataContext="{Binding ReportViewModel}"></views:MakeReportView>
             <GroupBox x:Name="groupBox" Header="{x:Static properties:Eng.TerminalList_Header}">
                 <DataGrid x:Name="terminalsView" Height="200" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
                     <DataGrid.Columns>
@@ -51,11 +51,9 @@
             <views:PropertiesView DataContext="{Binding SelectedTerminal}"></views:PropertiesView>
         </StackPanel>
         <m:Map 
-            x:Name="Map"
-            Grid.Column="1" 
+            x:Name="Map" 
             CredentialsProvider="AglUDYfQDZ8hI6mMq9obyR994bGaNEA5PthdhJdkVj_UDDJ_IxcVj3ccldL_papd"
             ZoomLevel="12.000"
-            Center="59.918116, 30.346666">
-        </m:Map>
+            Center="59.918116, 30.346666" Grid.ColumnSpan="2" Margin="215,0,5,0"/>
     </Grid>
 </Window>

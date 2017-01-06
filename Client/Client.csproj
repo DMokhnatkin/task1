@@ -113,8 +113,8 @@
     <Compile Include="Views\PropertiesView.xaml.cs">
       <DependentUpon>PropertiesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReportView.xaml.cs">
-      <DependentUpon>ReportView.xaml</DependentUpon>
+    <Compile Include="Views\MakeReportView.xaml.cs">
+      <DependentUpon>MakeReportView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -132,7 +132,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ReportView.xaml">
+    <Page Include="Views\MakeReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

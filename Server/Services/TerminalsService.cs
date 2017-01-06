@@ -4,8 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
-using Infrastructure.Model.Sensors.Types;
+using Infrastructure.Model.Dto;
 using Microsoft.Practices.Unity;
 using Server.Data;
 using Server.Data.Repository;
@@ -26,14 +25,14 @@ namespace Server.Services
             return true;
         }
 
-        public List<TerminalStatus> GetCurStatus()
+        public List<TerminalStatusDto> GetCurStatus()
         {
             var z = _terminalsRepository
                 .GetTerminalIds()
-                .Select(x => new TerminalStatus
+                .Select(x => new TerminalStatusDto
                 {
                     TerminalId = x,
-                    LastMetering = _meteringsRepository.GetLastMetering(x)
+                    LastMetering = new MeteringDto(_meteringsRepository.GetLastMetering(x))
                 })
                 .ToList();
             return z;

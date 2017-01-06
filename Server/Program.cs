@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.ServiceModel;
 using AutoMapper;
-using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
-using Infrastructure.Model.Sensors.Types;
 using Microsoft.Practices.Unity;
 using NLog;
 using Server.Data;
 using Server.Data.DAO;
-using Server.Services;
 using Unity.Wcf;
 
 namespace Server
@@ -87,8 +80,6 @@ namespace Server
             Mapper.Initialize(cfg =>
                 {
                     cfg.CreateMap<Metering, MeteringDAO>().ReverseMap();
-                    cfg.CreateMap<ISensorValue, SensorValueDAO>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => DAOHelper.ObjectToByteArray(src)));
                 }
             );
         }

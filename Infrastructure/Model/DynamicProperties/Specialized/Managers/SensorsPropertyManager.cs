@@ -1,21 +1,21 @@
 ﻿
-using Infrastructure.Model.DynamicProperties.Specialized.Attributes;
+using Infrastructure.Model.DynamicProperties.Specialized.Properties;
 
 namespace Infrastructure.Model.DynamicProperties.Specialized.Managers
 {
-    public class SensorsPropertyManager : PropertyManagerBase
+    public class SensorsPropertyManager : PropertyManagerBase<SensorProperty>
     {
-        [SensorProperty]
-        public Property IsEngineRunning { get; } = 
-            new Property("Engine on", typeof(bool));
+        [Property]
+        public SensorProperty IsEngineRunning { get; } = 
+            new SensorProperty("Engine on", typeof(bool));
 
-        [SensorProperty(Unit = "Kmh")]
-        public Property SpeedKmh { get; } =
-            new Property("SpeedKmh", typeof(float));
+        [Property]
+        public SensorProperty SpeedKmh { get; } =
+            new SensorProperty("SpeedKmh", typeof(float), "kmh");
 
-        [SensorProperty(Unit = "Km")]
-        public Property MileageKm { get; } =
-            new Property("Mileage", typeof(float));
+        [Property]
+        public SensorProperty MileageKm { get; } =
+            new SensorProperty("MileageKm", typeof(float), "Km");
 
         internal SensorsPropertyManager()
         {

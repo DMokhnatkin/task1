@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using NLog;
 using Common.Communication.Proxy;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
+using Infrastructure.Model.Dto;
 
 namespace Terminal
 {
@@ -37,7 +39,7 @@ namespace Terminal
                 AuthorizationServiceProxy authorizationProxy = new AuthorizationServiceProxy();
                 authorizationProxy.Login(_terminalId);
                 DataServiceProxy dataProxy = new DataServiceProxy();
-                dataProxy.SendData(_terminalId, data);
+                dataProxy.SendData(_terminalId, data.Select(x => new MeteringDto(x)).ToList());
                 logger.Info("Data sent");
             }
             catch (Exception e)

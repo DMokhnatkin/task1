@@ -1,7 +1,6 @@
 ﻿using System;
 using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
-using Infrastructure.Model.Sensors.Types;
+using Infrastructure.Model.DynamicProperties.Specialized;
 
 namespace Terminal
 {
@@ -17,9 +16,9 @@ namespace Terminal
                 Longitude = (float) rand.NextDouble()*360 - 180,
                 Time = DateTime.Now.AddMilliseconds(rand.NextDouble()*maxTimeOffsetMs)
             };
-            SensorValuesHelper.AddSensorValue(res, new SpeedSensorValue() { SpeedKmh = (float)rand.NextDouble() * maxSpeedKmh});
-            SensorValuesHelper.AddSensorValue(res, new MileageSensorValue() { MileageKm = (float)rand.NextDouble() * maxMileageKm});
-            SensorValuesHelper.AddSensorValue(res, new EngineSensorValue() { IsTurnedOn = rand.Next() % 2 == 0 });
+            res.SensorValues.SetValue(DynamicPropertyManagers.Sensors.SpeedKmh, (float)rand.NextDouble() * maxSpeedKmh);
+            res.SensorValues.SetValue(DynamicPropertyManagers.Sensors.MileageKm, (float)rand.NextDouble() * maxMileageKm);
+            res.SensorValues.SetValue(DynamicPropertyManagers.Sensors.IsEngineRunning, rand.Next() % 2 == 0);
 
             return res;
         }
@@ -52,12 +51,12 @@ namespace Terminal
             next.Longitude = lonO;
             next.Time = prev.Time + dTime;
 
-            SensorValuesHelper.AddSensorValue(next, new SpeedSensorValue() { SpeedKmh = speed });
-            SensorValuesHelper.AddSensorValue(next, new MileageSensorValue()
-            {
-                MileageKm = SensorValuesHelper.GetSensorValue<MileageSensorValue>(prev).MileageKm + dMil
-            });
-            SensorValuesHelper.AddSensorValue(next, new EngineSensorValue() { IsTurnedOn = speed > 0 });
+            next.SensorValues.SetValue(DynamicPropertyManagers.Sensors.SpeedKmh, speed);
+            next.SensorValues.SetValue(
+                DynamicPropertyManagers.Sensors.MileageKm,
+                (float)prev.SensorValues.GetValue(DynamicPropertyManagers.Sensors.MileageKm) + dMil);
+            next.SensorValues.SetValue(DynamicPropertyManagers.Sensors.IsEngineRunning, speed > 0);
+
             return next;
         }
     }

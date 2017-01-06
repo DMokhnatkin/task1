@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Common.Communication.Proxy;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
+using Infrastructure.Model.Dto;
 
 namespace Common.Communication.ProxyWrappers
 {
@@ -29,16 +30,16 @@ namespace Common.Communication.ProxyWrappers
         }
 
         /// <inheritdoc />
-        public List<TerminalStatus> GetCurStatus()
+        public List<TerminalStatusDto> GetCurStatus()
         {
             try
             {
                 return ((TerminalServiceProxy)_proxy).GetCurStatus();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 OnFault();
-                return new List<TerminalStatus>();
+                return new List<TerminalStatusDto>();
             }
         }
     }

@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using Common.Communication.ProxyWrappers;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
+using Infrastructure.Model.Dto;
 using Microsoft.Practices.Unity;
 
 namespace Client.ViewModels
@@ -104,7 +105,7 @@ namespace Client.ViewModels
         private async void LoadStatsFromServer()
         {
             // Get from server new collection
-            var statsColl = new List<TerminalStatus>();
+            var statsColl = new List<TerminalStatusDto>();
             await Task.Run(() =>
             {
                 statsColl = _proxy.GetCurStatus();

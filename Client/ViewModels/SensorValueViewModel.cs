@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.Contract.Model;
-using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
+﻿using Infrastructure.Model.DynamicProperties;
+using Infrastructure.Model.DynamicProperties.Specialized.Properties;
 
 namespace Client.ViewModels
 {
     internal class SensorValueViewModel : ViewModelBase
     {
-        private ISensorValue _sensorValue;
+        private SensorProperty _property;
+        private PropertiesCollection _collection;
 
-        public object Value => _sensorValue.ObjValue;
+        public object Value => _collection.GetValue(_property);
 
-        public string SensorName => SensorsRep.GetSensorTypeAttribute(_sensorValue.GetType()).SensorName;
+        public string SensorName => _property.Name;
 
-        public string Units => SensorsRep.GetSensorTypeAttribute(_sensorValue.GetType()).Units;
+        public string Units => _property.Unit;
 
-        public SensorValueViewModel(ISensorValue sensorValue)
+        public SensorValueViewModel(SensorProperty prop, PropertiesCollection coll)
         {
-            _sensorValue = sensorValue;
+            _property = prop;
+            _collection = coll;
         }
     }
 }

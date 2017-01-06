@@ -1,6 +1,7 @@
 ﻿
 using Infrastructure.Model.DynamicProperties;
 using Infrastructure.Model.DynamicProperties.Specialized;
+using Infrastructure.Model.DynamicProperties.Specialized.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InfrastructureTest.DynamicProperties
@@ -11,7 +12,7 @@ namespace InfrastructureTest.DynamicProperties
         [TestMethod]
         public void TestRuntimePropRegister()
         {
-            DynamicPropertyManagers.Sensors.RegisterProperty(new Property("test", typeof(bool)));
+            DynamicPropertyManagers.Sensors.RegisterProperty(new SensorProperty("test", typeof(bool)));
             var z = DynamicPropertyManagers.Sensors.GetProperty("test");
             Assert.IsNotNull(z);
             

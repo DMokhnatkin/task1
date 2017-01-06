@@ -2,20 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
-using AutoMapper;
 using Infrastructure.Contract.Model;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
+using Infrastructure.Model.Dto;
 using Microsoft.Practices.Unity;
 using NLog;
-using Server.Data;
-using Server.Data.DAO;
 using Server.Data.Repository;
 
 namespace Server.Services
@@ -31,7 +25,7 @@ namespace Server.Services
 
         private MeteringRepository _meteringRepository = new MeteringRepository();
 
-        public void SendData(string terminalId, List<IMetering> data)
+        public void SendData(string terminalId, List<MeteringDto> data)
         {
             if (!_authorization.IsLogged(terminalId))
             {
@@ -40,8 +34,9 @@ namespace Server.Services
             }
             else
             {
-                foreach (var metering in data)
+                foreach (var z in data)
                 {
+                    var metering = z.ToBo();
                     try
                     {
                         _meteringRepository.SaveMetering(metering);
@@ -55,12 +50,11 @@ namespace Server.Services
 
                 MemoryStream str = new MemoryStream();
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(
-                    typeof(List<IMetering>), 
+                    typeof(List<MeteringDto>), 
                     new List<Type>()
                     {
-                        typeof(Metering)
+                        typeof(MeteringDto)
                     }
-                    .Concat(SensorsRep.GetKnownTypes())
                     );
                 ser.WriteObject(str, data);
                 str.Position = 0;

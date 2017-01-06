@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
+using Infrastructure.Model.Dto;
 
 namespace Common.Communication.Proxy
 {
@@ -11,7 +12,7 @@ namespace Common.Communication.Proxy
         ITerminalsService
     {
         /// <inheritdoc />
-        public List<TerminalStatus> GetCurStatus()
+        public List<TerminalStatusDto> GetCurStatus()
         {
             return Channel.GetCurStatus();
         }

@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Infrastructure.Model.DynamicProperties
 {
     /// <summary>
     /// Instance of this class can store dynamic property values
     /// </summary>
-    public class PropertiesCollection
+    public class PropertiesCollection : IEnumerable<KeyValuePair<Property, object>>
     {
         Dictionary<Property, object> _propValues = new Dictionary<Property, object>();
 
@@ -25,6 +27,16 @@ namespace Infrastructure.Model.DynamicProperties
                 throw a;
             }
             _propValues[prop] = val;
+        }
+
+        public IEnumerator<KeyValuePair<Property, object>> GetEnumerator()
+        {
+            return _propValues.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _propValues.GetEnumerator();
         }
     }
 }

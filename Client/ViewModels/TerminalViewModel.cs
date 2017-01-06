@@ -1,42 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using Infrastructure.Contract.Model;
-using Infrastructure.Model;
+using Infrastructure.Model.Dto;
+using Infrastructure.Model.DynamicProperties.Specialized.Properties;
 
 namespace Client.ViewModels
 {
     internal class TerminalViewModel : ViewModelBase
     {
-        private TerminalStatus _terminalStatus;
+        private TerminalStatusDto _terminalStatusDto;
 
-        public void UpdateTerminalStatus(TerminalStatus newTerminalStatus)
+        public void UpdateTerminalStatus(TerminalStatusDto newTerminalStatusDto)
         {
-            ChangeModel(newTerminalStatus);
+            ChangeModel(newTerminalStatusDto);
         }
 
-        public void ChangeModel(TerminalStatus newModel)
+        public void ChangeModel(TerminalStatusDto newModel)
         {
-            _terminalStatus = newModel;
+            _terminalStatusDto = newModel;
             // Raise all properties changed
             RaisePropertyChanged(null);
         }
 
-        public TerminalViewModel(TerminalStatus terminalStatus)
+        public TerminalViewModel(TerminalStatusDto terminalStatusDto)
         {
-            UpdateTerminalStatus(terminalStatus);
+            UpdateTerminalStatus(terminalStatusDto);
         }
 
-        public string Id => _terminalStatus.TerminalId;
+        public string Id => _terminalStatusDto.TerminalId;
 
-        public DateTime LastActiveDateTime => _terminalStatus.LastMetering.Time;
+        public DateTime LastActiveDateTime => _terminalStatusDto.LastMetering.Time;
 
-        public float Longitude => _terminalStatus.LastMetering.Longitude;
+        public float Longitude => _terminalStatusDto.LastMetering.Longitude;
 
-        public float Latitude => _terminalStatus.LastMetering.Latitude;
+        public float Latitude => _terminalStatusDto.LastMetering.Latitude;
 
         public List<SensorValueViewModel> SensorValues => 
-            _terminalStatus.LastMetering.SensorValues?.Values.Select(x => new SensorValueViewModel(x)).ToList();
+            _terminalStatusDto.LastMetering.ToBo().SensorValues.Select(x => new SensorValueViewModel(x.Key as SensorProperty, _terminalStatusDto.LastMetering.ToBo().SensorValues)).ToList();
     }
 }

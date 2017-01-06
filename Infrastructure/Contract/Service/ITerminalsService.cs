@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
+using Infrastructure.Model.Dto;
 
 namespace Infrastructure.Contract.Service
 {
@@ -10,18 +10,18 @@ namespace Infrastructure.Contract.Service
     /// Service for get statistics
     /// </summary>
     [ServiceContract]
-    [ServiceKnownType(nameof(SensorsRep.GetKnownTypes), typeof(SensorsRep))]
     public interface ITerminalsService : IPingAvailable
     {
         [OperationContract]
-        [ServiceKnownType(typeof(TerminalStatus))]
+        [ServiceKnownType(typeof(TerminalStatusDto))]
         [ServiceKnownType(typeof(Metering))]
+        [ServiceKnownType(typeof(List<Metering>))]
         [WebInvoke(
             Method = "GET",
             UriTemplate = "/status",
             ResponseFormat = WebMessageFormat.Xml,
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        List<TerminalStatus> GetCurStatus();
+        List<TerminalStatusDto> GetCurStatus();
     }
 }

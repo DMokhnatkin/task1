@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Infrastructure.Model.DynamicProperties;
 
 namespace Infrastructure.Contract.Model
 {
@@ -12,6 +12,6 @@ namespace Infrastructure.Contract.Model
         float Latitude { get; set; }
         float Longitude { get; set; }
 
-        IDictionary<Guid, ISensorValue> SensorValues { get; }
+        PropertiesCollection SensorValues { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Server.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
+                        TerminalId = c.String(nullable: false),
                         Time = c.DateTime(nullable: false),
                         Latitude = c.Single(nullable: false),
                         Longitude = c.Single(nullable: false),
@@ -25,7 +26,7 @@ namespace Server.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         MeteringId = c.Long(nullable: false),
                         SensorValueId = c.Long(nullable: false),
-                        SensorGuid = c.Guid(nullable: false),
+                        PropertyName = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.MeteringDAOs", t => t.MeteringId, cascadeDelete: true)
@@ -38,7 +39,7 @@ namespace Server.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
-                        Value = c.Binary(),
+                        Value = c.Binary(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

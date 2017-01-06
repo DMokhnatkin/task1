@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
-using Infrastructure.Model.Sensors;
+using Infrastructure.Model.DynamicProperties;
+using Infrastructure.Model.DynamicProperties.Specialized;
 using Server.Data.DAO;
 
 namespace Server.Data.Repository
@@ -25,13 +25,13 @@ namespace Server.Data.Repository
                     _context.SaveChanges();
                     foreach (var met in metering.SensorValues)
                     {
-                        var sv = _context.SensorValues.Add(Mapper.Map<SensorValueDAO>(met.Value));
+                        var sv = _context.SensorValues.Add(new SensorValueDAO() {Value = DAOHelper.ObjectToByteArray(met.Value)});
                         _context.SaveChanges();
                         _context.MeteringSensorRelations.Add(new MeteringSensorValueRelationDAO()
                         {
                             MeteringId = m.Id,
                             SensorValueId = sv.Id,
-                            SensorGuid = met.Key
+                            PropertyName = met.Key.Name
                         });
                         _context.SaveChanges();
                     }
@@ -47,24 +47,12 @@ namespace Server.Data.Repository
 
         public IMetering GetLastMetering(string terminalId)
         {
-            // TODO: combine in one query
-
             // Get last metering
             MeteringDAO lastMetering = _context.Meterings
                 .Include(x => x.SensorValueRelations)
                 .OrderByDescending(x => x.Time)
                 .FirstOrDefault(x => x.TerminalId == terminalId);
 
-            // Get sensor vals for last metering
-            var sensorVals = _context.MeteringSensorRelations
-                .Include(x => x.Metering)
-                .Include(x => x.SensorValue)
-                .Where(x => x.Metering.Id == lastMetering.Id)
-                .ToDictionary(
-                    k => k.SensorGuid,
-                    v => (ISensorValue)DAOHelper.ByteArrayToObject(
-                            SensorsRep.GetSensorType(v.SensorGuid),
-                            v.SensorValue.Value));
 
             // Map to Metering model
             Metering res = new Metering()
@@ -73,8 +61,19 @@ namespace Server.Data.Repository
                 Latitude = lastMetering.Latitude,
                 Longitude = lastMetering.Longitude,
                 Time = lastMetering.Time,
-                SensorValues = sensorVals
             };
+
+            // Get sensor vals for last metering
+            var sensorVals = _context.MeteringSensorRelations
+                .Include(x => x.Metering)
+                .Include(x => x.SensorValue)
+                .Where(x => x.Metering.Id == lastMetering.Id)
+                .ToList();
+            foreach (var sv in sensorVals)
+            {
+                Property prop = DynamicPropertyManagers.Sensors.GetProperty(sv.PropertyName);
+                res.SensorValues.SetValue(prop, DAOHelper.ByteArrayToObject(prop.TypeOfValue, sv.SensorValue.Value));
+            }
             return res;
         }
     }

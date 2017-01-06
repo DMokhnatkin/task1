@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.Data.DAO
 {
@@ -20,6 +16,6 @@ namespace Server.Data.DAO
         [ForeignKey("SensorValueId")]
         public SensorValueDAO SensorValue { get; set; }
 
-        public Guid SensorGuid { get; set; }
+        public string PropertyName { get; set; }
     }
 }

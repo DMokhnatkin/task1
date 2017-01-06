@@ -48,20 +48,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contract\IPingAvailable.cs" />
-    <Compile Include="Contract\Model\ISensorValue.cs" />
     <Compile Include="Contract\Service\IAuthorizationService.cs" />
     <Compile Include="Contract\Service\IDataService.cs" />
     <Compile Include="Contract\Service\ITerminalsService.cs" />
+    <Compile Include="Model\Dto\MeteringDto.cs" />
+    <Compile Include="Model\Dto\TerminalStatusDto.cs" />
+    <Compile Include="Model\DynamicProperties\PropertiesCollection.cs" />
+    <Compile Include="Model\DynamicProperties\Property.cs" />
+    <Compile Include="Model\DynamicProperties\PropertyManagerBase.cs" />
+    <Compile Include="Model\DynamicProperties\PropertyAttribute.cs" />
+    <Compile Include="Model\DynamicProperties\Specialized\DynamicPropertyManagers.cs" />
+    <Compile Include="Model\DynamicProperties\Specialized\Managers\ReportsPropertyManager.cs" />
+    <Compile Include="Model\DynamicProperties\Specialized\Managers\SensorsPropertyManager.cs" />
+    <Compile Include="Model\DynamicProperties\Specialized\Properties\SensorProperty.cs" />
     <Compile Include="Model\Metering.cs" />
     <Compile Include="Contract\Model\IMetering.cs" />
-    <Compile Include="Model\Sensors\SensorsRep.cs" />
-    <Compile Include="Model\Sensors\SensorTypeAttribute.cs" />
-    <Compile Include="Model\Sensors\SensorValuesHelper.cs" />
-    <Compile Include="Model\Sensors\Types\EngineSensorValue.cs" />
-    <Compile Include="Model\Sensors\Types\MileageSensorValue.cs" />
-    <Compile Include="Model\Sensors\Types\SpeedSensorValue.cs" />
-    <Compile Include="Model\SensorTypeInfo.cs" />
-    <Compile Include="Model\TerminalStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
