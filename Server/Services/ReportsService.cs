@@ -1,6 +1,8 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model.Dto.Reports;
+using Infrastructure.Model.DynamicProperties.Specialized;
 using Infrastructure.Model.Reports;
 
 namespace Server.Services
@@ -13,7 +15,15 @@ namespace Server.Services
         /// <inheritdoc />
         public ReportDto BuildReport(ReportSettingsDto settings)
         {
-            ReportDto res = new ReportDto(new Report());
+            var rep = new Report();
+            rep.ReportSettings.TerminalId = "2";
+            rep.ReportSettings.StartDateTime = DateTime.Now;
+            rep.ReportSettings.EndDateTime = DateTime.Now + new TimeSpan(1, 0, 0, 0);
+
+            rep.Values.SetValue(DynamicPropertyManagers.Reports.Mileage, 123.4f);
+            rep.Values.SetValue(DynamicPropertyManagers.Reports.MaxSpeed, 100f);
+
+            ReportDto res = new ReportDto(rep);
             return res;
         }
     }

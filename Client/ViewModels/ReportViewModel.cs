@@ -1,42 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using Infrastructure.Model.DynamicProperties;
+using Infrastructure.Model.Reports;
 
 namespace Client.ViewModels
 {
     internal class ReportViewModel : ViewModelBase
     {
-        private DateTime _from = DateTime.Now - new TimeSpan(1, 0, 0, 0);
-        private DateTime _to = DateTime.Now;
+        private Report _report;
 
-        public DelegateCommand MakeAReportCommand { get; set; }
-
-        public DateTime From
+        public ReportViewModel(Report report)
         {
-            get { return _from; }
-            set
-            {
-                _from = value;
-                RaisePropertyChanged(nameof(From));
-            }
+            _report = report;
         }
 
-        public DateTime To
-        {
-            get { return _to; }
-            set
-            {
-                _to = value;
-                RaisePropertyChanged(nameof(To));
-            }
-        }
+        public string TerminalId => _report.ReportSettings.TerminalId;
 
-        public ReportViewModel()
-        {
-            MakeAReportCommand = new DelegateCommand(MakeAReportExecute);
-        }
+        public DateTime StartDateTime => _report.ReportSettings.StartDateTime;
 
-        private void MakeAReportExecute(object o)
-        {
-            // Not implemented
-        }
+        public DateTime EndDateTime => _report.ReportSettings.EndDateTime;
+
+        public IEnumerable<KeyValuePair<Property, object>> ReportValues => _report.Values;
     }
 }

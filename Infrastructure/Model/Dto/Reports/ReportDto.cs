@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Infrastructure.Contract;
 using Infrastructure.Model.DynamicProperties.Specialized;
 using Infrastructure.Model.Reports;
 
 namespace Infrastructure.Model.Dto.Reports
 {
     [DataContract]
-    public class ReportDto
+    public class ReportDto : IDto<Report>
     {
         [DataMember]
-        public ReportSettingsDto ReportSettings { get; set; } = new ReportSettingsDto();
+        public ReportSettingsDto ReportSettings { get; set; }
 
         [DataMember]
         public Dictionary<string, object> Values = new Dictionary<string, object>();
 
         public ReportDto(Report report)
         {
-            ReportSettings.TerminalId = report.TerminalId;
-            ReportSettings.StartTime = report.StartDateTime;
-            ReportSettings.EndTime = report.EndDateTime;
+            ReportSettings = new ReportSettingsDto(report.ReportSettings);
 
             foreach (var z in report.Values)
             {
@@ -29,10 +28,8 @@ namespace Infrastructure.Model.Dto.Reports
         public Report ToBo()
         {
             Report res = new Report();
-            res.TerminalId = ReportSettings.TerminalId;
-            res.StartDateTime = ReportSettings.StartTime;
-            res.EndDateTime = ReportSettings.EndTime;
 
+            res.ReportSettings = ReportSettings.ToBo();
             foreach (var z in Values)
             {
                 res.Values.SetValue(

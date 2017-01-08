@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Client.Views;
 using Common.Communication.ProxyWrappers;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model;
@@ -15,7 +16,7 @@ namespace Client.ViewModels
 {
     internal class MainViewModel : ViewModelBase
     {
-        private ReportViewModel _reportViewModel = new ReportViewModel();
+        private ReportRequestViewModel _reportViewModel = new ReportRequestViewModel();
 
         private const int UpdatePeriod = 2000;
 
@@ -29,6 +30,8 @@ namespace Client.ViewModels
 
         private TerminalViewModel _selectedTerminal;
         private bool _isServerConnected = false;
+
+        public DelegateCommand BuildReportCommand { get; set; }
 
         public ObservableCollection<TerminalViewModel> TerminalViewModels
         {
@@ -60,7 +63,7 @@ namespace Client.ViewModels
             }
         }
 
-        public ReportViewModel ReportViewModel
+        public ReportRequestViewModel ReportViewModel
         {
             get { return _reportViewModel; }
             set
@@ -72,6 +75,8 @@ namespace Client.ViewModels
 
         public MainViewModel()
         {
+            BuildReportCommand = new DelegateCommand(BuildReportExecute);
+
             _proxy.Connected += () =>
             {
                 IsServerConnected = true;
@@ -100,6 +105,15 @@ namespace Client.ViewModels
                 };
             };
             _loadAllTerminalsStatus.Start();
+        }
+
+        private void BuildReportExecute(object o)
+        {
+            Window wnd = new Window();
+            wnd.WindowStyle = WindowStyle.ToolWindow;
+            wnd.Width = 100;
+            wnd.Height = 100;
+            wnd.ShowDialog();
         }
 
         private async void LoadStatsFromServer()

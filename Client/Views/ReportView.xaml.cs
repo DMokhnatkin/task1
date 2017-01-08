@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Client.Views
 {
     /// <summary>
-    /// Interaction logic for MakeReportView.xaml
+    /// Interaction logic for ReportView.xaml
     /// </summary>
-    public partial class MakeReportView : UserControl
+    public partial class ReportView : UserControl
     {
-        public MakeReportView()
+        public ReportView()
         {
             InitializeComponent();
         }

@@ -14,11 +14,20 @@
         DataContext="{StaticResource MainViewModel}"
         Title="MainWindow" Height="700" Width="900">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="212*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Margin="10" VerticalAlignment="Top">
+        <ToolBar>
+            <Button ToolTip="{x:Static properties:Eng.Report_Make}" Command="{Binding BuildReportCommand}">
+                <Image Source="Resources/Images/report_icon.gif"></Image>
+            </Button>
+        </ToolBar>
+        <StackPanel Margin="10,10,10,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0">
             <GroupBox Header="{x:Static properties:Eng.ServerCaption}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{x:Static properties:Eng.ServerText}"></TextBlock>
@@ -39,7 +48,7 @@
                     </ContentPresenter>
                 </StackPanel>
             </GroupBox>
-            <views:MakeReportView DataContext="{Binding ReportViewModel}"></views:MakeReportView>
+            <views:ReportRequestView DataContext="{Binding ReportViewModel}"></views:ReportRequestView>
             <GroupBox x:Name="groupBox" Header="{x:Static properties:Eng.TerminalList_Header}">
                 <DataGrid x:Name="terminalsView" Height="200" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding TerminalViewModels, Mode=OneWay}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTerminal}">
                     <DataGrid.Columns>
@@ -54,6 +63,7 @@
             x:Name="Map" 
             CredentialsProvider="AglUDYfQDZ8hI6mMq9obyR994bGaNEA5PthdhJdkVj_UDDJ_IxcVj3ccldL_papd"
             ZoomLevel="12.000"
-            Center="59.918116, 30.346666" Grid.ColumnSpan="2" Margin="215,0,5,0"/>
+            Center="59.918116, 30.346666" Margin="10,0,5,0" Grid.Column="1" Grid.RowSpan="2"/>
     </Grid>
 </Window>
+

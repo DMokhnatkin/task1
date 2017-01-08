@@ -5,11 +5,8 @@ namespace Infrastructure.Model.Reports
 {
     public class Report
     {
-        public string TerminalId { get; set; }
+        public ReportSettings ReportSettings { get; set; } = new ReportSettings();
 
-        public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
-
-        public PropertiesCollection Values { get; set; }
+        public PropertiesCollection Values { get; set; } = new PropertiesCollection();
     }
 }
