@@ -23,7 +23,7 @@ namespace Server
             Instance.RegisterType<ITerminalsRepository, TerminalsRepository>(new ContainerControlledLifetimeManager());
 
             // Db context
-            Instance.RegisterType<ServerDbContext>("db", new ContainerControlledLifetimeManager());
+            Instance.RegisterType<ServerDbContext>("db", new PerThreadLifetimeManager());
         }
     }
 }

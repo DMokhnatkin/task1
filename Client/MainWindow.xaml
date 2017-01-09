@@ -12,22 +12,13 @@
         xmlns:views="clr-namespace:Client.Views"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="MainWindow" Height="700" Width="900">
+        Title="MainWindow" Height="800" Width="900">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="212*"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ToolBar>
-            <Button ToolTip="{x:Static properties:Eng.Report_Make}" Command="{Binding BuildReportCommand}">
-                <Image Source="Resources/Images/report_icon.gif"></Image>
-            </Button>
-        </ToolBar>
-        <StackPanel Margin="10,10,10,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0">
+        <StackPanel Margin="10" VerticalAlignment="Top" Grid.Column="0">
             <GroupBox Header="{x:Static properties:Eng.ServerCaption}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{x:Static properties:Eng.ServerText}"></TextBlock>
@@ -63,7 +54,7 @@
             x:Name="Map" 
             CredentialsProvider="AglUDYfQDZ8hI6mMq9obyR994bGaNEA5PthdhJdkVj_UDDJ_IxcVj3ccldL_papd"
             ZoomLevel="12.000"
-            Center="59.918116, 30.346666" Margin="10,0,5,0" Grid.Column="1" Grid.RowSpan="2"/>
+            Center="59.918116, 30.346666" Margin="10,0,5,0" Grid.Column="1"/>
     </Grid>
 </Window>
 
