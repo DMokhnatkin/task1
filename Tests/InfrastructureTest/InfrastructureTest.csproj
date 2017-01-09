@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Dto\Mappers\ReportTest.cs" />
+    <Compile Include="Dto\Mappers\ReportSettingsTest.cs" />
     <Compile Include="DynamicProperties\PropertiesCollectionTest.cs" />
     <Compile Include="DynamicProperties\PropertyManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

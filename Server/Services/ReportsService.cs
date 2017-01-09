@@ -8,8 +8,9 @@ using Infrastructure.Model.Reports;
 namespace Server.Services
 {
     [ServiceBehavior(
-         InstanceContextMode = InstanceContextMode.Single,
-         ConcurrencyMode = ConcurrencyMode.Single)]
+        InstanceContextMode = InstanceContextMode.Single,
+        ConcurrencyMode = ConcurrencyMode.Single,
+        IncludeExceptionDetailInFaults = true)]
     public class ReportsService : IReportService
     {
         /// <inheritdoc />
@@ -23,7 +24,7 @@ namespace Server.Services
             rep.Values.SetValue(DynamicPropertyManagers.Reports.Mileage, 123.4f);
             rep.Values.SetValue(DynamicPropertyManagers.Reports.MaxSpeed, 100f);
 
-            ReportDto res = new ReportDto(rep);
+            ReportDto res = ReportDto.Wrap(rep);
             return res;
         }
     }

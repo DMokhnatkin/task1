@@ -7,9 +7,9 @@ namespace Infrastructure.Model.Reports
 {
     public class ReportSettings
     {
-        public string TerminalId { get; set; }
-        public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
+        public string TerminalId { get; set; } = "";
+        public DateTime StartDateTime { get; set; } = new DateTime();
+        public DateTime EndDateTime { get; set; } = new DateTime();
 
         public HashSet<ReportProperty> Properties { get; set; } 
             = new HashSet<ReportProperty>();

@@ -2,49 +2,58 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Infrastructure.Contract;
+using AutoMapper;
 using Infrastructure.Model.DynamicProperties.Specialized;
+using Infrastructure.Model.DynamicProperties.Specialized.Properties;
 using Infrastructure.Model.Reports;
 
 namespace Infrastructure.Model.Dto.Reports
 {
     [DataContract]
-    public class ReportSettingsDto : IDto<ReportSettings>
+    public class ReportSettingsDto
     {
         [DataMember]
         public string TerminalId { get; set; }
 
         [DataMember]
-        public DateTime StartTime { get; set; }
+        public DateTime StartDateTime { get; set; }
 
         [DataMember]
-        public DateTime EndTime { get; set; }
+        public DateTime EndDateTime { get; set; }
 
         [DataMember]
-        public List<string> Properties { get; set; }
+        public List<string> Properties { get; set; } = new List<string>();
 
-        public ReportSettingsDto(ReportSettings sett)
+        private static readonly IMapper MapperInstance;
+
+        public static ReportSettingsDto Wrap(ReportSettings reportSettings)
         {
-            TerminalId = sett.TerminalId;
-            StartTime = sett.StartDateTime;
-            EndTime = sett.EndDateTime;
-            Properties = sett.Properties.Select(x => x.Name).ToList();
+            return MapperInstance.Map<ReportSettingsDto>(reportSettings);
         }
 
-        /// <inheritdoc />
-        public ReportSettings ToBo()
+        public static ReportSettings Unwrap(ReportSettingsDto reportSettingsDto)
         {
-            var res = new ReportSettings();
-            res.TerminalId = TerminalId;
-            res.StartDateTime = StartTime;
-            res.EndDateTime = EndTime;
+            return MapperInstance.Map<ReportSettings>(reportSettingsDto);
+        }
 
-            foreach (var z in Properties)
+        static ReportSettingsDto()
+        {
+            var config = new MapperConfiguration(cfg =>
             {
-                res.Properties.Add(DynamicPropertyManagers.Reports.GetProperty(z));
-            }
-
-            return res;
+                cfg.CreateMap<ReportSettings, ReportSettingsDto>()
+                    // Map HashSet<ReportProperty> to List<string> 
+                    .ForMember(
+                        dto => dto.Properties, 
+                        opt => opt.MapFrom(x => x.Properties.Select(t => t.Name).ToList()));
+                cfg.CreateMap<ReportSettingsDto, ReportSettings>()
+                    // Map List<string> to HashSet<ReportProperty>
+                    .ForMember(
+                        bo => bo.Properties,
+                        opt => opt.MapFrom(
+                            x => new HashSet<ReportProperty>(
+                                x.Properties.Select(t => DynamicPropertyManagers.Reports.GetProperty(t)))));
+            });
+            MapperInstance = config.CreateMapper();
         }
     }
 }

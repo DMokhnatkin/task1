@@ -1,5 +1,4 @@
-﻿using System;
-using Infrastructure.Model.DynamicProperties;
+﻿using Infrastructure.Model.DynamicProperties;
 
 namespace Infrastructure.Model.Reports
 {

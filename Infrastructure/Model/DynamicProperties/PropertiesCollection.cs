@@ -29,6 +29,11 @@ namespace Infrastructure.Model.DynamicProperties
             _propValues[prop] = val;
         }
 
+        public bool ContainsValue(Property prop)
+        {
+            return _propValues.ContainsKey(prop);
+        }
+
         public IEnumerator<KeyValuePair<Property, object>> GetEnumerator()
         {
             return _propValues.GetEnumerator();
@@ -37,6 +42,19 @@ namespace Infrastructure.Model.DynamicProperties
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _propValues.GetEnumerator();
+        }
+
+        public PropertiesCollection()
+        {
+            
+        }
+
+        public PropertiesCollection(IEnumerable<KeyValuePair<Property, object>> coll)
+        {
+            foreach (var z in coll)
+            {
+                SetValue(z.Key, z.Value);
+            }
         }
     }
 }

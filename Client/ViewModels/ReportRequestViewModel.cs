@@ -17,6 +17,10 @@ namespace Client.ViewModels
     {
         private ReportProperty _property;
 
+        public ReportProperty ReportProperty {
+            get { return _property; }
+        }
+
         public string PropertyName => _property.Name;
 
         public bool Enabled { get; set; } = true;
@@ -69,7 +73,17 @@ namespace Client.ViewModels
 
         private void MakeAReportExecute(object o)
         {
-            var res = _reportsService.BuildReport(new ReportSettingsDto(new ReportSettings())).ToBo();
+            ReportSettings repSettings = new ReportSettings();
+            repSettings.TerminalId = "2";
+            repSettings.StartDateTime = From;
+            repSettings.EndDateTime = To;
+            foreach (var propertySetting in EnabledReportProperties)
+            {
+                if (propertySetting.Enabled)
+                    repSettings.Properties.Add(propertySetting.ReportProperty);
+            }
+
+            var res = ReportDto.Unwrap(_reportsService.BuildReport(ReportSettingsDto.Wrap(repSettings)));
 
             Window wnd = new Window();
             wnd.WindowStyle = WindowStyle.ToolWindow;
