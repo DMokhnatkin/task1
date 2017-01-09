@@ -28,7 +28,7 @@ namespace Terminal
             Metering next = new Metering();
             next.TerminalId = prev.TerminalId;
 
-            // Mileage
+            // MileageKm
             float dMil = speed * (float) dTime.TotalHours;
 
             //Earth’s radius, sphere

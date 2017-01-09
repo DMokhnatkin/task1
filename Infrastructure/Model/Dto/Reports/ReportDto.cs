@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using AutoMapper;
-using Infrastructure.Contract;
 using Infrastructure.Model.DynamicProperties;
 using Infrastructure.Model.DynamicProperties.Specialized;
 using Infrastructure.Model.Reports;

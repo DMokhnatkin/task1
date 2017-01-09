@@ -6,7 +6,7 @@ namespace Infrastructure.Model.DynamicProperties.Specialized.Managers
     public class ReportsPropertyManager : PropertyManagerBase<ReportProperty>
     {
         [Property]
-        public ReportProperty Mileage { get; } = 
+        public ReportProperty MileageKm { get; } = 
             new ReportProperty("Mileage", typeof(float));
 
         [Property]

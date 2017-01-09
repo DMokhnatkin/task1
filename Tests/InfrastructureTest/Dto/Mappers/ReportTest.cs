@@ -18,11 +18,11 @@ namespace InfrastructureTest.Dto.Mappers
             z.ReportSettings.TerminalId = "test";
 
             z.Values.SetValue(DynamicPropertyManagers.Reports.AvgSpeed, 23.0f);
-            z.Values.SetValue(DynamicPropertyManagers.Reports.Mileage, 45.0f);
+            z.Values.SetValue(DynamicPropertyManagers.Reports.MileageKm, 45.0f);
 
             var dto = ReportDto.Wrap(z);
             Assert.IsTrue(dto.Values.ContainsKey(DynamicPropertyManagers.Reports.AvgSpeed.Name));
-            Assert.IsTrue(dto.Values.ContainsKey(DynamicPropertyManagers.Reports.Mileage.Name));
+            Assert.IsTrue(dto.Values.ContainsKey(DynamicPropertyManagers.Reports.MileageKm.Name));
             Assert.AreEqual(z.ReportSettings.TerminalId, dto.ReportSettings.TerminalId);
         }
 
@@ -35,12 +35,12 @@ namespace InfrastructureTest.Dto.Mappers
             ReportDto dto = new ReportDto();
             dto.ReportSettings.TerminalId = "test";
             dto.Values.Add(DynamicPropertyManagers.Reports.AvgSpeed.Name, 123.0f);
-            dto.Values.Add(DynamicPropertyManagers.Reports.Mileage.Name, 23.0f);
+            dto.Values.Add(DynamicPropertyManagers.Reports.MileageKm.Name, 23.0f);
 
             var bo = ReportDto.Unwrap(dto);
             Assert.AreEqual(dto.ReportSettings.TerminalId, bo.ReportSettings.TerminalId);
             Assert.IsTrue(bo.Values.ContainsValue(DynamicPropertyManagers.Reports.AvgSpeed));
-            Assert.IsTrue(bo.Values.ContainsValue(DynamicPropertyManagers.Reports.Mileage));
+            Assert.IsTrue(bo.Values.ContainsValue(DynamicPropertyManagers.Reports.MileageKm));
         }
     }
 }

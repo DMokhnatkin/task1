@@ -21,7 +21,7 @@ namespace Infrastructure.Model.DynamicProperties
 
         public void SetValue(Property prop, object val)
         {
-            if (!prop.TypeOfValue.IsInstanceOfType(val))
+            if (!prop.TypeOfValue.IsInstanceOfType(val) && val != null)
             {
                 ArgumentException a = new ArgumentException("Invalid property value type");
                 throw a;
