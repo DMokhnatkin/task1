@@ -12,6 +12,8 @@
              d:DataContext="{d:DesignInstance viewModels:ReportRequestViewModel, IsDesignTimeCreatable=True}">
     <GroupBox Header="{x:Static properties:Eng.Report_Header}">
         <StackPanel Orientation="Vertical">
+            <TextBlock Text="Selected terminal:"/>
+            <TextBox IsReadOnly="True" Text="{Binding SelectedTerminal}"/>
             <TextBlock Text="{x:Static properties:Eng.Report_From}"></TextBlock>
             <xctk:DateTimePicker Value="{Binding From}" AutoCloseCalendar="True"></xctk:DateTimePicker>
             <TextBlock Text="{x:Static properties:Eng.Report_To}"></TextBlock>

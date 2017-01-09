@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using Client.Views;
@@ -37,6 +37,7 @@ namespace Client.ViewModels
 
         private DateTime _from = DateTime.Now - new TimeSpan(1, 0, 0, 0);
         private DateTime _to = DateTime.Now;
+        private string _selectedTerminal = null;
 
         public List<ReportPropertySetting> EnabledReportProperties { get; private set; }
 
@@ -62,19 +63,38 @@ namespace Client.ViewModels
             }
         }
 
+        public string SelectedTerminal
+        {
+            get { return _selectedTerminal; }
+            set
+            {
+                _selectedTerminal = value;
+                RaisePropertyChanged(nameof(SelectedTerminal));
+            }
+        }
+
         public ReportRequestViewModel()
         {
-            MakeAReportCommand = new DelegateCommand(MakeAReportExecute);
+            MakeAReportCommand = new DelegateCommand(MakeAReportExecute, false);
             EnabledReportProperties = 
                 DynamicPropertyManagers.Reports.GetProperties()
                     .Select(x => new ReportPropertySetting(x))
                     .ToList();
+            PropertyChanged += OnPropertyChanged;
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == nameof(SelectedTerminal))
+            {
+                MakeAReportCommand.SetCanExecute(SelectedTerminal != null);
+            }
         }
 
         private void MakeAReportExecute(object o)
         {
             ReportSettings repSettings = new ReportSettings();
-            repSettings.TerminalId = "2";
+            repSettings.TerminalId = SelectedTerminal;
             repSettings.StartDateTime = From;
             repSettings.EndDateTime = To;
             foreach (var propertySetting in EnabledReportProperties)
@@ -89,7 +109,6 @@ namespace Client.ViewModels
             wnd.WindowStyle = WindowStyle.ToolWindow;
             ReportView z = new ReportView();
             z.DataContext = new ReportViewModel(res);
-            wnd.Height = 200;
             wnd.Width = 300;
             wnd.Content = z;
             wnd.ShowDialog();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -76,6 +77,7 @@ namespace Client.ViewModels
         public MainViewModel()
         {
             BuildReportCommand = new DelegateCommand(BuildReportExecute);
+            PropertyChanged += OnPropertyChanged;
 
             _proxy.Connected += () =>
             {
@@ -105,6 +107,14 @@ namespace Client.ViewModels
                 };
             };
             _loadAllTerminalsStatus.Start();
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == nameof(SelectedTerminal))
+            {
+                ReportViewModel.SelectedTerminal = SelectedTerminal?.Id;
+            }
         }
 
         private void BuildReportExecute(object o)

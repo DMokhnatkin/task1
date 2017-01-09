@@ -109,6 +109,9 @@ namespace Server.Data.Repository
 
         public double GetAvgPropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
         {
+            var t = FilterQuery(start, end, terminalId, prop);
+            if (!t.Any())
+                return 0;
             // Try cast to double
             if (typeof(double).IsAssignableFrom(prop.TypeOfValue))
                 return
@@ -134,6 +137,8 @@ namespace Server.Data.Repository
         public double GetLastFirstDifferencePropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
         {
             var fltr = FilterQuery(start, end, terminalId, prop);
+            if (!fltr.Any())
+                return 0;
             var first = fltr.OrderBy(x => x.Metering.Time).First();
             var last = fltr.OrderByDescending(x => x.Metering.Time).First();
 

@@ -9,20 +9,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:ReportViewModel, IsDesignTimeCreatable=True}">
-    <StackPanel>
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="Terminal id:"/>
-            <TextBlock Text="{Binding TerminalId, Mode=OneTime}"/>
-            <TextBlock Text="Start:"/>
-            <xctk:DateTimePicker IsReadOnly="True" Value="{Binding StartDateTime, Mode=OneTime}" AllowTextInput="False" AllowSpin="False" TimePickerAllowSpin="False" TimePickerShowButtonSpinner="False"/>
-            <TextBlock Text="End:"/>
-            <xctk:DateTimePicker IsReadOnly="True" Value="{Binding EndDateTime, Mode=OneTime}"/>
+    <GroupBox Header="Report" Margin="5">
+        <StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Terminal id:"/>
+                <TextBlock Text="{Binding TerminalId, Mode=OneTime}"/>
+                <TextBlock Text="Start:"/>
+                <xctk:DateTimePicker IsReadOnly="True" Value="{Binding StartDateTime, Mode=OneTime}" AllowTextInput="False" AllowSpin="False" TimePickerAllowSpin="False" TimePickerShowButtonSpinner="False"/>
+                <TextBlock Text="End:"/>
+                <xctk:DateTimePicker IsReadOnly="True" Value="{Binding EndDateTime, Mode=OneTime}"/>
+            </StackPanel>
+            <DataGrid ItemsSource="{Binding ReportValues}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Name, Mode=OneTime}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Value, Mode=OneTime}"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
-        <DataGrid ItemsSource="{Binding ReportValues}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Name, Mode=OneTime}"/>
-                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Value, Mode=OneTime}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </StackPanel>
+    </GroupBox>
 </UserControl>
