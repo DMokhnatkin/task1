@@ -23,6 +23,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Name, Mode=OneTime}"/>
                     <DataGridTextColumn IsReadOnly="True" Binding="{Binding Value, Mode=OneTime}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Unit, Mode=OneTime}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

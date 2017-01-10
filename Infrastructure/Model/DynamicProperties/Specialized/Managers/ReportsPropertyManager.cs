@@ -7,7 +7,7 @@ namespace Infrastructure.Model.DynamicProperties.Specialized.Managers
     {
         [Property]
         public ReportProperty MileageKm { get; } = 
-            new ReportProperty("Mileage", typeof(float));
+            new ReportProperty("Mileage", typeof(float), "Km");
 
         [Property]
         public ReportProperty EngineWorkTime { get; } = 
@@ -15,11 +15,11 @@ namespace Infrastructure.Model.DynamicProperties.Specialized.Managers
 
         [Property]
         public ReportProperty MaxSpeed { get; } = 
-            new ReportProperty("Max speed", typeof(float));
+            new ReportProperty("Max speed", typeof(float), "Kmh");
 
         [Property]
         public ReportProperty AvgSpeed { get; } =
-            new ReportProperty("Average speed", typeof(float));
+            new ReportProperty("Average speed", typeof(float), "Kmh");
 
         internal ReportsPropertyManager()
         {

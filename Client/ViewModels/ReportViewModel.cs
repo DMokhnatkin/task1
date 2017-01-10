@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Infrastructure.Model.DynamicProperties;
+using System.Linq;
+using Infrastructure.Model.DynamicProperties.Specialized.Properties;
 using Infrastructure.Model.Reports;
 
 namespace Client.ViewModels
@@ -20,6 +21,8 @@ namespace Client.ViewModels
 
         public DateTime EndDateTime => _report.ReportSettings.EndDateTime;
 
-        public IEnumerable<KeyValuePair<Property, object>> ReportValues => _report.Values;
+        public IEnumerable<KeyValuePair<ReportProperty, object>> ReportValues => 
+            // Transform all Property keys to ReportProperty keys
+            _report.Values.ToDictionary(z => (ReportProperty)z.Key, t => t.Value);
     }
 }
