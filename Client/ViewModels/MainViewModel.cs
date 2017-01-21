@@ -106,6 +106,11 @@ namespace Client.ViewModels
             _loadAllTerminalsStatus.Start();
         }
 
+        ~MainViewModel()
+        {
+            _loadAllTerminalsStatus.Stop();
+        }
+
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(SelectedTerminal))

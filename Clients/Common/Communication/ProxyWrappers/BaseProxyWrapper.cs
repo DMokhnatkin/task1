@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Infrastructure.Contract;
@@ -11,6 +8,8 @@ namespace Common.Communication.ProxyWrappers
     public class BaseProxyWrapper
     {
         protected readonly IPingAvailable _proxy;
+
+        private Task _pingTask;
 
         public int SleepTime { get; set; } = 1000;
 
@@ -48,7 +47,7 @@ namespace Common.Communication.ProxyWrappers
         /// </summary>
         public virtual async void StartPing()
         {
-            await Task.Run(() =>
+            _pingTask = Task.Run(() =>
             {
                 while (true)
                 {
@@ -73,6 +72,12 @@ namespace Common.Communication.ProxyWrappers
                     Thread.Sleep(SleepTime);
                 }
             });
+            await _pingTask;
+        }
+
+        ~BaseProxyWrapper()
+        {
+            _pingTask?.Dispose();
         }
     }
 }
