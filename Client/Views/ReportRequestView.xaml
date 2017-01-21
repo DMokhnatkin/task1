@@ -24,7 +24,12 @@
                     <DataGridCheckBoxColumn Binding="{Binding Enabled}"></DataGridCheckBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Margin="0, 5, 0, 5" Command="{Binding MakeAReportCommand}" Content="{x:Static properties:Eng.Report_Make}"></Button>
+            <Button Margin="0, 5, 0, 5" Command="{Binding MakeAReportCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Height="20" Source="../Resources/Images/report_icon.gif"></Image>
+                    <TextBlock Text="{x:Static properties:Eng.Report_Make}"></TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </GroupBox>
 </UserControl>

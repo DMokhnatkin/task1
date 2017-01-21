@@ -32,8 +32,6 @@ namespace Client.ViewModels
         private TerminalViewModel _selectedTerminal;
         private bool _isServerConnected = false;
 
-        public DelegateCommand BuildReportCommand { get; set; }
-
         public ObservableCollection<TerminalViewModel> TerminalViewModels
         {
             get { return _terminalViewModels; }
@@ -76,7 +74,6 @@ namespace Client.ViewModels
 
         public MainViewModel()
         {
-            BuildReportCommand = new DelegateCommand(BuildReportExecute);
             PropertyChanged += OnPropertyChanged;
 
             _proxy.Connected += () =>
@@ -115,15 +112,6 @@ namespace Client.ViewModels
             {
                 ReportViewModel.SelectedTerminal = SelectedTerminal?.Id;
             }
-        }
-
-        private void BuildReportExecute(object o)
-        {
-            Window wnd = new Window();
-            wnd.WindowStyle = WindowStyle.ToolWindow;
-            wnd.Width = 100;
-            wnd.Height = 100;
-            wnd.ShowDialog();
         }
 
         private async void LoadStatsFromServer()

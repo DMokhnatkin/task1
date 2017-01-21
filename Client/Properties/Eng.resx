@@ -166,4 +166,13 @@
   <data name="Report_To" xml:space="preserve">
     <value>End period</value>
   </data>
+  <data name="Report_PropName" xml:space="preserve">
+    <value>Property name</value>
+  </data>
+  <data name="Report_PropValue" xml:space="preserve">
+    <value>Property value</value>
+  </data>
+  <data name="Report_Units" xml:space="preserve">
+    <value>Units</value>
+  </data>
 </root>

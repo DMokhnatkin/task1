@@ -109,7 +109,7 @@ namespace Client.ViewModels
             wnd.WindowStyle = WindowStyle.ToolWindow;
             ReportView z = new ReportView();
             z.DataContext = new ReportViewModel(res);
-            wnd.Width = 300;
+            wnd.SizeToContent = SizeToContent.WidthAndHeight;
             wnd.Content = z;
             wnd.ShowDialog();
         }

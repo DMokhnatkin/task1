@@ -12,7 +12,8 @@
         xmlns:views="clr-namespace:Client.Views"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="MainWindow" Height="800" Width="900">
+        Title="Individual Task" 
+        WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

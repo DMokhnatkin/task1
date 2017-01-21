@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Client.Views"
              xmlns:viewModels="clr-namespace:Client.ViewModels"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:properties="clr-namespace:Client.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance viewModels:ReportViewModel, IsDesignTimeCreatable=True}">
@@ -19,11 +20,11 @@
                 <TextBlock Text="End:"/>
                 <xctk:DateTimePicker IsReadOnly="True" Value="{Binding EndDateTime, Mode=OneTime}"/>
             </StackPanel>
-            <DataGrid ItemsSource="{Binding ReportValues}" AutoGenerateColumns="False">
+            <DataGrid ItemsSource="{Binding ReportValues}" AutoGenerateColumns="False" Margin="0, 5">
                 <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Name, Mode=OneTime}"/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Value, Mode=OneTime}"/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Unit, Mode=OneTime}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Name, Mode=OneTime}" Header="{x:Static properties:Eng.Report_PropName}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Value, Mode=OneTime}" Header="{x:Static properties:Eng.Report_PropValue}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Key.Unit, Mode=OneTime}" Header="{x:Static properties:Eng.Report_Units}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

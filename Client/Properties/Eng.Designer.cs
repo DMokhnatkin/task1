@@ -115,11 +115,38 @@ namespace Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Property name.
+        /// </summary>
+        public static string Report_PropName {
+            get {
+                return ResourceManager.GetString("Report_PropName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property value.
+        /// </summary>
+        public static string Report_PropValue {
+            get {
+                return ResourceManager.GetString("Report_PropValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End period.
         /// </summary>
         public static string Report_To {
             get {
                 return ResourceManager.GetString("Report_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units.
+        /// </summary>
+        public static string Report_Units {
+            get {
+                return ResourceManager.GetString("Report_Units", resourceCulture);
             }
         }
         
