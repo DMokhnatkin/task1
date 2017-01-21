@@ -48,7 +48,7 @@ namespace Client.ViewModels
             get { return _from; }
             set
             {
-                _from = value;
+                _from = value > _to ? _to : value;
                 RaisePropertyChanged(nameof(From));
             }
         }
