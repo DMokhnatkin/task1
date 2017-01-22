@@ -81,5 +81,11 @@ namespace Server.Services
 
             return ReportDto.Wrap(rep);
         }
+
+        /// <inheritdoc />
+        public bool Ping()
+        {
+            return true;
+        }
     }
 }

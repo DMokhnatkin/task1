@@ -5,7 +5,7 @@ using Infrastructure.Model.Dto.Reports;
 namespace Infrastructure.Contract.Service
 {
     [ServiceContract]
-    public interface IReportService
+    public interface IReportService : IPingAvailable
     {
         /// <summary>
         /// Build report

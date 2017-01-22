@@ -18,7 +18,7 @@ namespace Client
         {
             // Proxies
             Instance.RegisterType<ITerminalsService, TerminalServiceProxyWrapper>(new ContainerControlledLifetimeManager());
-            Instance.RegisterType<IReportService, ReportServiceProxy>(new ContainerControlledLifetimeManager());
+            Instance.RegisterType<IReportService, ReportServiceProxyWrapper>(new ContainerControlledLifetimeManager());
         }
     }
 }

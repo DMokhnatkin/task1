@@ -9,7 +9,7 @@ namespace Common.Communication.ProxyWrappers
     {
         protected readonly IPingAvailable _proxy;
 
-        private Task _pingTask;
+        private CancellationTokenSource _pingTaskToken = new CancellationTokenSource();
 
         public int SleepTime { get; set; } = 1000;
 
@@ -47,7 +47,7 @@ namespace Common.Communication.ProxyWrappers
         /// </summary>
         public virtual async void StartPing()
         {
-            _pingTask = Task.Run(() =>
+            await Task.Run(() =>
             {
                 while (true)
                 {
@@ -69,15 +69,16 @@ namespace Common.Communication.ProxyWrappers
                     {
                         OnFault();
                     }
+                    if (_pingTaskToken.IsCancellationRequested)
+                        break;
                     Thread.Sleep(SleepTime);
                 }
             });
-            await _pingTask;
         }
 
         ~BaseProxyWrapper()
         {
-            _pingTask?.Dispose();
+            _pingTaskToken.Cancel();
         }
     }
 }

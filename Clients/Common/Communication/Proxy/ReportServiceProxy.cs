@@ -13,5 +13,11 @@ namespace Common.Communication.Proxy
         {
             return Channel.BuildReport(settings);
         }
+
+        /// <inheritdoc />
+        public bool Ping()
+        {
+            return Channel.Ping();
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using Client.Views;
+using Common.Communication.ProxyWrappers;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model.Dto.Reports;
 using Infrastructure.Model.DynamicProperties.Specialized;
@@ -33,7 +34,7 @@ namespace Client.ViewModels
 
     internal class ReportRequestViewModel : ViewModelBase
     {
-        private IReportService _reportsService = (IReportService)MyUnityContainer.Instance.Resolve<IReportService>();
+        private ReportServiceProxyWrapper _reportsService = (ReportServiceProxyWrapper)MyUnityContainer.Instance.Resolve<IReportService>();
 
         private DateTime _from = DateTime.Now - new TimeSpan(1, 0, 0, 0);
         private DateTime _to = DateTime.Now;
@@ -81,6 +82,26 @@ namespace Client.ViewModels
                     .Select(x => new ReportPropertySetting(x))
                     .ToList();
             PropertyChanged += OnPropertyChanged;
+            _reportsService.Fault += ReportsServiceOnFault;
+            _reportsService.Connected += ReportsServiceOnConnected;
+        }
+
+        ~ReportRequestViewModel()
+        {
+            PropertyChanged -= OnPropertyChanged;
+            _reportsService.Fault -= ReportsServiceOnFault;
+            _reportsService.Connected -= ReportsServiceOnConnected;
+        }
+
+        private void ReportsServiceOnConnected()
+        {
+            Application.Current.Dispatcher.Invoke(() => MakeAReportCommand.SetCanExecute(true));
+        }
+
+        private void ReportsServiceOnFault()
+        {
+            Application.Current.Dispatcher.Invoke(() => MakeAReportCommand.SetCanExecute(false));
+            _reportsService.StartPing();
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -105,13 +126,16 @@ namespace Client.ViewModels
 
             var res = ReportDto.Unwrap(_reportsService.BuildReport(ReportSettingsDto.Wrap(repSettings)));
 
-            Window wnd = new Window();
-            wnd.WindowStyle = WindowStyle.ToolWindow;
-            ReportView z = new ReportView();
-            z.DataContext = new ReportViewModel(res);
-            wnd.SizeToContent = SizeToContent.WidthAndHeight;
-            wnd.Content = z;
-            wnd.ShowDialog();
+            if (res != null)
+            {
+                Window wnd = new Window();
+                wnd.WindowStyle = WindowStyle.ToolWindow;
+                ReportView z = new ReportView();
+                z.DataContext = new ReportViewModel(res);
+                wnd.SizeToContent = SizeToContent.WidthAndHeight;
+                wnd.Content = z;
+                wnd.ShowDialog();
+            }
         }
     }
 }

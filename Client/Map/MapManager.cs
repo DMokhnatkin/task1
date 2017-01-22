@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Client.ViewModels;
 using Microsoft.Maps.MapControl.WPF;
@@ -72,7 +73,8 @@ namespace Client.Map
                 Location = new Location(
                         terminalViewModel.Latitude,
                         terminalViewModel.Longitude),
-                Background = new SolidColorBrush(_defaultColor)
+                Background = new SolidColorBrush(_defaultColor),
+                Content = new TextBlock() { Text = terminalViewModel.Id}
             };
             // If terminal view model is changed, redraw its pushpin
             terminalViewModel.PropertyChanged += TerminalViewModelOnPropertyChanged;
