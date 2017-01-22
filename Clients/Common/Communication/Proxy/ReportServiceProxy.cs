@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model.Dto.Reports;
 
@@ -9,7 +10,7 @@ namespace Common.Communication.Proxy
         IReportService
     {
         /// <inheritdoc />
-        public ReportDto BuildReport(ReportSettingsDto settings)
+        public Task<ReportDto> BuildReport(ReportSettingsDto settings)
         {
             return Channel.BuildReport(settings);
         }

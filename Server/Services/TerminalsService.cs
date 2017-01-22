@@ -32,7 +32,7 @@ namespace Server.Services
                 .Select(x => new TerminalStatusDto
                 {
                     TerminalId = x,
-                    LastMetering = new MeteringDto(_meteringsRepository.GetLastMetering(x))
+                    LastMetering = new MeteringDto(_meteringsRepository.GetLastMetering(x).Result)
                 })
                 .ToList();
             return z;

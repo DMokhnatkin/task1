@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model.Dto.Reports;
 using Infrastructure.Model.DynamicProperties.Specialized;
@@ -18,7 +19,7 @@ namespace Server.Services
         private IMeteringRepository _meteringRepository = MyUnityContainer.Instance.Resolve<IMeteringRepository>();
 
         /// <inheritdoc />
-        public ReportDto BuildReport(ReportSettingsDto settings)
+        public async Task<ReportDto> BuildReport(ReportSettingsDto settings)
         {
             var rep = new Report();
             var repSettings = ReportSettingsDto.Unwrap(settings);
@@ -26,7 +27,7 @@ namespace Server.Services
 
             if (repSettings.Properties.Contains(DynamicPropertyManagers.Reports.MaxSpeed))
             {
-                var maxSpeed = _meteringRepository.GetMaxPropertyValue(
+                var maxSpeed = await _meteringRepository.GetMaxPropertyValue(
                     repSettings.TerminalId,
                     DynamicPropertyManagers.Sensors.SpeedKmh,
                     repSettings.StartDateTime,
@@ -37,7 +38,7 @@ namespace Server.Services
             }
             if (repSettings.Properties.Contains(DynamicPropertyManagers.Reports.AvgSpeed))
             {
-                var avgSpeed = _meteringRepository.GetAvgPropertyValue(
+                var avgSpeed = await _meteringRepository.GetAvgPropertyValue(
                     repSettings.TerminalId,
                     DynamicPropertyManagers.Sensors.SpeedKmh,
                     repSettings.StartDateTime,
@@ -48,7 +49,7 @@ namespace Server.Services
             }
             if (repSettings.Properties.Contains(DynamicPropertyManagers.Reports.MileageKm))
             {
-                var differencePropertyValue = _meteringRepository.GetLastFirstDifferencePropertyValue(
+                var differencePropertyValue = await _meteringRepository.GetLastFirstDifferencePropertyValue(
                     repSettings.TerminalId,
                     DynamicPropertyManagers.Sensors.MileageKm,
                     repSettings.StartDateTime,
@@ -59,7 +60,7 @@ namespace Server.Services
             }
             if (repSettings.Properties.Contains(DynamicPropertyManagers.Reports.EngineWorkTime))
             {
-                var meterings = _meteringRepository.GetMeterings(
+                var meterings = await _meteringRepository.GetMeterings(
                     repSettings.TerminalId,
                     repSettings.StartDateTime,
                     repSettings.EndDateTime,

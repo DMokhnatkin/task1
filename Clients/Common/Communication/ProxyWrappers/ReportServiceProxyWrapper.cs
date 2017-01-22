@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Common.Communication.Proxy;
 using Infrastructure.Contract.Service;
 using Infrastructure.Model.Dto.Reports;
@@ -13,7 +14,7 @@ namespace Common.Communication.ProxyWrappers
         }
 
         /// <inheritdoc />
-        public ReportDto BuildReport(ReportSettingsDto settings)
+        public Task<ReportDto> BuildReport(ReportSettingsDto settings)
         {
             try
             {

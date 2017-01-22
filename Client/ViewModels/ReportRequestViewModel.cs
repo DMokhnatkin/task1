@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using Client.ViewModels.Commands;
 using Client.Views;
 using Common.Communication.ProxyWrappers;
 using Infrastructure.Contract.Service;
@@ -11,6 +13,7 @@ using Infrastructure.Model.DynamicProperties.Specialized;
 using Infrastructure.Model.DynamicProperties.Specialized.Properties;
 using Infrastructure.Model.Reports;
 using Microsoft.Practices.Unity;
+using Xceed.Wpf.Toolkit;
 
 namespace Client.ViewModels
 {
@@ -39,10 +42,35 @@ namespace Client.ViewModels
         private DateTime _from = DateTime.Now - new TimeSpan(1, 0, 0, 0);
         private DateTime _to = DateTime.Now;
         private string _selectedTerminal = null;
+        private bool _isWaiting = false;
+        private bool _canMakeRequest = false;
 
         public List<ReportPropertySetting> EnabledReportProperties { get; private set; }
 
-        public DelegateCommand MakeAReportCommand { get; set; }
+        public AsyncCommand MakeAReportCommand { get; set; }
+
+        public bool CanMakeRequest
+        {
+            get
+            {
+                return _canMakeRequest;
+            }
+            set
+            {
+                _canMakeRequest = value;
+                RaisePropertyChanged(nameof(CanMakeRequest));
+            }
+        }
+
+        public bool IsWaiting
+        {
+            get { return _isWaiting; }
+            set
+            {
+                _isWaiting = true;
+                RaisePropertyChanged(nameof(IsWaiting));
+            }
+        }
 
         public DateTime From
         {
@@ -76,7 +104,7 @@ namespace Client.ViewModels
 
         public ReportRequestViewModel()
         {
-            MakeAReportCommand = new DelegateCommand(MakeAReportExecute, false);
+            MakeAReportCommand = new AsyncCommand(MakeAReportExecute, () => true);
             EnabledReportProperties = 
                 DynamicPropertyManagers.Reports.GetProperties()
                     .Select(x => new ReportPropertySetting(x))
@@ -95,12 +123,12 @@ namespace Client.ViewModels
 
         private void ReportsServiceOnConnected()
         {
-            Application.Current.Dispatcher.Invoke(() => MakeAReportCommand.SetCanExecute(true));
+            Application.Current.Dispatcher.Invoke(() => CanMakeRequest = true);
         }
 
         private void ReportsServiceOnFault()
         {
-            Application.Current.Dispatcher.Invoke(() => MakeAReportCommand.SetCanExecute(false));
+            Application.Current.Dispatcher.Invoke(() => CanMakeRequest = false);
             _reportsService.StartPing();
         }
 
@@ -108,11 +136,11 @@ namespace Client.ViewModels
         {
             if (propertyChangedEventArgs.PropertyName == nameof(SelectedTerminal))
             {
-                MakeAReportCommand.SetCanExecute(SelectedTerminal != null);
+                CanMakeRequest = SelectedTerminal != null;
             }
         }
 
-        private void MakeAReportExecute(object o)
+        private async Task MakeAReportExecute()
         {
             ReportSettings repSettings = new ReportSettings();
             repSettings.TerminalId = SelectedTerminal;
@@ -124,18 +152,19 @@ namespace Client.ViewModels
                     repSettings.Properties.Add(propertySetting.ReportProperty);
             }
 
-            var res = ReportDto.Unwrap(_reportsService.BuildReport(ReportSettingsDto.Wrap(repSettings)));
+            Window wnd = new Window();
+            wnd.WindowStyle = WindowStyle.ToolWindow;
+            wnd.Content = new BusyIndicator() {IsBusy = true};
+            wnd.SizeToContent = SizeToContent.WidthAndHeight;
+            wnd.Show();
 
-            if (res != null)
-            {
-                Window wnd = new Window();
-                wnd.WindowStyle = WindowStyle.ToolWindow;
-                ReportView z = new ReportView();
-                z.DataContext = new ReportViewModel(res);
-                wnd.SizeToContent = SizeToContent.WidthAndHeight;
-                wnd.Content = z;
-                wnd.ShowDialog();
-            }
+            IsWaiting = true;
+            var res = ReportDto.Unwrap(await _reportsService.BuildReport(ReportSettingsDto.Wrap(repSettings)));
+            IsWaiting = false;
+           
+            ReportView z = new ReportView();
+            z.DataContext = new ReportViewModel(res);
+            wnd.Content = z;
         }
     }
 }

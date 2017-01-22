@@ -1,5 +1,6 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Web;
+using System.Threading.Tasks;
 using Infrastructure.Model.Dto.Reports;
 
 namespace Infrastructure.Contract.Service
@@ -17,6 +18,6 @@ namespace Infrastructure.Contract.Service
             ResponseFormat = WebMessageFormat.Xml,
             RequestFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        ReportDto BuildReport(ReportSettingsDto settings);
+        Task<ReportDto> BuildReport(ReportSettingsDto settings);
     }
 }

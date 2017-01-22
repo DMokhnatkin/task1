@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Infrastructure.Contract.Model;
 using Infrastructure.Model;
@@ -47,14 +48,13 @@ namespace Server.Data.Repository
             }
         }
 
-        public IMetering GetLastMetering(string terminalId)
+        public async Task<IMetering> GetLastMetering(string terminalId)
         {
             // Get last metering
-            MeteringDAO lastMetering = _context.Meterings
+            MeteringDAO lastMetering = await _context.Meterings
                 .Include(x => x.SensorValueRelations)
                 .OrderByDescending(x => x.Time)
-                .FirstOrDefault(x => x.TerminalId == terminalId);
-
+                .FirstOrDefaultAsync(x => x.TerminalId == terminalId);
 
             // Map to Metering model
             Metering res = new Metering()
@@ -66,11 +66,11 @@ namespace Server.Data.Repository
             };
 
             // Get sensor vals for last metering
-            var sensorVals = _context.MeteringSensorRelations
+            var sensorVals = await _context.MeteringSensorRelations
                 .Include(x => x.Metering)
                 .Include(x => x.SensorValue)
                 .Where(x => x.Metering.Id == lastMetering.Id)
-                .ToList();
+                .ToListAsync();
             foreach (var sv in sensorVals)
             {
                 Property prop = DynamicPropertyManagers.Sensors.GetProperty(sv.PropertyName);
@@ -95,19 +95,19 @@ namespace Server.Data.Repository
             return res.Include(x => x.SensorValue);
         }
 
-        private List<MeteringSensorValueRelationDAO> Filter(string terminalId, SensorProperty prop, DateTime start,
+        private async Task<List<MeteringSensorValueRelationDAO>> Filter(string terminalId, SensorProperty prop, DateTime start,
             DateTime end)
         {
-            return FilterQuery(start, end, terminalId, prop).ToList();
+            return await FilterQuery(start, end, terminalId, prop).ToListAsync();
         }
 
         /// <inheritdoc />
-        public object GetMaxPropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
+        public async Task<object> GetMaxPropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
         {
-            return Filter(terminalId, prop, start, end).Max(selector => DAOHelper.ByteArrayToObject(prop.TypeOfValue, selector.SensorValue.Value));
+            return (await Filter(terminalId, prop, start, end)).Max(selector => DAOHelper.ByteArrayToObject(prop.TypeOfValue, selector.SensorValue.Value));
         }
 
-        public double GetAvgPropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
+        public async Task<double> GetAvgPropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
         {
             var t = FilterQuery(start, end, terminalId, prop);
             if (!t.Any())
@@ -115,26 +115,26 @@ namespace Server.Data.Repository
             // Try cast to double
             if (typeof(double).IsAssignableFrom(prop.TypeOfValue))
                 return
-                    Filter(terminalId, prop, start, end).Average(
+                    (await Filter(terminalId, prop, start, end)).Average(
                         selector => (double) DAOHelper.ByteArrayToObject(prop.TypeOfValue, selector.SensorValue.Value));
             // Try convert to double 
-            return Filter(terminalId, prop, start, end)
+            return (await Filter(terminalId, prop, start, end))
                 .Average(selector => Convert.ToDouble(DAOHelper.ByteArrayToObject(prop.TypeOfValue, selector.SensorValue.Value)));
         }
 
-        public double GetSumPropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
+        public async Task<double> GetSumPropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
         {
             // Try cast to double
             if (typeof(double).IsAssignableFrom(prop.TypeOfValue))
                 return
-                    Filter(terminalId, prop, start, end).Sum(
+                    (await Filter(terminalId, prop, start, end)).Sum(
                         selector => (double)DAOHelper.ByteArrayToObject(prop.TypeOfValue, selector.SensorValue.Value));
             // Try convert to double 
-            return Filter(terminalId, prop, start, end)
+            return (await Filter(terminalId, prop, start, end))
                 .Sum(selector => Convert.ToDouble(DAOHelper.ByteArrayToObject(prop.TypeOfValue, selector.SensorValue.Value)));
         }
 
-        public double GetLastFirstDifferencePropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
+        public async Task<double> GetLastFirstDifferencePropertyValue(string terminalId, SensorProperty prop, DateTime start, DateTime end)
         {
             var fltr = FilterQuery(start, end, terminalId, prop);
             if (!fltr.Any())
@@ -153,11 +153,11 @@ namespace Server.Data.Repository
                 Convert.ToDouble(DAOHelper.ByteArrayToObject(prop.TypeOfValue, first.SensorValue.Value));
         }
 
-        public List<Metering> GetMeterings(string terminalId, DateTime start, DateTime end, SensorProperty prop)
+        public async Task<List<Metering>> GetMeterings(string terminalId, DateTime start, DateTime end, SensorProperty prop)
         {
-            return FilterQuery(start, end, terminalId, prop)
+            return (await FilterQuery(start, end, terminalId, prop)
                 .OrderBy(x => x.Metering.Time)
-                .ToList()
+                .ToListAsync())
                 .Select(x => new Metering()
                 {
                     TerminalId = x.Metering.TerminalId,

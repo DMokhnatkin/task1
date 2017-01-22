@@ -104,7 +104,8 @@
     </ApplicationDefinition>
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="MyUnityContainer.cs" />
-    <Compile Include="ViewModels\DelegateCommand.cs" />
+    <Compile Include="ViewModels\Commands\AsyncCommand.cs" />
+    <Compile Include="ViewModels\Commands\DelegateCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ReportRequestViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
